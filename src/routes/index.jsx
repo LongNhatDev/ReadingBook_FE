@@ -3,7 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import Login from "../modules/auth/login";
 
-export default function Routes_ReName() {
+export default function RoutesRoot() {
   return (
     <BrowserRouter
     >
