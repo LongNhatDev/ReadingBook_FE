@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Routes from './routes';
+
 import reportWebVitals from './reportWebVitals';
+import RoutesRoot from './routes';
 
 ReactDOM.render(
   <React.StrictMode>
-      <Routes />
+    <RoutesRoot />
   </React.StrictMode>,
   document.getElementById('root')
 );
