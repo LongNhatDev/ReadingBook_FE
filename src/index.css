@@ -1,13 +1,33 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Fira Sans', 'Segoe UI', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+.recipe-toaster {
+  position: fixed !important;
+}
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+iframe {
+  display: none;
+}
+
+*:focus {
+  outline: none;
+}
+
+.sun-editor-editable {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.4rem;
 }
