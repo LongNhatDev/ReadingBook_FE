@@ -4,6 +4,7 @@ import styled from "styled-components";
 import BackgroundCSS from "../components/background";
 import Button from "../components/button";
 import DivSignUp from "../components/divsignup";
+import Form from "../components/form";
 import Input from "../components/input";
 import InputWrapper from "../components/inputwrapper";
 import InvalidMessage from "../components/invalidmessage";
@@ -15,16 +16,12 @@ const Login = () => {
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
 
-  let password = "";
-  let confirmPassword = "";
-
   return (
     <BackgroundCSS>
       <DivSignUp>
         <TitleSignUp>
           <H1Css>Sign Up</H1Css>
         </TitleSignUp>
-
         <ContentSignUp>
           <InputWrapper>
             <Input
@@ -46,7 +43,6 @@ const Login = () => {
               </div>
             )}
           </InputWrapper>
-
           <InputWrapper>
             <Input
               type="text"
@@ -67,7 +63,6 @@ const Login = () => {
               </div>
             )}
           </InputWrapper>
-
           <InputWrapper>
             <Input
               type="password"
@@ -77,12 +72,9 @@ const Login = () => {
                 setErrorPassword(false);
               }}
               onBlur={(event) => {
-                if (event.target.value.trim() === "") {
-                  setErrorPassword(true);
-                } else {
-                  setErrorPassword(false);
-                  password = event.target.value.trim();
-                }
+                event.target.value.trim() === ""
+                  ? setErrorPassword(true)
+                  : setErrorPassword(false);
               }}
             />
             {errorPassword && (
@@ -91,7 +83,6 @@ const Login = () => {
               </div>
             )}
           </InputWrapper>
-
           <InputWrapper>
             <Input
               type="password"
@@ -101,23 +92,18 @@ const Login = () => {
                 setErrorConfirmPassword(false);
               }}
               onBlur={(event) => {
-                confirmPassword = event.target.value.trim();
-                setErrorConfirmPassword(
-                  confirmPassword === "" || confirmPassword !== password
-                );
+                event.target.value.trim() === ""
+                  ? setErrorConfirmPassword(true)
+                  : setErrorConfirmPassword(false);
               }}
             />
             {errorConfirmPassword && (
               <div>
-                <InvalidMessage>
-                  The password confirmation does not match
-                </InvalidMessage>
+                <InvalidMessage>Please confirm your password</InvalidMessage>
               </div>
             )}
           </InputWrapper>
-
           <Button>CREATE ACCOUNT</Button>
-
           <SignUpWrapper>
             <Ptype>Already have an acount?</Ptype>
             <LinkSignUp to={"/auth/login"}>Log In</LinkSignUp>
@@ -129,10 +115,10 @@ const Login = () => {
 };
 
 export default Login;
-
 const Ptype = styled.p`
   margin: 3px 5px 0 0;
 `;
+
 const LinkSignUp = styled(Link)`
   font-size: 18px;
   font-weight: bold;
@@ -145,6 +131,7 @@ const LinkSignUp = styled(Link)`
 const H1Css = styled.h1`
   color: white;
 `;
+
 const TitleSignUp = styled.div`
   background-color: #66d049;
   width: 100%;
@@ -154,6 +141,7 @@ const TitleSignUp = styled.div`
   flex: 1;
   box-shadow: 2px 2px 6px grey;
 `;
+
 const ContentSignUp = styled.div`
   width: 100%;
   flex: 3.5;
