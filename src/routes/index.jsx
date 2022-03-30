@@ -1,15 +1,15 @@
 import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
-import Login from "../modules/auth/login";
+import Authentic from "../modules/auth";
 
 export default function RoutesRoot() {
   return (
-    <BrowserRouter
-    >
+    <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<Login/>} />
-        <Route path="/" element={<Navigate  to="/login" replace />} />
+        <Route path="auth/*" element={<Authentic />} />
+
+        <Route path="/" element={<Navigate to="/auth/login" replace />} />
       </Routes>
     </BrowserRouter>
   );

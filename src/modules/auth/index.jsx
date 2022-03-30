@@ -1,17 +1,15 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import login from "./login";
+import Login from "./login";
+import SignUp from "./signup";
 
-
-
-const authentic = () => {
-  const path = "http://localhost:3000";
+const Authentic = () => {
   return (
     <Routes>
-      <Route path={`${path}/login`} component={login} />
-      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="login" element={<Login />} />
+      <Route path="signup" element={<SignUp />} />
     </Routes>
   );
 };
 
-export default authentic;
+export default Authentic;

@@ -18,8 +18,8 @@ const Form = styled.div`
   & a {
     text-decoration: none;
     color: #444444;
-    font-size: 20px;
-    margin: 20px 0 10px 0;
+    font-size: 16px;
+    margin-top: 10px;
   }
 
   

@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import BackgroundCSS from "./components/background.jsx";
-import Button from "./components/button.jsx";
-import DivlogIn from "./components/divlogin";
-import Form from "./components/form.jsx";
-import Input from "./components/input.jsx";
-import InputWrapper from "./components/inputwrapper.jsx";
-import InvalidMessage from "./components/invalidmessage.jsx";
-import Logo from "./components/logo.jsx";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import BackgroundCSS from "../components/background";
+import Button from "../components/button";
+import DivlogIn from "../components/divlogin";
+import Form from "../components/form";
+import Input from "../components/input";
+import InputWrapper from "../components/inputwrapper";
+import InvalidMessage from "../components/invalidmessage";
+import Logo from "../components/logo";
+import SignUpWrapper from "../components/signupwrapper";
 
 const Login = () => {
   const [errorEmail, setErrorEmail] = useState(false);
@@ -61,9 +64,12 @@ const Login = () => {
               </div>
             )}
           </InputWrapper>
-
-          <a href=""> Forgot password ?</a>
+          <LinkForgotPass to={"/auth/signup"}>Forgot password ?</LinkForgotPass>
           <Button>LOGIN</Button>
+          <SignUpWrapper>
+            <Ptype>Don't have an acount?</Ptype>
+            <LinkSignUp to={"/auth/signup"}>Sign Up</LinkSignUp>
+          </SignUpWrapper>
         </Form>
       </DivlogIn>
     </BackgroundCSS>
@@ -71,3 +77,22 @@ const Login = () => {
 };
 
 export default Login;
+const Ptype = styled.p`
+  margin: 10px 5px 0 0;
+`;
+
+const LinkSignUp = styled(Link)`
+  font-size: 18px;
+  font-weight: bold;
+  :hover {
+    color: green;
+    text-decoration: underline;
+  }
+`;
+
+const LinkForgotPass = styled(Link)`
+  :hover {
+    color: blue;
+    text-decoration: underline;
+  }
+`;

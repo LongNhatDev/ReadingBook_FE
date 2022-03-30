@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import bg_image from '../../../../assets/image/bg_image.png'
+import bg_image from '../../../assets/image/bg_image.png'
 
 const BackgroundCSS = styled.div`
   width: 100%;

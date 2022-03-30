@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
-const InputWrapper = styled.div`
+const SignUpWrapper = styled.div`
   width: 100%;
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
+  margin-top: 10px;
+
 `;
 
-export default InputWrapper;
+export default SignUpWrapper;
