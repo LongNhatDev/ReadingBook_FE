@@ -19,9 +19,11 @@ const ResetPassword = () => {
   let navigate = useNavigate();
   const handleClick = () => {
     let path = "/auth/login";
-    password !== confirmPassword
-      ? setErrorConfirmPassword(true)
-      : navigate(path);
+    if (password === "") {
+      setErrorPassword(true);
+    } else if (password !== confirmPassword || confirmPassword === "") {
+      setErrorConfirmPassword(true);
+    } else navigate(path);
   };
 
   return (
@@ -42,7 +44,7 @@ const ResetPassword = () => {
                 setErrorPassword(false);
                 setPassword(event.target.value);
               }}
-              onBlur={(event) => {
+              onBlur={() => {
                 setErrorPassword(password === "");
               }}
             />
@@ -73,11 +75,7 @@ const ResetPassword = () => {
               </div>
             )}
           </InputWrapper>
-          <Button
-            onClick={password === "" || confirmPassword === "" || handleClick}
-          >
-            RESET
-          </Button>
+          <Button onClick={handleClick}>RESET</Button>
         </Form>
       </DivlogIn>
     </BackgroundCSS>

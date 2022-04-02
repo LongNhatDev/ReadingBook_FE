@@ -18,7 +18,11 @@ const ConfirmOTP = () => {
   let navigate = useNavigate();
   const handleClick = () => {
     let path = "/auth/resetpassword";
-    navigate(path);
+    if (OTP === "") {
+      setErrorOTP(true);
+    } else {
+      navigate(path);
+    }
   };
 
   return (
@@ -41,7 +45,7 @@ const ConfirmOTP = () => {
                   setOTP(event.target.value);
                 }}
                 onBlur={() => {
-                  setErrorOTP(OTP==="");
+                  setErrorOTP(OTP === "");
                 }}
               />
               {errorOTP && (
@@ -50,7 +54,7 @@ const ConfirmOTP = () => {
                 </div>
               )}
             </InputWrapper>
-            <Button onClick={OTP === "" || handleClick}>CONFIRM</Button>
+            <Button onClick={handleClick}>CONFIRM</Button>
           </Content>
           <SignUpWrapper>
             <Ptype>Didn't receive OTP code?</Ptype>

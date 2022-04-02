@@ -23,7 +23,18 @@ const Login = () => {
   let navigate = useNavigate();
   const handleClick = () => {
     let path = "/auth/login";
-    navigate(path);
+
+    if (fullname === "") {
+      setErrorFullName(true);
+    } else if (email === "") {
+      setErrorEmail(true);
+    } else if (password === "") {
+      setErrorPassword(true);
+    } else if (confirmPassword === "" || confirmPassword !== password) {
+      setErrorConfirmPassword(true);
+    } else {
+      navigate(path);
+    }
   };
 
   return (
@@ -39,7 +50,8 @@ const Login = () => {
               placeholder="Enter FullName"
               className={errorFullname ? "invalid" : ""}
               onChange={(event) => {
-                setFullName(event.target.value.trim());
+                setErrorFullName(false);
+                setFullName(event.target.value.trim() === "");
               }}
               onBlur={() => {
                 setErrorFullName(fullname === "");
@@ -57,6 +69,7 @@ const Login = () => {
               placeholder="Enter Email"
               className={errorEmail ? "invalid" : ""}
               onChange={(event) => {
+                setErrorEmail(false);
                 setEmail(event.target.value.trim());
               }}
               onBlur={() => {
@@ -75,6 +88,7 @@ const Login = () => {
               placeholder="Enter Password"
               className={errorPassword ? "invalid" : ""}
               onChange={(event) => {
+                setErrorPassword(false);
                 setPassword(event.target.value.trim());
               }}
               onBlur={() => {
@@ -93,6 +107,7 @@ const Login = () => {
               placeholder="Confirm Password"
               className={errorConfirmPassword ? "invalid" : ""}
               onChange={(event) => {
+                setErrorConfirmPassword(false);
                 setConfimPassword(event.target.value.trim());
               }}
               onBlur={() => {
@@ -107,17 +122,7 @@ const Login = () => {
               </div>
             )}
           </InputWrapper>
-          <Button
-            onClick={
-              fullname === "" ||
-              email === "" ||
-              password === "" ||
-              confirmPassword !== password ||
-              handleClick
-            }
-          >
-            CREATE ACCOUNT
-          </Button>
+          <Button onClick={handleClick}>CREATE ACCOUNT</Button>
           <SignUpWrapper>
             <Ptype>Already have an acount?</Ptype>
             <LinkSignUp to={"/auth/login"}>Log In</LinkSignUp>
