@@ -8,7 +8,7 @@ const DivSignUp = styled.div`
   flex-flow: column wrap;
   align-items: center;
 
-  box-shadow: 2px 2px 6px grey;
+  box-shadow: 2px 2px 6px #401D83;
 `;
 
 export default DivSignUp;

@@ -1,6 +1,8 @@
 import React from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import ComfirmOTP from "./confirmOPT";
 import Login from "./login";
+import ResetPassword from "./resetpassword";
 import SignUp from "./signup";
 
 const Authentic = () => {
@@ -8,6 +10,8 @@ const Authentic = () => {
     <Routes>
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<SignUp />} />
+      <Route path="confirmotp" element={<ComfirmOTP />} />
+      <Route path="resetpassword" element={<ResetPassword />} />
     </Routes>
   );
 };

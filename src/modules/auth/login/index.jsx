@@ -64,7 +64,7 @@ const Login = () => {
               </div>
             )}
           </InputWrapper>
-          <LinkForgotPass to={"/auth/signup"}>Forgot password ?</LinkForgotPass>
+          <LinkForgotPass to={"/auth/confirmOTP"}>Forgot password ?</LinkForgotPass>
           <Button>LOGIN</Button>
           <SignUpWrapper>
             <Ptype>Don't have an acount?</Ptype>

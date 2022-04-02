@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import BackgroundCSS from "../components/background";
 import Button from "../components/button";
@@ -17,6 +17,12 @@ const Login = () => {
 
   let password = "";
   let confirmPassword = "";
+
+  let navigate = useNavigate();
+  const handleClick = () => {
+    let path = "/auth/login";
+    navigate(path);
+  };
 
   return (
     <BackgroundCSS>
@@ -116,7 +122,7 @@ const Login = () => {
             )}
           </InputWrapper>
 
-          <Button>CREATE ACCOUNT</Button>
+          <Button onClick={handleClick}>CREATE ACCOUNT</Button>
 
           <SignUpWrapper>
             <Ptype>Already have an acount?</Ptype>
@@ -146,7 +152,7 @@ const H1Css = styled.h1`
   color: white;
 `;
 const TitleSignUp = styled.div`
-  background-color: #66d049;
+  background-color: #68d69d;
   width: 100%;
   display: flex;
   justify-content: center;
