@@ -6,7 +6,7 @@ height: 400px;
 background-color: white;
 display: flex;
 flex-flow: row wrap;
-box-shadow:  2px 2px 6px grey;
+box-shadow:  2px 2px 6px #401D83;
 `;
 
 export default DivlogIn;

@@ -9,20 +9,17 @@ const Form = styled.div`
   align-items: center;
 
   & h1 {
-    color: #66d049;
+    color: #68D69D;
     padding-bottom: 15px;
     font-weight: bold;
-  
   }
-  
+
   & a {
     text-decoration: none;
     color: #444444;
     font-size: 16px;
     margin-top: 10px;
   }
-
-  
 `;
 
 export default Form;
