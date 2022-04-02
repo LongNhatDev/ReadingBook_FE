@@ -13,6 +13,8 @@ import SignUpWrapper from "../components/signupwrapper";
 const ConfirmOTP = () => {
   const [errorOTP, setErrorOTP] = useState(false);
 
+  const [OTP, setOTP] = useState("");
+
   let navigate = useNavigate();
   const handleClick = () => {
     let path = "/auth/resetpassword";
@@ -34,13 +36,12 @@ const ConfirmOTP = () => {
                 type="text"
                 placeholder="Enter OTP"
                 className={errorOTP ? "invalid" : ""}
-                onClick={() => {
+                onChange={(event) => {
                   setErrorOTP(false);
+                  setOTP(event.target.value);
                 }}
-                onBlur={(event) => {
-                  event.target.value.trim() === ""
-                    ? setErrorOTP(true)
-                    : setErrorOTP(false);
+                onBlur={() => {
+                  setErrorOTP(OTP==="");
                 }}
               />
               {errorOTP && (
@@ -49,11 +50,11 @@ const ConfirmOTP = () => {
                 </div>
               )}
             </InputWrapper>
-            <Button onClick={handleClick}>CONFIRM</Button>
+            <Button onClick={OTP === "" || handleClick}>CONFIRM</Button>
           </Content>
           <SignUpWrapper>
             <Ptype>Didn't receive OTP code?</Ptype>
-            <LinkResend to={"/auth/signup"}>Resend</LinkResend>
+            <LinkResend to={"/auth/confirmotp"}>Resend</LinkResend>
           </SignUpWrapper>
         </FormOTP>
       </DivlogIn>

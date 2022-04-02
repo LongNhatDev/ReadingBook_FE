@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import ComfirmOTP from "./confirmOPT";
+import ComfirmOTP from "./confirmOTP";
 import Login from "./login";
 import ResetPassword from "./resetpassword";
 import SignUp from "./signup";

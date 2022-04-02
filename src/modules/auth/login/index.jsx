@@ -15,6 +15,11 @@ const Login = () => {
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
 
+  const [password, setpassword] = useState("");
+  const [email, setEmail] = useState("");
+  const handlerClick = () => {
+    console.log("Click button");
+  };
   return (
     <BackgroundCSS>
       <DivlogIn>
@@ -29,13 +34,12 @@ const Login = () => {
               type="text"
               placeholder="Enter Email"
               className={errorEmail ? "invalid" : ""}
-              onClick={() => {
+              onClick={(event) => {
                 setErrorEmail(false);
+                setEmail(event.target.value);
               }}
-              onBlur={(event) => {
-                event.target.value.trim() === ""
-                  ? setErrorEmail(true)
-                  : setErrorEmail(false);
+              onBlur={() => {
+                setErrorEmail(email === "");
               }}
             />
             {errorEmail && (
@@ -49,13 +53,12 @@ const Login = () => {
               type="password"
               placeholder="Enter Password"
               className={errorPassword ? "invalid" : ""}
-              onClick={() => {
+              onClick={(event) => {
                 setErrorPassword(false);
+                setpassword(event.target.value);
               }}
-              onBlur={(event) => {
-                event.target.value.trim() === ""
-                  ? setErrorPassword(true)
-                  : setErrorPassword(false);
+              onBlur={() => {
+                setErrorPassword(password === "");
               }}
             />
             {errorPassword && (
@@ -64,8 +67,12 @@ const Login = () => {
               </div>
             )}
           </InputWrapper>
-          <LinkForgotPass to={"/auth/confirmOTP"}>Forgot password ?</LinkForgotPass>
-          <Button>LOGIN</Button>
+          <LinkForgotPass to={"/auth/confirmOTP"}>
+            Forgot password ?
+          </LinkForgotPass>
+          <Button onClick={password === "" || email === "" || handlerClick}>
+            LOGIN
+          </Button>
           <SignUpWrapper>
             <Ptype>Don't have an acount?</Ptype>
             <LinkSignUp to={"/auth/signup"}>Sign Up</LinkSignUp>
@@ -77,6 +84,7 @@ const Login = () => {
 };
 
 export default Login;
+
 const Ptype = styled.p`
   margin: 10px 5px 0 0;
 `;

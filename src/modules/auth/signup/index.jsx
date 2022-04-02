@@ -15,8 +15,10 @@ const Login = () => {
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
 
-  let password = "";
-  let confirmPassword = "";
+  const [fullname, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfimPassword] = useState("");
 
   let navigate = useNavigate();
   const handleClick = () => {
@@ -30,20 +32,17 @@ const Login = () => {
         <TitleSignUp>
           <H1Css>Sign Up</H1Css>
         </TitleSignUp>
-
         <ContentSignUp>
           <InputWrapper>
             <Input
               type="text"
               placeholder="Enter FullName"
               className={errorFullname ? "invalid" : ""}
-              onClick={() => {
-                setErrorFullName(false);
+              onChange={(event) => {
+                setFullName(event.target.value.trim());
               }}
-              onBlur={(event) => {
-                event.target.value.trim() === ""
-                  ? setErrorFullName(true)
-                  : setErrorFullName(false);
+              onBlur={() => {
+                setErrorFullName(fullname === "");
               }}
             />
             {errorFullname && (
@@ -52,19 +51,16 @@ const Login = () => {
               </div>
             )}
           </InputWrapper>
-
           <InputWrapper>
             <Input
               type="text"
               placeholder="Enter Email"
               className={errorEmail ? "invalid" : ""}
-              onClick={() => {
-                setErrorEmail(false);
+              onChange={(event) => {
+                setEmail(event.target.value.trim());
               }}
-              onBlur={(event) => {
-                event.target.value.trim() === ""
-                  ? setErrorEmail(true)
-                  : setErrorEmail(false);
+              onBlur={() => {
+                setErrorEmail(email === "");
               }}
             />
             {errorEmail && (
@@ -73,22 +69,16 @@ const Login = () => {
               </div>
             )}
           </InputWrapper>
-
           <InputWrapper>
             <Input
               type="password"
               placeholder="Enter Password"
               className={errorPassword ? "invalid" : ""}
-              onClick={() => {
-                setErrorPassword(false);
+              onChange={(event) => {
+                setPassword(event.target.value.trim());
               }}
-              onBlur={(event) => {
-                if (event.target.value.trim() === "") {
-                  setErrorPassword(true);
-                } else {
-                  setErrorPassword(false);
-                  password = event.target.value.trim();
-                }
+              onBlur={() => {
+                setErrorPassword(password === "");
               }}
             />
             {errorPassword && (
@@ -97,20 +87,16 @@ const Login = () => {
               </div>
             )}
           </InputWrapper>
-
           <InputWrapper>
             <Input
               type="password"
               placeholder="Confirm Password"
               className={errorConfirmPassword ? "invalid" : ""}
-              onClick={() => {
-                setErrorConfirmPassword(false);
+              onChange={(event) => {
+                setConfimPassword(event.target.value.trim());
               }}
-              onBlur={(event) => {
-                confirmPassword = event.target.value.trim();
-                setErrorConfirmPassword(
-                  confirmPassword === "" || confirmPassword !== password
-                );
+              onBlur={() => {
+                setErrorConfirmPassword(confirmPassword !== password);
               }}
             />
             {errorConfirmPassword && (
@@ -121,9 +107,17 @@ const Login = () => {
               </div>
             )}
           </InputWrapper>
-
-          <Button onClick={handleClick}>CREATE ACCOUNT</Button>
-
+          <Button
+            onClick={
+              fullname === "" ||
+              email === "" ||
+              password === "" ||
+              confirmPassword !== password ||
+              handleClick
+            }
+          >
+            CREATE ACCOUNT
+          </Button>
           <SignUpWrapper>
             <Ptype>Already have an acount?</Ptype>
             <LinkSignUp to={"/auth/login"}>Log In</LinkSignUp>

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import BackgroundCSS from "../components/background";
 import Button from "../components/button";
 import DivlogIn from "../components/divlogin";
@@ -14,10 +13,15 @@ const ResetPassword = () => {
   const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
 
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
   let navigate = useNavigate();
   const handleClick = () => {
     let path = "/auth/login";
-    navigate(path);
+    password !== confirmPassword
+      ? setErrorConfirmPassword(true)
+      : navigate(path);
   };
 
   return (
@@ -31,16 +35,15 @@ const ResetPassword = () => {
           <h1>Reset Password</h1>
           <InputWrapper>
             <Input
-              type="text"
+              type="password"
               placeholder="Enter Password"
-              className={errorConfirmPassword ? "invalid" : ""}
-              onChange={() => {
+              className={errorPassword ? "invalid" : ""}
+              onChange={(event) => {
                 setErrorPassword(false);
+                setPassword(event.target.value);
               }}
               onBlur={(event) => {
-                event.target.value.trim() === ""
-                  ? setErrorPassword(true)
-                  : setErrorPassword(false);
+                setErrorPassword(password === "");
               }}
             />
             {errorPassword && (
@@ -53,25 +56,28 @@ const ResetPassword = () => {
             <Input
               type="password"
               placeholder="Confirm Password"
-              className={errorPassword ? "invalid" : ""}
-              onChange={() => {
+              className={errorConfirmPassword ? "invalid" : ""}
+              onChange={(event) => {
                 setErrorConfirmPassword(false);
+                setConfirmPassword(event.target.value);
               }}
-              onBlur={(event) => {
-                event.target.value.trim() === ""
-                  ? setErrorConfirmPassword(true)
-                  : setErrorConfirmPassword(false);
+              onBlur={() => {
+                setErrorConfirmPassword(confirmPassword === "");
               }}
             />
             {errorConfirmPassword && (
               <div>
                 <InvalidMessage>
-                  Please confirm your new password
+                  The password confirmation does not match
                 </InvalidMessage>
               </div>
             )}
           </InputWrapper>
-          <Button onClick={handleClick}>RESET</Button>
+          <Button
+            onClick={password === "" || confirmPassword === "" || handleClick}
+          >
+            RESET
+          </Button>
         </Form>
       </DivlogIn>
     </BackgroundCSS>
