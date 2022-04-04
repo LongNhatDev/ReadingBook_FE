@@ -18,16 +18,17 @@ const Login = () => {
   const [password, setpassword] = useState("");
   const [email, setEmail] = useState("");
 
-  let navi = useNavigate();
-  const HandleLogin = () => {
+  let navigate = useNavigate();
+
+  const HandlerClick = () => {
     let path = "/";
-    navi(path);
+    navigate(path);
   };
   return (
     <BackgroundCSS>
       <DivlogIn>
         <Logo>
-          <p style={{color:"#004468"}}>Reading Book</p>
+          <p>Reading Book</p>
           <span>FREE BOOKS AND FREE YOUR MIND</span>
         </Logo>
         <Form>
@@ -73,7 +74,9 @@ const Login = () => {
           <LinkForgotPass to={"/auth/confirmOTP"}>
             Forgot password ?
           </LinkForgotPass>
-          <Button onClick={HandleLogin}>LOGIN</Button>
+          <Button onClick={HandlerClick}>
+            LOGIN
+          </Button>
           <SignUpWrapper>
             <Ptype>Don't have an acount?</Ptype>
             <LinkSignUp to={"/auth/signup"}>Sign Up</LinkSignUp>

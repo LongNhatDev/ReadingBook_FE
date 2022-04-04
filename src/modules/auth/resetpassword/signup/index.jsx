@@ -151,14 +151,7 @@ const H1Css = styled.h1`
   color: white;
 `;
 const TitleSignUp = styled.div`
-  background-image: linear-gradient(
-    to right,
-    #051937,
-    #004468,
-    #00748c,
-    #00a69d,
-    #68d69d
-  );
+  background-color: #68d69d;
   width: 100%;
   display: flex;
   justify-content: center;
