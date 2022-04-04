@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import BackgroundCSS from "../components/background";
 import Button from "../components/button";
@@ -17,14 +17,17 @@ const Login = () => {
 
   const [password, setpassword] = useState("");
   const [email, setEmail] = useState("");
-  const handlerClick = () => {
-    console.log("Click button");
+
+  let navi = useNavigate();
+  const HandleLogin = () => {
+    let path = "/";
+    navi(path);
   };
   return (
     <BackgroundCSS>
       <DivlogIn>
         <Logo>
-          <p>Reading Book</p>
+          <p style={{color:"#004468"}}>Reading Book</p>
           <span>FREE BOOKS AND FREE YOUR MIND</span>
         </Logo>
         <Form>
@@ -70,9 +73,7 @@ const Login = () => {
           <LinkForgotPass to={"/auth/confirmOTP"}>
             Forgot password ?
           </LinkForgotPass>
-          <Button onClick={password === "" || email === "" || handlerClick}>
-            LOGIN
-          </Button>
+          <Button onClick={HandleLogin}>LOGIN</Button>
           <SignUpWrapper>
             <Ptype>Don't have an acount?</Ptype>
             <LinkSignUp to={"/auth/signup"}>Sign Up</LinkSignUp>

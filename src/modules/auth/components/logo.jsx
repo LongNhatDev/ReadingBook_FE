@@ -3,7 +3,8 @@ import styled from "styled-components";
 const Logo = styled.div`
   width: 50%;
   height: 100%;
-  background-color: #68D69D;
+  /* background-color: #68D69D; */
+  background-image: linear-gradient(to right, #051937, #004468, #00748c, #00a69d, #68d69d);
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
