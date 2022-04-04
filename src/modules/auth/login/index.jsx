@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import BackgroundCSS from "../components/background";
 import Button from "../components/button";
@@ -17,8 +17,12 @@ const Login = () => {
 
   const [password, setpassword] = useState("");
   const [email, setEmail] = useState("");
-  const handlerClick = () => {
-    console.log("Click button");
+
+  let navigate = useNavigate();
+
+  const HandlerClick = () => {
+    let path = "/";
+    navigate(path);
   };
   return (
     <BackgroundCSS>
@@ -70,7 +74,7 @@ const Login = () => {
           <LinkForgotPass to={"/auth/confirmOTP"}>
             Forgot password ?
           </LinkForgotPass>
-          <Button onClick={password === "" || email === "" || handlerClick}>
+          <Button onClick={HandlerClick}>
             LOGIN
           </Button>
           <SignUpWrapper>
