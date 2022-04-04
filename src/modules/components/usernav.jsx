@@ -1,10 +1,16 @@
-import { FaBraille, FaCogs, FaSortAmountUpAlt, FaUpload, FaUserAlt } from "react-icons/fa";
+import {
+  FaBraille,
+  FaCogs,
+  FaSortAmountUpAlt,
+  FaUpload,
+  FaUserAlt,
+} from "react-icons/fa";
+import { FcReading } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import styled, { isStyledComponent } from "styled-components";
 import Dropdown from "../home/components/dropdown";
 import SeachBox from "../home/components/searchbox";
 import Item from "./item";
-import Links from "./links";
 import LogoContent from "./logocontent";
 import NavbarItems from "./navbaritems";
 
@@ -56,10 +62,16 @@ const UserNav = () => {
     const path = "upload";
     navigation(path);
   };
+  const HandleHome = () => {
+    const path = "/";
+    navigation(path);
+  };
+
   return (
     <UserNavDiv>
-      <LogoContent>
-        <Links to="/">BOOK READING</Links>
+      <LogoContent onClick={HandleHome}>
+        <FcReading style={{ margin: "10px" }}></FcReading>
+        <p style={{ color: "white" }}>READING BOOK</p>
       </LogoContent>
       <NavbarItems>
         <SeachBox />
@@ -93,6 +105,7 @@ const UserNavDiv = styled.header`
   font-size: 25px;
   display: flex;
   box-shadow: 2px 2px 6px grey;
+  /* position: fixed; */
   background-image: linear-gradient(
     to right,
     #051937,

@@ -5,12 +5,7 @@ import Page from "../components/page";
 import UserNav from "../components/usernav";
 
 const Upload = () => {
-  return (
-    <Page>
-      <UserNav />
-      
-    </Page>
-  );
+  return <Page></Page>;
 };
 
 export default Upload;

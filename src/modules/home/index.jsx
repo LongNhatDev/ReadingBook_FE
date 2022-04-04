@@ -8,7 +8,7 @@ import UserNav from "../components/usernav";
 const Home = () => {
   return (
     <Page>
-      <UserNav/>
+      {/* <UserNav/> */}
       <Slider />
       <Content></Content>
       <Footer />
