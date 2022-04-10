@@ -20,6 +20,7 @@ export default function RoutesRoot() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/rank/*" element={<Rank />} />
         <Route path="/upload" element={<Upload />} />
+        {console.log("hello1")}
       </Routes>
     </BrowserRouter>
   );

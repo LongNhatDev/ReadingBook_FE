@@ -7,7 +7,7 @@ import {
 } from "react-icons/fa";
 import { FcReading } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
-import styled, { isStyledComponent } from "styled-components";
+import styled from "styled-components";
 import Dropdown from "../home/components/dropdown";
 import SeachBox from "../home/components/searchbox";
 import Item from "./item";
@@ -17,8 +17,9 @@ import NavbarItems from "./navbaritems";
 const UserNav = () => {
   const categoriesRow = [
     {
-      id: "LN",
-      content: "Light Novel",
+      id: "act",
+      content: "Action",
+      url: "category/action",
     },
     {
       id: "CM",
