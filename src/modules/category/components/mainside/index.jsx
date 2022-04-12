@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import BookIntro from "../bookintro";
-import { bookData } from "../../../../book-data";
 
-const MainSide = () => {
+const MainSide = (props) => {
+  console.log((props.data.length / 2) * 14);
   return (
-    <Main>
-      {bookData.map((book) => (
+    <Main len={`${(props.data.length / 2) * 14}rem`}>
+      {props.data.map((book) => (
         <BookIntro key={book.bookId} bookinfo={book} />
       ))}
     </Main>
@@ -17,6 +17,8 @@ export default MainSide;
 
 const Main = styled.div`
   display: flex;
+  height: ${(props) => props.len};
   flex-wrap: wrap;
-  justify-content: space-between;
+  flex: 1;
+  padding-top: 2rem;
 `;

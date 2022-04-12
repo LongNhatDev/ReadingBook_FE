@@ -16,5 +16,5 @@ export default index;
 
 const Side = styled.div`
   width: 20rem;
-  heigh: 100vh;
+  flex-shrink: 0;
 `;

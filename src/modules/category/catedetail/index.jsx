@@ -3,15 +3,22 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import MainSide from "../components/mainside";
 import Side from "../components/side";
+import { bookData } from "../../../book-data";
 
 const CateDetail = () => {
   const categoryType = useParams();
-  console.log(categoryType.catename);
+  let books = bookData.filter((book) => {
+    return book.booktag === categoryType.catename;
+  });
+
+  if (categoryType.catename.toString() === "all") {
+    books = [...bookData];
+  }
+
   return (
     <MainSection>
-      {console.log("hello")}
       <Side selected={categoryType.catename} />
-      <MainSide />
+      <MainSide data={books} />
     </MainSection>
   );
 };
@@ -19,8 +26,8 @@ const CateDetail = () => {
 export default CateDetail;
 
 const MainSection = styled.section`
+  width: 100rem;
   margin: 0 18.5rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
 `;

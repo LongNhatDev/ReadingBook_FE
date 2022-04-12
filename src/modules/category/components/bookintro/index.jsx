@@ -35,9 +35,10 @@ const Book = styled.div`
   width: calc(50% - 4rem);
   display: flex;
   flex-direction: row;
-  height: 12rem;
   box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.2);
-  margin: 1rem;
+  margin-left: 4rem;
+  margin-bottom: 3rem;
+  height: 12rem;
 `;
 const BookImage = styled.img`
   width: 9rem;
@@ -56,9 +57,11 @@ const BookDetail = styled.div`
   align-items: flex-start;
   flex-direction: column;
   line-height: 1.2;
+  flex: 1;
 `;
 const BookTag = styled.div`
   color: blue;
+  text-transform: uppercase;
 `;
 const BookName = styled.h3`
   margin-top: 1rem;
