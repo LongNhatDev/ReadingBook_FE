@@ -1,4 +1,11 @@
-import { FaCopyright, FaFacebook, FaInstagram, FaTiktok, FaTwitter, FaYoutube } from "react-icons/fa";
+import {
+  FaCopyright,
+  FaFacebook,
+  FaInstagram,
+  FaTiktok,
+  FaTwitter,
+  FaYoutube,
+} from "react-icons/fa";
 import styled from "styled-components";
 const Footer = () => {
   return (
@@ -39,7 +46,7 @@ const Footer = () => {
         <p>GG meet</p>
       </Col>
       <Col>
-        <H2Css>FRAMEWORK & DATABASE</H2Css>
+        <H2Css>FRAMEWORK & INFRASTRUCTURE</H2Css>
         <p>React JS</p>
         <p>Node JS</p>
         <p>Monggo DB</p>
