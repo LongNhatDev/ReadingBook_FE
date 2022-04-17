@@ -92,7 +92,7 @@ const UserNav = () => {
         </Item>
         <Item>
           <FaUserAlt onClick={HandleLogin} />
-        </Item>
+        </Item>bi
       </NavbarItems>
     </UserNavDiv>
   );
