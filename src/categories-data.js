@@ -35,11 +35,6 @@ export const categoryData = [
     cateContent: "Horror",
   },
   {
-    cateLink: "/category/marketing",
-    cateId: "marketing1",
-    cateContent: "Marketing",
-  },
-  {
     cateLink: "/category/fantasy",
     cateId: "fantasy",
     cateContent: "Fantasy",

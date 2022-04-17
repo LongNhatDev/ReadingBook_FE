@@ -22,21 +22,20 @@ const CateBox = (props) => {
 export default CateBox;
 
 const Wrapper = styled.div`
-  width: 20rem;
+  width: 15rem;
   padding: 1rem;
   display: flex;
   flex-direction: row;
-  margin-top: 5rem;
   flex-wrap: wrap;
   align-items: center;
 `;
 const Links = styled(Link)`
   &.invalid {
-    background-color: #3b66f5;
+    background-color: #00a69d;
     color: white;
   }
   display: inline-block;
-  width: calc(50% - 20px);
+  width: 10rem;
   margin: 10px;
   line-height: 2.4rem;
   padding-top: 5px;
@@ -49,6 +48,6 @@ const Links = styled(Link)`
   border-radius: 4px;
   &:hover {
     color: white;
-    background-color: #3b66f5;
+    background-color: #00a69d;
   }
 `;

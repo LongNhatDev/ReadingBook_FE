@@ -3,9 +3,9 @@ import styled from "styled-components";
 import BookIntro from "../bookintro";
 
 const MainSide = (props) => {
-  console.log((props.data.length / 2) * 14);
+  console.log((props.data.length / 3) * 14);
   return (
-    <Main len={`${(props.data.length / 2) * 14}rem`}>
+    <Main len={`${(props.data.length / 3) * 14}rem`}>
       {props.data.map((book) => (
         <BookIntro key={book.bookId} bookinfo={book} />
       ))}

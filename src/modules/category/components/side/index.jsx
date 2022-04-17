@@ -15,6 +15,9 @@ const index = (props) => {
 export default index;
 
 const Side = styled.div`
-  width: 20rem;
+  width: 15rem;
   flex-shrink: 0;
+  border-right: 1px solid #f2f2f2;
+  box-shadow: 0 -30px 0 0 rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.1);
 `;

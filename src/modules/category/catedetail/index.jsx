@@ -26,8 +26,9 @@ const CateDetail = () => {
 export default CateDetail;
 
 const MainSection = styled.section`
-  width: 100rem;
-  margin: 0 18.5rem;
+  padding-top: 3rem;
+  width: 100%;
   display: flex;
   flex-direction: row;
+  height: 85vh;
 `;

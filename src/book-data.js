@@ -6,7 +6,7 @@ export const bookData = [
     bookname: "SKELETON KNIGHT IN ANOTHER WORLD",
     bookdes: "#####################%%%%%%%%%%%%%%%%*************",
     bookrate: "4.91",
-    bookchapter: "9",
+    bookchapter: "91212",
   },
   {
     bookId: "seireigensoukei",
@@ -35,7 +35,7 @@ export const bookData = [
     bookname: "KHOẢNG CÁCH GIỮA HAI NGƯỜI",
     bookdes: "#####################%%%%%%%%%%%%%%%%*************",
     bookrate: "4.91",
-    bookchapter: "9",
+    bookchapter: "92323",
   },
   {
     bookId: "tantei",
@@ -54,7 +54,7 @@ export const bookData = [
     bookname: "GRIMGAR OF FANTASY AND ASH",
     bookdes: "#####################%%%%%%%%%%%%%%%%*************",
     bookrate: "4.91",
-    bookchapter: "9",
+    bookchapter: "12343",
   },
   {
     bookId: "dungeon",
@@ -64,7 +64,7 @@ export const bookData = [
     bookname: "DUNGEON NI DEAI WO MOTOMERU",
     bookdes: "#####################%%%%%%%%%%%%%%%%*************",
     bookrate: "4.91",
-    bookchapter: "9",
+    bookchapter: "94545",
   },
   {
     bookId: "dungeons",

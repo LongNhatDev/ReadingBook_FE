@@ -31,7 +31,6 @@ const Dropdowns = styled.div`
   font-weight: bold;
   border-radius: 4px;
   transition: all 0.3s ease;
-  
 `;
 
 const DropdownSelect = styled.div`

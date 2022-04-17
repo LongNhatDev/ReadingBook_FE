@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { FaStar, FaStickyNote, FaPlusCircle } from "react-icons/fa";
+import { FaStar, FaEye, FaPlusCircle } from "react-icons/fa";
 
 const BookIntro = (props) => {
   return (
@@ -12,16 +12,20 @@ const BookIntro = (props) => {
         <BookDes>{props.bookinfo.bookdes}</BookDes>
         <BookBottom>
           <BookRate>
-            <FaStar />
-            <span>{props.bookinfo.bookrate}</span>
+            <span style={{ color: "yellow" }}>
+              <FaStar />
+            </span>
+            <span> {props.bookinfo.bookrate}</span>
           </BookRate>
           <BookChapter>
-            <FaStickyNote />
-            <span>{props.bookinfo.bookchapter} chapters</span>
+            <span style={{ fontSize: 12 + "px", color: "red" }}>
+              <IconMat />
+            </span>
+            <span>{props.bookinfo.bookchapter} views</span>
           </BookChapter>
           <BookAdd>
-            <FaPlusCircle />
-            <span>ADD</span>
+            <IconCong />
+            <span> Follow</span>
           </BookAdd>
         </BookBottom>
       </BookDetail>
@@ -32,11 +36,11 @@ const BookIntro = (props) => {
 export default BookIntro;
 
 const Book = styled.div`
-  width: calc(50% - 4rem);
+  width: calc(33% - 4rem);
   display: flex;
   flex-direction: row;
-  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.2);
-  margin-left: 4rem;
+  box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.25);
+  margin-left: 3.5rem;
   margin-bottom: 3rem;
   height: 12rem;
 `;
@@ -86,11 +90,25 @@ const BookBottom = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  gap: 2rem;
   margin-top: auto;
+  align-items: center;
 `;
-const BookRate = styled.div``;
-const BookChapter = styled.div``;
+const BookRate = styled.div`
+  width: 3.5rem;
+`;
+const BookChapter = styled.div`
+  margin-left: 4rem;
+`;
 const BookAdd = styled.div`
   color: blue;
+  margin-left: auto;
+`;
+
+const IconMat = styled(FaEye)`
+  transform: translateY(2px);
+  margin-right: 2px;
+`;
+
+const IconCong = styled(FaPlusCircle)`
+  transform: translateY(1px);
 `;
