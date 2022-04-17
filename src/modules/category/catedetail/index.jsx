@@ -30,5 +30,5 @@ const MainSection = styled.section`
   width: 100%;
   display: flex;
   flex-direction: row;
-  height: 85vh;
+  height: 100%;
 `;

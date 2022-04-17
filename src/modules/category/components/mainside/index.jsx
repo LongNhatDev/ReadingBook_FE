@@ -3,9 +3,10 @@ import styled from "styled-components";
 import BookIntro from "../bookintro";
 
 const MainSide = (props) => {
-  console.log((props.data.length / 3) * 14);
+  console.log(props.data.length);
+  console.log(Math.ceil(props.data.length / 3) * 15 + 3);
   return (
-    <Main len={`${(props.data.length / 3) * 14}rem`}>
+    <Main len={`${Math.ceil(props.data.length / 3) * 15 + 3}rem`}>
       {props.data.map((book) => (
         <BookIntro key={book.bookId} bookinfo={book} />
       ))}
