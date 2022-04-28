@@ -111,7 +111,7 @@ const BookSections = styled.section`
 `;
 
 const SectionName = styled.div`
-position: relative;
+  position: relative;
   max-width: 1150px;
   width: 100%;
   left: 97px;
@@ -127,7 +127,9 @@ position: relative;
     background-color: #83848f;
     position: absolute;
     bottom: -3px;
-    left: 0;`;
+    left: 0;
+  }
+`;
 
 const ListBook = styled.div`
   display: flex;
