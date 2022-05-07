@@ -3,11 +3,9 @@ import styled from "styled-components";
 const Logo = styled.div`
   width: 50%;
   height: 100%;
+
   background-image: linear-gradient(
     to right,
-    #051937,
-    #004468,
-    #00748c,
     #00a69d,
     #68d69d
   );
@@ -18,10 +16,10 @@ const Logo = styled.div`
   align-items: center;
 
   & p {
-    color: #051937;
+    color: #00a69d;
     background-color: white;
     font-size: 50px;
-    /* font-weight: bold; */
+    font-weight: bold;
     padding: 0 10px;
     box-shadow: 2px 2px 6px grey;
   }

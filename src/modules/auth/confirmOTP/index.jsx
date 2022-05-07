@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import BackgroundCSS from "../components/background";
-import Button from "../components/button";
 import DivlogIn from "../components/divlogin";
-import Input from "../components/input";
+import Input from "../../components/input"
 import InputWrapper from "../components/inputwrapper";
 import InvalidMessage from "../components/invalidmessage";
 import Logo from "../components/logo";
 import SignUpWrapper from "../components/signupwrapper";
+import Button from "../../components/button";
 
 const ConfirmOTP = () => {
   const [errorOTP, setErrorOTP] = useState(false);

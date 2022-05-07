@@ -3,23 +3,25 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Authentic from "../modules/auth";
 import Category from "../modules/category";
-import UserNav from "../modules/components/usernav";
 import Home from "../modules/home";
 import Profile from "../modules/profile";
 import Rank from "../modules/rank";
-import Upload from "../modules/upload";
+import Create from "../modules/create";
+import YourBook from "../modules/yourbook";
+import SignIn from "../modules/auth/signin";
 
 export default function RoutesRoot() {
   return (
     <BrowserRouter>
-      <UserNav />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<SignIn />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/auth/*" element={<Authentic />} />
         <Route path="/category/*" element={<Category />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/rank/*" element={<Rank />} />
-        <Route path="/upload" element={<Upload />} />
+        <Route path="/create" element={<Create />} />
+        <Route path="/yourbook" element={<YourBook />} />
       </Routes>
     </BrowserRouter>
   );
