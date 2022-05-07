@@ -17,6 +17,7 @@ const Item = styled.li`
   height: 100%;
   max-height: 3rem;
   padding: 3rem 1.5rem;
+  border-radius: 1rem;
   background-color: rgb(37 38 47);
   display: flex;
   align-items: center;
