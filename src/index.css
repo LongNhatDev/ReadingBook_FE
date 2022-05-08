@@ -9,7 +9,8 @@ html {
 }
 
 body {
-  margin: 0;
+  width: 100%;
+  height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Fira Sans', 'Segoe UI', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
