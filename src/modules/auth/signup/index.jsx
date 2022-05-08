@@ -1,40 +1,76 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import BackgroundCSS from "../components/background";
-import Button from "../components/button";
+import Button from "../../components/button";
 import DivSignUp from "../components/divsignup";
-import Input from "../components/input";
+import Input from "../../components/input";
 import InputWrapper from "../components/inputwrapper";
 import InvalidMessage from "../components/invalidmessage";
 import SignUpWrapper from "../components/signupwrapper";
+import {
+  showErrorToaster,
+  showSuccessToaster,
+} from "../../../components/Toaster";
+import { BaseURL } from "../../AxiosInstance";
 
 const Login = () => {
-  const [errorFullname, setErrorFullName] = useState(false);
-  const [errorEmail, setErrorEmail] = useState(false);
-  const [errorPassword, setErrorPassword] = useState(false);
-  const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
-
-  const [fullname, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfimPassword] = useState("");
-
   let navigate = useNavigate();
-  const handleClick = () => {
-    let path = "/auth/login";
 
-    if (fullname === "") {
-      setErrorFullName(true);
-    } else if (email === "") {
-      setErrorEmail(true);
-    } else if (password === "") {
-      setErrorPassword(true);
-    } else if (confirmPassword === "" || confirmPassword !== password) {
-      setErrorConfirmPassword(true);
-    } else {
-      navigate(path);
+  const [error, setError] = useState({
+    fullname: false,
+    email: false,
+    password: false,
+    confirmPassword: false,
+  });
+
+  const [value, setValue] = useState({
+    fullname: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleSignUp = async () => {
+    try {
+      let path = "/";
+
+      if (value.fullname === "") {
+        setError({ ...error, fullname: true });
+      }
+      if (value.email === "") {
+        setError({ ...error, email: true });
+      }
+      if (value.password === "") {
+        setError({ ...error, password: true });
+      }
+      if (
+        value.confirmPassword === "" ||
+        value.confirmPassword !== value.password
+      ) {
+        setError({ ...error, confirmPassword: true });
+      }
+      const requestSignUpInfor = {
+        email: value.email,
+        password: value.password,
+        fullname: value.fullname,
+      };
+      const responeOfRequest = await BaseURL.post(
+        "/api/auth/sign_up",
+        requestSignUpInfor
+      );
+      if (responeOfRequest !== null || responeOfRequest !== undefined) {
+        showSuccessToaster("You have signed up successfully.");
+        navigate(path);
+      } else showErrorToaster("Server not responed");
+    } catch (error) {
+      showErrorToaster("This email is already in use by another account.");
     }
+  };
+
+  const handleSignIn = () => {
+    let path = "/";
+    navigate(path);
   };
 
   return (
@@ -48,16 +84,16 @@ const Login = () => {
             <Input
               type="text"
               placeholder="Enter FullName"
-              className={errorFullname ? "invalid" : ""}
+              className={error.fullname ? "invalid" : ""}
               onChange={(event) => {
-                setErrorFullName(false);
-                setFullName(event.target.value.trim() === "");
+                setError({ ...error, fullname: false });
+                setValue({ ...value, fullname: event.target.value.trim() });
               }}
               onBlur={() => {
-                setErrorFullName(fullname === "");
+                setError({ ...error, fullname: value.fullname === "" });
               }}
             />
-            {errorFullname && (
+            {error.fullname && (
               <div>
                 <InvalidMessage>Please fill your fullname</InvalidMessage>
               </div>
@@ -67,16 +103,16 @@ const Login = () => {
             <Input
               type="text"
               placeholder="Enter Email"
-              className={errorEmail ? "invalid" : ""}
+              className={error.email ? "invalid" : ""}
               onChange={(event) => {
-                setErrorEmail(false);
-                setEmail(event.target.value.trim());
+                setError({ ...error, email: false });
+                setValue({ ...value, email: event.target.value.trim() });
               }}
               onBlur={() => {
-                setErrorEmail(email === "");
+                setError({ ...error, email: value.email === "" });
               }}
             />
-            {errorEmail && (
+            {error.email && (
               <div>
                 <InvalidMessage>Please fill your email</InvalidMessage>
               </div>
@@ -86,16 +122,16 @@ const Login = () => {
             <Input
               type="password"
               placeholder="Enter Password"
-              className={errorPassword ? "invalid" : ""}
+              className={error.password ? "invalid" : ""}
               onChange={(event) => {
-                setErrorPassword(false);
-                setPassword(event.target.value.trim());
+                setError({ ...error, password: false });
+                setValue({ ...value, password: event.target.value.trim() });
               }}
               onBlur={() => {
-                setErrorPassword(password === "");
+                setError({ ...error, password: value.password === "" });
               }}
             />
-            {errorPassword && (
+            {error.password && (
               <div>
                 <InvalidMessage>Please fill your password</InvalidMessage>
               </div>
@@ -105,16 +141,24 @@ const Login = () => {
             <Input
               type="password"
               placeholder="Confirm Password"
-              className={errorConfirmPassword ? "invalid" : ""}
+              className={error.confirmPassword ? "invalid" : ""}
               onChange={(event) => {
-                setErrorConfirmPassword(false);
-                setConfimPassword(event.target.value.trim());
+                setError({ ...error, confirmPassword: false });
+                setValue({
+                  ...value,
+                  confirmPassword: event.target.value.trim(),
+                });
               }}
               onBlur={() => {
-                setErrorConfirmPassword(confirmPassword !== password);
+                setError({
+                  ...error,
+                  confirmPassword:
+                    value.confirmPassword === "" ||
+                    value.confirmPassword !== value.password,
+                });
               }}
             />
-            {errorConfirmPassword && (
+            {error.confirmPassword && (
               <div>
                 <InvalidMessage>
                   The password confirmation does not match
@@ -122,10 +166,10 @@ const Login = () => {
               </div>
             )}
           </InputWrapper>
-          <Button onClick={handleClick}>CREATE ACCOUNT</Button>
+          <Button onClick={handleSignUp}>Sign Up</Button>
           <SignUpWrapper>
             <Ptype>Already have an acount?</Ptype>
-            <LinkSignUp to={"/auth/login"}>Log In</LinkSignUp>
+            <LinkSignIn onClick={handleSignIn}>Sign In</LinkSignIn>
           </SignUpWrapper>
         </ContentSignUp>
       </DivSignUp>
@@ -138,13 +182,13 @@ export default Login;
 const Ptype = styled.p`
   margin: 3px 5px 0 0;
 `;
-const LinkSignUp = styled(Link)`
+const LinkSignIn = styled.p`
   font-size: 18px;
   font-weight: bold;
+  margin-top: 12px;
   text-decoration: none;
   :hover {
     color: green;
-    text-decoration: underline;
   }
 `;
 const H1Css = styled.h1`

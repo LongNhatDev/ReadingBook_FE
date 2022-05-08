@@ -7,12 +7,14 @@ import UserNav from "../components/usernav";
 
 const Home = () => {
   return (
-    <Page>
-      {/* <UserNav/> */}
-      <Slider />
-      <Content></Content>
-      <Footer />
-    </Page>
+    <>
+      <UserNav />
+      <Page>
+        <Slider />
+        <Content></Content>
+        <Footer />
+      </Page>
+    </>
   );
 };
 
@@ -24,4 +26,3 @@ const Content = styled.div`
   width: 100%;
   height: 800px;
 `;
-

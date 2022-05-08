@@ -6,6 +6,7 @@ const Item = styled.li`
   font-weight: bold;
   cursor: pointer;
   transition-duration: 0.5s;
+
 `;
 
 export default Item;

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { sliderData } from "../../../../slider-data";
-import Button from "../../../auth/components/button";
+import Button from "../../../components/button";
 import styled from "styled-components";
 
 const Slider = () => {
@@ -14,7 +14,6 @@ const Slider = () => {
 
   const nextSlide = () => {
     setCurrentSlide(currentSlide === slideLength - 1 ? 0 : currentSlide + 1);
-    console.log("next");
   };
 
   const prevSlide = () => {

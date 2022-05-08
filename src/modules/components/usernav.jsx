@@ -1,13 +1,14 @@
 import {
+  FaBook,
   FaBraille,
   FaCogs,
+  FaPlus,
   FaSortAmountUpAlt,
-  FaUpload,
   FaUserAlt,
 } from "react-icons/fa";
 import { FcReading } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
-import styled, { isStyledComponent } from "styled-components";
+import styled from "styled-components";
 import Dropdown from "../home/components/dropdown";
 import SeachBox from "../home/components/searchbox";
 import Item from "./item";
@@ -55,15 +56,19 @@ const UserNav = () => {
   let navigation = useNavigate();
 
   const HandleLogin = () => {
-    const path = "auth/login";
+    const path = "/";
     navigation(path);
   };
-  const HandleUpload = () => {
-    const path = "upload";
+  const HandleCreate = () => {
+    const path = "/create";
+    navigation(path);
+  };
+  const HandleYourBook = () => {
+    const path = "yourbook";
     navigation(path);
   };
   const HandleHome = () => {
-    const path = "/";
+    const path = "/home";
     navigation(path);
   };
 
@@ -83,16 +88,20 @@ const UserNav = () => {
           <FaSortAmountUpAlt />
           <Dropdown label={"Ranking"} categories={rankingRow} />
         </Item>
-        <Item onClick={HandleUpload}>
-          <FaUpload />
-          <H3Css>Upload</H3Css>
+        <Item onClick={HandleCreate}>
+          <FaPlus />
+          <H3Css>Create</H3Css>
+        </Item>
+        <Item onClick={HandleYourBook}>
+          <FaBook />
+          <H3Css>Your Book</H3Css>
         </Item>
         <Item>
           <FaCogs />
         </Item>
         <Item>
           <FaUserAlt onClick={HandleLogin} />
-        </Item>bi
+        </Item>
       </NavbarItems>
     </UserNavDiv>
   );
@@ -102,7 +111,7 @@ export default UserNav;
 
 const UserNavDiv = styled.header`
   height: 100px;
-  font-size: 25px;
+  font-size: 20px;
   display: flex;
   box-shadow: 2px 2px 6px grey;
   /* position: fixed; */
