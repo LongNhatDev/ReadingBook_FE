@@ -8,8 +8,6 @@ import { useNavigate } from "react-router-dom";
 import InvalidMessage from "../auth/components/invalidmessage";
 import { showErrorToaster, showSuccessToaster } from "../../components/Toaster";
 import UserNav from "../components/usernav";
-import { useEffect } from "react";
-import axios from "axios";
 import { BaseURL } from "../AxiosInstance";
 
 const Create = () => {
@@ -87,12 +85,6 @@ const Create = () => {
     navigate(path);
   };
 
-  function handleChooseCategory() {
-    var selectBox = document.getElementById("category");
-    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    console.log(selectedValue);
-  }
-
   React.useEffect(() => {
     window.onbeforeunload = function () {
       return true;
@@ -138,11 +130,7 @@ const Create = () => {
               </div>
             )}
 
-            <Select
-              name="category"
-              id="category"
-              onChange={handleChooseCategory()}
-            >
+            <Select name="category" id="category">
               {bookCategory.map((element) => (
                 <option value={element._id}>{element.categoryName}</option>
               ))}
