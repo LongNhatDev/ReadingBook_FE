@@ -6,10 +6,9 @@ import Category from "../modules/category";
 import Home from "../modules/home";
 import Profile from "../modules/profile";
 import Rank from "../modules/rank";
-import Home from "../modules/home";
-import Profile from "../modules/profile";
-import Rank from "../modules/rank";
 import SignIn from "../modules/auth/signin";
+import Create from "../modules/create";
+import YourBook from "../modules/yourbook";
 
 export default function RoutesRoot() {
   return (

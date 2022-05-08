@@ -67,7 +67,7 @@ const SignIn = () => {
               type="text"
               placeholder="Enter Email"
               className={error.email ? "invalid" : ""}
-              onClick={(event) => {
+              onClick={() => {
                 setError({ ...error, email: false });
               }}
               onBlur={(event) => {
@@ -86,7 +86,7 @@ const SignIn = () => {
               type="password"
               placeholder="Enter Password"
               className={error.password ? "invalid" : ""}
-              onClick={(event) => {
+              onClick={() => {
                 setError({ ...error, password: false });
               }}
               onBlur={(event) => {
@@ -97,7 +97,7 @@ const SignIn = () => {
                 setValue({ ...value, password: event.target.value.trim() });
               }}
             />
-            {error.email && (
+            {error.password && (
               <div>
                 <InvalidMessage>Please fill your password</InvalidMessage>
               </div>
