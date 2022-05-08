@@ -65,10 +65,6 @@ const UserNav = () => {
         <Item>
           <FaUserAlt onClick={HandleLogin} />
         </Item>
-<<<<<<< HEAD
-        bi
-=======
->>>>>>> master-fe
       </NavbarItems>
     </UserNavDiv>
   );
