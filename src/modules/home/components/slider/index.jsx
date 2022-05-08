@@ -18,7 +18,6 @@ const Slider = () => {
 
   const prevSlide = () => {
     setCurrentSlide(currentSlide === 0 ? slideLength - 1 : currentSlide - 1);
-    console.log("prev");
   };
 
   function auto() {

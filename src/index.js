@@ -1,15 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
 
-import reportWebVitals from './reportWebVitals';
-import RoutesRoot from './routes';
+import reportWebVitals from "./reportWebVitals";
+import RoutesRoot from "./routes";
+import { MainContextProvider } from "./store/main-context";
 
-ReactDOM.render(
-  <React.StrictMode>
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <MainContextProvider>
     <RoutesRoot />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </MainContextProvider>
 );
 
 reportWebVitals();

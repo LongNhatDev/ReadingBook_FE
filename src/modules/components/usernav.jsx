@@ -16,43 +16,6 @@ import LogoContent from "./logocontent";
 import NavbarItems from "./navbaritems";
 
 const UserNav = () => {
-  const categoriesRow = [
-    {
-      id: "LN",
-      content: "Light Novel",
-    },
-    {
-      id: "CM",
-      content: "Comic",
-    },
-    {
-      id: "WN",
-      content: "Web novel",
-    },
-  ];
-  const rankingRow = [
-    {
-      id: "DL",
-      content: "Daily",
-      url: "ranking/dailyranking",
-    },
-    {
-      id: "WL",
-      content: "Weekly",
-      url: "ranking/weeklyranking",
-    },
-    {
-      id: "ML",
-      content: "Monthly",
-      url: "ranking/monthlyranking",
-    },
-    {
-      id: "YL",
-      content: "Yearly",
-      url: "ranking/yearlyranking",
-    },
-  ];
-
   let navigation = useNavigate();
 
   const HandleLogin = () => {
@@ -82,11 +45,11 @@ const UserNav = () => {
         <SeachBox />
         <Item>
           <FaBraille />
-          <Dropdown label={"Category"} categories={categoriesRow} />
+          <Dropdown label={"Category"} />
         </Item>
         <Item>
           <FaSortAmountUpAlt />
-          <Dropdown label={"Ranking"} categories={rankingRow} />
+          <H3Css>Ranking</H3Css>
         </Item>
         <Item onClick={HandleCreate}>
           <FaPlus />
