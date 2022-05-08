@@ -42,7 +42,7 @@ const Links = styled(Link)`
   line-height: 2rem;
   padding-top: 5px;
   padding-bottom: 5px;
-  text-decoration: none;
+  text-decoration: none !important;
   color: #121217;
   font-size: 1.6rem;
   text-align: center;

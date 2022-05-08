@@ -38,10 +38,10 @@ export const MainContextProvider = (props) => {
         cateLink: "/category/all",
       },
     ];
-    const response = await fetch(
-      "https://reading-book-api.herokuapp.com/api/categories"
+    const response = await BaseURL.get(
+"api/categories"
     );
-    const data = await response.json();
+    const data = response.data;
     data.forEach((element) => {
       categoriesData.push({
         cateId: element._id,
@@ -54,11 +54,9 @@ export const MainContextProvider = (props) => {
 
   async function getBooksData() {
     const booksData = [];
-    const response = await BaseURL.get(
-      "/api/books"
-    );
+    const response = await BaseURL.get("/api/books");
 
-    const data = await response.json();
+    const data = response.data;
     data.books.forEach((element) => {
       booksData.push({
         bookId: element._id,
