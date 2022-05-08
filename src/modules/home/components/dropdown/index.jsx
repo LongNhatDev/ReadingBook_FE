@@ -52,6 +52,8 @@ const DropdownSelected = styled.span`
 const DropdownList = styled.ul`
   width: 50rem;
   position: absolute;
+  background-color: rgb(37 38 47);
+  border-radius: 1rem;
   top: 100%;
   left: 0;
   right: 0;
