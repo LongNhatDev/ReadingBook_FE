@@ -17,7 +17,9 @@ const Button = styled.button`
   cursor: pointer;
   z-index: 1;
   text-transform: uppercase;
-
+  .cancel {
+    background-color: red !important;
+  }
   ::after,
   ::before {
     content: "";

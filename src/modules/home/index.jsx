@@ -7,12 +7,14 @@ import UserNav from "../components/usernav";
 
 const Home = () => {
   return (
-    <Page>
-      {/* <UserNav/> */}
-      <Slider />
-      <Content></Content>
-      <Footer />
-    </Page>
+    <>
+      <UserNav />
+      <Page>
+        <Slider />
+        <Content></Content>
+        <Footer />
+      </Page>
+    </>
   );
 };
 

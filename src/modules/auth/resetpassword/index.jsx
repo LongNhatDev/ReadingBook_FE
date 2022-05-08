@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BackgroundCSS from "../components/background";
-import Button from "../components/button";
+import Button from "../../components/button";
 import DivlogIn from "../components/divlogin";
 import Form from "../components/form";
-import Input from "../components/input";
+import Input from "../../components/input"
 import InputWrapper from "../components/inputwrapper";
 import InvalidMessage from "../components/invalidmessage";
 import Logo from "../components/logo";
@@ -18,7 +18,7 @@ const ResetPassword = () => {
 
   let navigate = useNavigate();
   const handleClick = () => {
-    let path = "/auth/login";
+    let path = "/";
     if (password === "") {
       setErrorPassword(true);
     } else if (password !== confirmPassword || confirmPassword === "") {

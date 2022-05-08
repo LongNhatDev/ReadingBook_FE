@@ -1,8 +1,9 @@
 import {
+  FaBook,
   FaBraille,
   FaCogs,
+  FaPlus,
   FaSortAmountUpAlt,
-  FaUpload,
   FaUserAlt,
 } from "react-icons/fa";
 import { FcReading } from "react-icons/fc";
@@ -18,15 +19,19 @@ const UserNav = () => {
   let navigation = useNavigate();
 
   const HandleLogin = () => {
-    const path = "auth/login";
+    const path = "/";
     navigation(path);
   };
-  const HandleUpload = () => {
-    const path = "upload";
+  const HandleCreate = () => {
+    const path = "/create";
+    navigation(path);
+  };
+  const HandleYourBook = () => {
+    const path = "yourbook";
     navigation(path);
   };
   const HandleHome = () => {
-    const path = "/";
+    const path = "/home";
     navigation(path);
   };
 
@@ -46,9 +51,13 @@ const UserNav = () => {
           <FaSortAmountUpAlt />
           <H3Css>Ranking</H3Css>
         </Item>
-        <Item onClick={HandleUpload}>
-          <FaUpload />
-          <H3Css>Upload</H3Css>
+        <Item onClick={HandleCreate}>
+          <FaPlus />
+          <H3Css>Create</H3Css>
+        </Item>
+        <Item onClick={HandleYourBook}>
+          <FaBook />
+          <H3Css>Your Book</H3Css>
         </Item>
         <Item>
           <FaCogs />
@@ -56,7 +65,10 @@ const UserNav = () => {
         <Item>
           <FaUserAlt onClick={HandleLogin} />
         </Item>
+<<<<<<< HEAD
         bi
+=======
+>>>>>>> master-fe
       </NavbarItems>
     </UserNavDiv>
   );
@@ -66,7 +78,7 @@ export default UserNav;
 
 const UserNavDiv = styled.header`
   height: 100px;
-  font-size: 25px;
+  font-size: 20px;
   display: flex;
   box-shadow: 2px 2px 6px grey;
   /* position: fixed; */
