@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { BaseURL } from "../modules/AxiosInstance";
 
 const MainContext = React.createContext({
   categories: [],
@@ -53,8 +54,8 @@ export const MainContextProvider = (props) => {
 
   async function getBooksData() {
     const booksData = [];
-    const response = await fetch(
-      "https://reading-book-api.herokuapp.com/api/books"
+    const response = await BaseURL.get(
+      "/api/books"
     );
 
     const data = await response.json();
