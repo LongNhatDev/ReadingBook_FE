@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Button from "../components/button";
 import Input from "../components/input";
@@ -11,13 +11,33 @@ import UserNav from "../components/usernav";
 import { BaseURL } from "../AxiosInstance";
 
 const Create = () => {
-  const [files, setFiles] = useState([]);
+  let navigate = useNavigate();
+  const path = "/home";
+  const reg = new RegExp("^[0-9]+$");
+  const token = localStorage.getItem("token");
+  const [bookCategory, setBookCategory] = React.useState([]);
+  const [error, setError] = React.useState({
+    name: false,
+    author: false,
+    price: false,
+    description: false,
+  });
+  const [value, setValue] = React.useState({
+    name: "",
+    categoryId: "",
+    coverImage: "",
+    description: "",
+    price: "",
+  });
+  let fileName = "";
+  let fileType = "";
+  const [file, setfile] = React.useState([]);
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
-    onDrop: (acceptedFiles) => {
-      setFiles(
-        acceptedFiles.map((file) =>
+    onDrop: async (acceptedfile) => {
+      setfile(
+        acceptedfile.map((file) =>
           Object.assign(file, {
             preview: URL.createObjectURL(file),
           })
@@ -25,65 +45,6 @@ const Create = () => {
       );
     },
   });
-
-  const images = files.map((file) => (
-    <div key={file.name}>
-      <div>
-        <img
-          src={file.preview}
-          style={{ height: "243px", width: "278px", marginTop: "4px" }}
-          alt="preview"
-        />
-      </div>
-    </div>
-  ));
-
-  let navigate = useNavigate();
-  const path = "/home";
-  const reg = new RegExp("^[0-9]+$");
-
-  const [error, setError] = useState({
-    name: false,
-    author: false,
-    price: false,
-  });
-  const [value, setValue] = useState({ name: "", category: "", price: "" });
-
-  const [bookCategory, setBookCategory] = React.useState([]);
-
-  React.useEffect(() => {
-    async function getCategory() {
-      const arrayOfBook = await BaseURL.get("/api/categories");
-      setBookCategory(arrayOfBook.data);
-    }
-    getCategory();
-  }, []);
-
-  const handleCreate = () => {
-    setError({
-      ...error,
-      name: value.name === "",
-      author: value.author === "",
-      price: value.price === "" || !reg.test(value.price),
-    });
-    if (
-      error.name ||
-      error.author ||
-      error.price ||
-      value.name === "" ||
-      value.author === "" ||
-      value.price === ""
-    ) {
-      showErrorToaster("Something Wrong, Check again !");
-    } else {
-      showSuccessToaster("Create Successfully !");
-      navigate(path);
-    }
-  };
-
-  const handleCancel = () => {
-    navigate(path);
-  };
 
   React.useEffect(() => {
     window.onbeforeunload = function () {
@@ -95,17 +56,106 @@ const Create = () => {
     };
   });
 
+  React.useEffect(() => {
+    async function getCategory() {
+      const arrayOfBook = await BaseURL.get("/api/categories");
+      setBookCategory(arrayOfBook.data);
+    }
+    getCategory();
+  }, []);
+
+  const images = file.map((file) => (
+    <div key={file.name}>
+      <div>
+        <img
+          src={file.preview}
+          style={{ height: "243px", width: "182.25px", marginTop: "4px" }}
+          alt="preview"
+        />
+      </div>
+    </div>
+  ));
+
+  file.forEach((file) => {
+    fileName = file.name;
+    fileType = file.type;
+  });
+
+  const handleCreate = async () => {
+    try {
+      setError({
+        ...error,
+        name: value.name === "",
+        author: value.author === "",
+        description: value.description === "",
+        price: value.price === "" || !reg.test(value.price),
+      });
+      if (value.categoryId === "") {
+        value.categoryId = bookCategory[0]._id;
+      }
+      if (
+        error.description ||
+        error.name ||
+        error.author ||
+        error.price ||
+        value.name === "" ||
+        value.author === "" ||
+        value.price === "" ||
+        value.description === ""
+      )
+        showErrorToaster("Something Wrong, Check again !");
+
+      const responeGetURL = await BaseURL.get(
+        `/api/sign-s3?file-name=${fileName}&file-type=${fileType}&bucket-name=book-covers`
+      );
+      if (responeGetURL !== undefined || responeGetURL !== null) {
+        const authorization = {
+          headers: {
+            Authorization: token,
+          },
+        };
+        const inforRequest = {
+          bookName: value.name,
+          category: value.categoryId,
+          description: value.description,
+          price: value.price,
+          coverImageURL: responeGetURL.data.url,
+        };
+        const respone = await BaseURL.post(
+          "/api/books",
+          inforRequest,
+          authorization
+        );
+        if (respone !== null && respone !== undefined) {
+          showSuccessToaster("Create book successfully!");
+          navigate(path);
+        }
+      }
+    } catch (error) {
+      showErrorToaster("Error !");
+    }
+  };
+
+  const handleCancel = () => {
+    navigate(path);
+  };
+
   return (
     <>
-      <UserNav></UserNav>
+      <UserNav />
       <Page>
         <Title>Create Your Book</Title>
+
         <InformationOfBook>
           <CoverImageWrapper>
             <CoverImage title="Image Cover" {...getRootProps()}>
               <input style={{}} {...getInputProps()} />
               <p
-                style={{ position: "absolute", zIndex: "-1", fontSize: "22px" }}
+                style={{
+                  position: "absolute",
+                  zIndex: "-1",
+                  fontSize: "1.8rem",
+                }}
               >
                 + Add Image Cover
               </p>
@@ -130,11 +180,33 @@ const Create = () => {
               </div>
             )}
 
-            <Select name="category" id="category">
+            <Select
+              name="category"
+              id="category"
+              onChange={(element) => {
+                setValue({ ...value, categoryId: element.target.value });
+              }}
+            >
               {bookCategory.map((element) => (
                 <option value={element._id}>{element.categoryName}</option>
               ))}
             </Select>
+            <InputCreate
+              placeholder="Description of your book"
+              className={error.description ? "invalid" : ""}
+              onChange={(event) => {
+                setError({ ...error, description: false });
+                setValue({ ...value, description: event.target.value.trim() });
+              }}
+              onBlur={() => {
+                setError({ ...error, description: value.description === "" });
+              }}
+            />
+            {error.description && (
+              <div>
+                <InvalidNoti>Please fill description of the book</InvalidNoti>
+              </div>
+            )}
 
             <InputCreate
               placeholder="Price (e.g: 0, 10, ...$)"
@@ -159,6 +231,7 @@ const Create = () => {
             )}
           </Infor>
         </InformationOfBook>
+
         <WrapButton>
           <ButtonCancel onClick={handleCancel}>Cancel</ButtonCancel>
           <Button onClick={handleCreate}>Create</Button>
@@ -228,8 +301,8 @@ const InputCreate = styled(Input)`
 `;
 const CoverImage = styled.div`
   position: relative;
-  height: 245px;
-  width: 280px;
+  height: 248px;
+  width: 184.25px;
   margin-right: 100px;
   border: 1px dashed black;
   display: flex;
