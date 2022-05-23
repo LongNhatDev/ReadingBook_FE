@@ -13,8 +13,12 @@ const ToolBar = (props) => {
 export default ToolBar;
 
 const Bar = styled.ul`
-  height: 100vh;
+  list-style: none;
   width: 4rem;
-  background-color: black;
+  height: 30rem;
+  color: black;
   position: fixed;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  bottom: 5rem;
+  right: 0;
 `;

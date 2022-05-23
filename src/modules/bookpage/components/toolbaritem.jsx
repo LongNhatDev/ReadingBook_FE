@@ -15,12 +15,12 @@ export default ToolBarItem;
 const Item = styled.li`
   width: 100%;
   height: 3rem;
-  color: white;
+  color: black;
   font-size: 2rem;
   text-align: center;
   padding: 3px;
   cursor: pointer;
   &:hover {
-    background-color: blue;
+    background-color: rgba(0, 0, 0, 0.1);
   }
 `;

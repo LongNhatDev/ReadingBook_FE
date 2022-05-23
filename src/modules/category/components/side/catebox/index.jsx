@@ -5,7 +5,6 @@ import MainContext from "../../../../../store/main-context";
 
 const CateBox = (props) => {
   const mainCtx = useContext(MainContext);
-  console.log(props.selected);
   return (
     <Wrapper>
       {mainCtx.categories.map((category) => (

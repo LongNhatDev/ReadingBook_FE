@@ -27,7 +27,7 @@ const UserNav = () => {
     navigation(path);
   };
   const HandleYourBook = () => {
-    const path = "yourbook";
+    const path = "/yourbook";
     navigation(path);
   };
   const HandleHome = () => {

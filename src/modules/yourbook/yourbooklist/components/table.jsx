@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import BtnBar from "./btnbar";
 
@@ -6,26 +7,30 @@ const Tr = (props) => {
   const toArray = (item) => {
     const newArr = [];
     for (const x in item) {
-      if (x !== "Id") {
+      if (x !== "id" && x !== "cover") {
         newArr.push(item[x]);
       }
     }
     return newArr;
   };
 
+  let navigator = useNavigate();
+  const moveToBookManagePageHandler = () => {
+    const path = `${props.row.id}`;
+    navigator(path);
+  };
+
   return (
     <tr>
-      <td key="bcover">
-        <Image
-          src="https://i0.wp.com/wp-corp.qoo-app.com/en/wp-content/uploads/sites/3/2021/04/21042004284294.jpeg?resize=506%2C640&ssl=1"
-          alt="cover"
-        />
+      <td>{props.index + 1}</td>
+      <td onClick={moveToBookManagePageHandler} key="bcover">
+        <Image src={props.row.cover} alt="cover of a book" />
       </td>
       {toArray(props.row).map((value) => (
         <td key={props.row.Id + Math.random().toString()}>{value}</td>
       ))}
       <td key="icon">
-        <BtnBar />
+        <BtnBar onDetail={moveToBookManagePageHandler} />
       </td>
     </tr>
   );
@@ -42,8 +47,8 @@ const Table = (props) => {
         </tr>
       </thead>
       <tbody>
-        {props.body.map((row) => (
-          <Tr key={"id" + row.Id} row={row} />
+        {props.body.map((row, index) => (
+          <Tr index={index} key={row.id} row={row} />
         ))}
       </tbody>
     </TableCss>
@@ -64,6 +69,9 @@ const TableCss = styled.table`
 
   & th {
     padding: 1rem 2rem;
+  }
+  & tr {
+    cursor: pointer;
   }
 
   & tbody tr:hover {

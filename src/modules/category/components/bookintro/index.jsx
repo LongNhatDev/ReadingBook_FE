@@ -1,15 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 import { FaStar, FaEye, FaPlusCircle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const BookIntro = (props) => {
+  let navigator = useNavigate();
+  const moveToReadPageHandler = () => {
+    const path = `/books/${props.bookinfo._id}`;
+    navigator(path);
+  };
   return (
     <Book>
-      <BookImage src={props.bookinfo.bookimg} alt="gkvl1"></BookImage>
+      <BookImage
+        onClick={moveToReadPageHandler}
+        src={props.bookinfo.coverImageURL}
+        alt="gkvl1"
+      ></BookImage>
       <BookDetail>
         <BookTag>#{props.bookinfo.booktag}</BookTag>
-        <BookName>{props.bookinfo.bookname}</BookName>
-        <BookDes>{props.bookinfo.bookdes}</BookDes>
+        <BookName>{props.bookinfo.bookName}</BookName>
+        <BookDes>{props.bookinfo.description}</BookDes>
         <BookBottom>
           <BookRate>
             <span style={{ color: "yellow" }}>
