@@ -1,17 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { AiFillEdit, AiFillInfoCircle, AiTwotoneDelete } from "react-icons/ai";
+import { AiFillEdit, AiTwotoneDelete } from "react-icons/ai";
 
 const BtnBar = () => {
   return (
     <Bar>
-      <span>
+      <span style={{ color: "yellow" }}>
         <AiFillEdit />
       </span>
-      <span>
-        <AiFillInfoCircle />
-      </span>
-      <span>
+      <span style={{ color: "red" }}>
         <AiTwotoneDelete />
       </span>
     </Bar>
@@ -25,9 +22,10 @@ const Bar = styled.div`
     font-size: 2rem;
     padding: 0 1rem;
     cursor: pointer;
+    display: inline-block;
   }
 
   & span:hover {
-    color: blue;
+    transform: scale(1.3);
   }
 `;

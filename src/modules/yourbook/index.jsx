@@ -1,13 +1,14 @@
 import React from "react";
-import Page from "../components/page";
+import { Route, Routes } from "react-router-dom";
 import UserNav from "../components/usernav";
+import BookManager from "./bookmanager";
+import YourBookList from "./yourbooklist";
 
 const YourBook = () => {
   return (
     <>
       <UserNav />
-      <Page>
-      </Page>
+      <YourBookList />
     </>
   );
 };

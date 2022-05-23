@@ -1,15 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 import { FaStar, FaEye, FaPlusCircle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const BookIntro = (props) => {
+  let navigator = useNavigate();
+  const moveToReadPageHandler = () => {
+    const path = `/books/${props.bookinfo._id}`;
+    navigator(path);
+  };
   return (
     <Book>
-      <BookImage src={props.bookinfo.bookimg} alt="gkvl1"></BookImage>
+      <BookImage
+        onClick={moveToReadPageHandler}
+        src={props.bookinfo.coverImageURL}
+        alt="gkvl1"
+      ></BookImage>
       <BookDetail>
         <BookTag>#{props.bookinfo.booktag}</BookTag>
-        <BookName>{props.bookinfo.bookname}</BookName>
-        <BookDes>{props.bookinfo.bookdes}</BookDes>
+        <BookName>{props.bookinfo.bookName}</BookName>
+        <BookDes>{props.bookinfo.description}</BookDes>
         <BookBottom>
           <BookRate>
             <span style={{ color: "yellow" }}>
@@ -18,7 +28,7 @@ const BookIntro = (props) => {
             <span> {props.bookinfo.bookrate}</span>
           </BookRate>
           <BookChapter>
-            <span style={{ fontSize: 12 + "px", color: "red" }}>
+            <span style={{ fontSize: 14 + "px", color: "red" }}>
               <IconMat />
             </span>
             <span>{props.bookinfo.bookchapter} views</span>
@@ -56,7 +66,7 @@ const BookImage = styled.img`
 `;
 const BookDetail = styled.div`
   height: 100%;
-  padding: 1rem 2rem;
+  padding: 5px 2rem;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -66,17 +76,20 @@ const BookDetail = styled.div`
 const BookTag = styled.div`
   color: blue;
   text-transform: uppercase;
+  font-size: 1.4rem;
 `;
 const BookName = styled.h3`
-  margin-top: 1rem;
+  margin-top: 5px;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-word;
+  font-size: 1.6rem;
 `;
 const BookDes = styled.p`
+  font-size: 1.2rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -84,7 +97,7 @@ const BookDes = styled.p`
   text-overflow: ellipsis;
   word-break: break-word;
   color: #121217;
-  margin-top: 1rem;
+  margin-top: 5px;
 `;
 const BookBottom = styled.div`
   width: 100%;

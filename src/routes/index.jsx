@@ -9,6 +9,11 @@ import Rank from "../modules/rank";
 import SignIn from "../modules/auth/signin";
 import Create from "../modules/create";
 import YourBook from "../modules/yourbook";
+import UploadChapter from "../modules/yourbook/uploadchapter";
+import YourBookList from "../modules/yourbook/yourbooklist";
+import ReadingPage from "../modules/bookpage/components/readingpage";
+import BookPage from "../modules/bookpage";
+import BookManager from "../modules/yourbook/bookmanager";
 
 export default function RoutesRoot() {
   return (
@@ -22,6 +27,12 @@ export default function RoutesRoot() {
         <Route path="/rank/*" element={<Rank />} />
         <Route path="/create" element={<Create />} />
         <Route path="/yourbook" element={<YourBook />} />
+        <Route path="/yourbook/:bookId" element={<BookManager />} />
+        <Route path="/upload" element={<UploadChapter />} />
+        <Route path="/list" element={<YourBookList />} />
+        <Route path="/reading" element={<ReadingPage />} />
+        <Route path="/books/*" element={<BookPage />} />
+        <Route path="/bookmana" element={<BookManager />} />
       </Routes>
     </BrowserRouter>
   );

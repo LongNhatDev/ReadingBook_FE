@@ -34,7 +34,11 @@ const UserNav = () => {
     const path = "/create";
     navigation(path);
   };
+<<<<<<< HEAD
+  const HandleYourBook = () => {
+=======
   const handleViewYourBook = () => {
+>>>>>>> master-fe
     const path = "/yourbook";
     navigation(path);
   };

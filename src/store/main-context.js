@@ -38,10 +38,8 @@ export const MainContextProvider = (props) => {
         cateLink: "/category/all",
       },
     ];
-    const response = await fetch(
-      "https://reading-book-api.herokuapp.com/api/categories"
-    );
-    const data = await response.json();
+    const response = await BaseURL.get("api/categories");
+    const data = response.data;
     data.forEach((element) => {
       categoriesData.push({
         cateId: element._id,
@@ -53,21 +51,24 @@ export const MainContextProvider = (props) => {
   }
 
   async function getBooksData() {
+    console.log("this is run again");
     const booksData = [];
-    const response = await BaseURL.get(
-      "/api/books"
-    );
+    const response = await BaseURL.get("/api/books");
 
-    const data = await response.json();
+    const data = response.data;
     data.books.forEach((element) => {
       booksData.push({
-        bookId: element._id,
-        bookimg: element.coverImageURL,
+        _id: element._id,
+        coverImageURL: element.coverImageURL,
         booktag: createTag(element.category.categoryName),
-        bookname: element.bookName,
-        bookdes: element.description,
+        bookName: element.bookName,
+        description: element.description,
         bookrate: "5",
-        bookchapter: element.viewNumber,
+        viewNumber: element.viewNumber,
+        author: element.author,
+        category: element.category,
+        chapters: element.chapters,
+        price: element.price,
       });
     });
     setBooks(booksData);
@@ -76,7 +77,7 @@ export const MainContextProvider = (props) => {
   useEffect(() => {
     getData();
     getBooksData();
-    console.log("Effect run in main-context");
+    console.log("Effect run in main-context", Date.now());
   }, []);
 
   return (

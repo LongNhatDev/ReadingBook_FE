@@ -3,11 +3,10 @@ import styled from "styled-components";
 import BookIntro from "../bookintro";
 
 const MainSide = (props) => {
-  console.log(props);
   return (
     <Main len={`${Math.ceil(props.data.length / 3) * 15 + 3}rem`}>
       {props.data.map((book) => (
-        <BookIntro key={book.bookId} bookinfo={book} />
+        <BookIntro key={book._id} bookinfo={book} />
       ))}
     </Main>
   );

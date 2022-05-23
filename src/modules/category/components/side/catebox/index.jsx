@@ -5,7 +5,6 @@ import MainContext from "../../../../../store/main-context";
 
 const CateBox = (props) => {
   const mainCtx = useContext(MainContext);
-  console.log(props.selected);
   return (
     <Wrapper>
       {mainCtx.categories.map((category) => (
@@ -42,7 +41,7 @@ const Links = styled(Link)`
   line-height: 2rem;
   padding-top: 5px;
   padding-bottom: 5px;
-  text-decoration: none;
+  text-decoration: none !important;
   color: #121217;
   font-size: 1.6rem;
   text-align: center;
