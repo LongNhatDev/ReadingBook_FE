@@ -1,29 +1,63 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import BackgroundCSS from "../components/background";
 import Button from "../../components/button";
 import DivlogIn from "../components/divlogin";
 import Form from "../components/form";
-import Input from "../../components/input"
+import Input from "../../components/input";
 import InputWrapper from "../components/inputwrapper";
 import InvalidMessage from "../components/invalidmessage";
 import Logo from "../components/logo";
+import { BaseURL } from "../../AxiosInstance";
+import {
+  showErrorToaster,
+  showSuccessToaster,
+} from "../../../components/Toaster";
 
 const ResetPassword = () => {
-  const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
-  const [errorPassword, setErrorPassword] = useState(false);
+  const [value, setValue] = useState({ password: "", confirmPassword: "" });
+  const [error, setError] = useState({
+    password: false,
+    confirmPassword: false,
+  });
 
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const location = useLocation();
 
   let navigate = useNavigate();
-  const handleClick = () => {
-    let path = "/";
-    if (password === "") {
-      setErrorPassword(true);
-    } else if (password !== confirmPassword || confirmPassword === "") {
-      setErrorConfirmPassword(true);
-    } else navigate(path);
+  const handleReset = async () => {
+    try {
+      let path = "/";
+      if (value.password === "") {
+        setError({ ...error, password: true });
+      }
+      if (
+        value.password !== value.confirmPassword ||
+        value.confirmPassword === ""
+      ) {
+        setError({ ...error, confirmPassword: true });
+      }
+
+      const inforRequest = {
+        email: location.state.email,
+        password: value.confirmPassword,
+      };
+      const authorization = {
+        headers: { Authorization: location.state.token },
+      };
+      const respone = await BaseURL.patch(
+        "/api/auth/reset_password",
+        inforRequest,
+        authorization
+      );
+      if (respone !== null || respone !== undefined) {
+        showSuccessToaster("Sucessfully!");
+        navigate(path);
+      } else {
+        showErrorToaster("Server not respone !");
+      }
+    } catch (error) {
+      showErrorToaster("Something Wrong. Please try again!");
+    }
   };
 
   return (
@@ -39,16 +73,16 @@ const ResetPassword = () => {
             <Input
               type="password"
               placeholder="Enter Password"
-              className={errorPassword ? "invalid" : ""}
+              className={error.password ? "invalid" : ""}
               onChange={(event) => {
-                setErrorPassword(false);
-                setPassword(event.target.value);
+                setError({ ...error, password: false });
+                setValue({ ...value, password: event.target.value });
               }}
               onBlur={() => {
-                setErrorPassword(password === "");
+                setError({ ...error, password: value.password === "" });
               }}
             />
-            {errorPassword && (
+            {error.password && (
               <div>
                 <InvalidMessage>Please fill your new password</InvalidMessage>
               </div>
@@ -58,16 +92,21 @@ const ResetPassword = () => {
             <Input
               type="password"
               placeholder="Confirm Password"
-              className={errorConfirmPassword ? "invalid" : ""}
+              className={error.confirmPassword ? "invalid" : ""}
               onChange={(event) => {
-                setErrorConfirmPassword(false);
-                setConfirmPassword(event.target.value);
+                setError({ ...error, confirmPassword: false });
+                setValue({ ...value, confirmPassword: event.target.value });
               }}
               onBlur={() => {
-                setErrorConfirmPassword(confirmPassword === "");
+                setError({
+                  ...error,
+                  confirmPassword:
+                    value.password === "" ||
+                    value.password !== value.confirmPassword,
+                });
               }}
             />
-            {errorConfirmPassword && (
+            {error.confirmPassword && (
               <div>
                 <InvalidMessage>
                   The password confirmation does not match
@@ -75,7 +114,7 @@ const ResetPassword = () => {
               </div>
             )}
           </InputWrapper>
-          <Button onClick={handleClick}>RESET</Button>
+          <Button onClick={handleReset}>RESET</Button>
         </Form>
       </DivlogIn>
     </BackgroundCSS>

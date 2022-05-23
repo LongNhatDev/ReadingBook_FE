@@ -12,6 +12,7 @@ import Logo from "../components/logo";
 import SignUpWrapper from "../components/signupwrapper";
 import {
   showErrorToaster,
+  showInstructionToaster,
   showSuccessToaster,
 } from "../../../components/Toaster";
 import { BaseURL } from "../../AxiosInstance";
@@ -28,14 +29,15 @@ const SignIn = () => {
         email: value.email,
         password: value.password,
       };
-      let status = await BaseURL.post(
+      let respone = await BaseURL.post(
         "/api/auth/sign_in",
         inforRequestToSignIn
       );
 
-      if (status !== null || status !== undefined) {
+      if (respone !== null || respone !== undefined) {
         let path = "/home";
-        navigate(path);
+        localStorage.setItem("token",respone.data.token)
+        navigate(path, { state: { token: respone.data.token } });
         showSuccessToaster("Sign In Successfully");
       } else showErrorToaster("Server not responed");
     } catch (error) {
@@ -43,9 +45,23 @@ const SignIn = () => {
     }
   };
 
-  const handleForgotPassword = () => {
-    let path = "auth/confirmotp";
-    navigate(path);
+  const handleForgotPassword = async () => {
+    try {
+      const requestForgotPassword = {
+        email: value.email,
+      };
+      const respone = await BaseURL.post(
+        "/api/auth/forgot_password",
+        requestForgotPassword
+      );
+      if (respone !== null || respone !== undefined) {
+        showInstructionToaster("Please check your email to get OTP code !");
+        let path = "auth/confirmotp";
+        navigate(path, { state: { email: value.email } });
+      } else showErrorToaster("Server not respone");
+    } catch (error) {
+      showErrorToaster("Error: something occurs when clicking!");
+    }
   };
 
   const handleSignUp = () => {

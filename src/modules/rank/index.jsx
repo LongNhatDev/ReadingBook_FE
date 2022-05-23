@@ -1,8 +1,14 @@
-import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
-import React, { useState } from "react";
+import React from "react";
+import Page from "../components/page";
+import UserNav from "../components/usernav";
 
 const Rank = () => {
-  return;
+  return (
+    <>
+      <UserNav />
+      <Page></Page>
+    </>
+  );
 };
 
 export default Rank;

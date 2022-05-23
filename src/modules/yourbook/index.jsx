@@ -6,10 +6,10 @@ import YourBookList from "./yourbooklist";
 
 const YourBook = () => {
   return (
-    <React.Fragment>
+    <>
       <UserNav />
       <YourBookList />
-    </React.Fragment>
+    </>
   );
 };
 
