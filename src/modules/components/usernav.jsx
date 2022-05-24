@@ -17,6 +17,7 @@ import NavbarItems from "./navbaritems";
 
 const UserNav = () => {
   let navigation = useNavigate();
+  const ava = localStorage.getItem("ava");
 
   const handleReturnHomePage = () => {
     const path = "/home";
@@ -34,15 +35,10 @@ const UserNav = () => {
     const path = "/create";
     navigation(path);
   };
-<<<<<<< HEAD
-  const HandleYourBook = () => {
-=======
   const handleViewYourBook = () => {
->>>>>>> master-fe
     const path = "/yourbook";
     navigation(path);
   };
-
   const handleViewProfile = () => {
     const path = "/profile";
     navigation(path);
@@ -80,7 +76,15 @@ const UserNav = () => {
           <FaCogs onClick={handleViewProfile} />
         </Item>
         <Item>
-          <FaUserAlt onClick={handleSignIn} />
+          {ava === undefined && <FaUserAlt onClick={handleSignIn} />}
+          {ava !== undefined && (
+            <img
+              src={ava}
+              alt=""
+              style={{ width: "30px", borderRadius: "20px" }}
+              onClick={handleSignIn}
+            />
+          )}
         </Item>
       </NavbarItems>
     </UserNavDiv>
