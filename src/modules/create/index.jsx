@@ -9,6 +9,7 @@ import InvalidMessage from "../auth/components/invalidmessage";
 import { showErrorToaster, showSuccessToaster } from "../../components/Toaster";
 import UserNav from "../components/usernav";
 import { BaseURL } from "../AxiosInstance";
+import axios from "axios";
 
 const Create = () => {
   let navigate = useNavigate();
@@ -114,6 +115,13 @@ const Create = () => {
             Authorization: token,
           },
         };
+        const config = {
+          headers: {
+            "Content-Type": fileType,
+          },
+        };
+        await axios.put(responeGetURL.data.signedRequest, file[0], config);
+
         const inforRequest = {
           bookName: value.name,
           category: value.categoryId,
