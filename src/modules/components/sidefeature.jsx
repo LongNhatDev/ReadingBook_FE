@@ -2,15 +2,24 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import {
   BsSuitHeart,
-  BsStar,
+  BsStarFill,
   BsChatSquareText,
   BsListUl,
   BsShare,
 } from "react-icons/bs";
 import ChaptersToolbar from "../bookpage/components/chapterstoolbar";
+import Review from "./review";
 
 const SideFeature = (props) => {
   const [isShowIndex, setIsShowIndex] = useState(false);
+  const [isShowRating, setIsShowRating] = useState(false);
+
+  const showRatingHandler = () => {
+    setIsShowRating(true);
+  };
+  const hideRatingHandler = () => {
+    setIsShowRating(false);
+  };
   const showIndexHandler = () => {
     setIsShowIndex(true);
   };
@@ -26,11 +35,16 @@ const SideFeature = (props) => {
           </span>
           <Text>1000 followers</Text>
         </Item>
-        <Item>
-          <span style={{ color: "yellow" }}>
-            <BsStar />
-          </span>
-          <Text>4.91</Text>
+        <Item onClick={showRatingHandler}>
+          <Rating>
+            <IconStar style={{ color: "yellow" }}>
+              <BsStarFill />
+            </IconStar>
+          </Rating>
+          <Text>
+            {props.book.avrStarNumber !== undefined &&
+              props.book.avrStarNumber.toFixed(2)}
+          </Text>
         </Item>
         <Item onClick={showIndexHandler}>
           <span style={{ color: "black" }}>
@@ -51,6 +65,13 @@ const SideFeature = (props) => {
           <Text>Share</Text>
         </Item>
       </Row>
+      {isShowRating && (
+        <Review
+          onUpdate={props.onUpdate}
+          bookId={props.book._id}
+          onHideIndex={hideRatingHandler}
+        />
+      )}
       {isShowIndex && (
         <ChaptersToolbar
           onHideIndex={hideIndexHandler}
@@ -76,15 +97,21 @@ const Item = styled.div`
   width: 12rem;
   cursor: pointer;
   border-radius: 4px;
+  position: relative;
   & span {
     display: block;
     font-size: 3rem;
     text-align: center;
   }
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
 `;
+
+const Rating = styled.div``;
+const IconStar = styled.span`
+  display: block;
+  font-size: 3rem;
+  text-align: center;
+`;
+
 const Text = styled.div`
   font-size: 1.6rem;
   text-align: center;

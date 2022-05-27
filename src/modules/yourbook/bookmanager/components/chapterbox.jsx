@@ -6,7 +6,11 @@ const ChapterBox = (props) => {
   return (
     <Box>
       {props.chapters.map((chapter) => (
-        <ChapterItem key={chapter._id} chapter={chapter} />
+        <ChapterItem
+          bookId={props.bookId}
+          key={chapter._id}
+          chapter={chapter}
+        />
       ))}
     </Box>
   );
