@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import styled from "styled-components";
@@ -6,10 +6,11 @@ import Button from "../../../components/button";
 import { showSuccessToaster } from "../../../../components/Toaster";
 import Modal from "../../../components/modal";
 import axios from "axios";
+import { BaseURL } from "../../../AxiosInstance";
 
 const UpdateChapter = (props) => {
   const [datas, setDatas] = useState({});
-  const titleRef = useRef();
+  const [title, setTitle] = useState(props.chapter.title);
   useEffect(() => {
     async function getChapter() {
       try {
@@ -26,27 +27,32 @@ const UpdateChapter = (props) => {
   async function submitHandler(event) {
     event.preventDefault();
     const sendData = {
-      title: titleRef.current.value,
+      title: title,
       content: datas,
       audioLink: "",
     };
-    fetch(`http://localhost:3000/api/chapters?bookId=${props.id}`, {
-      method: "POST",
-      body: JSON.stringify(sendData),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjUxMzZjM2JkNjAwMzFhMTM1ZjAyMSIsImlhdCI6MTY1MjE5ODgzMSwiZXhwIjoxNjU0NzkwODMxfQ.sMhIs0EOK0kSwdAlsyReAiuMvK-4OmbwJyVz6QgyaDo",
-      },
-    }).then((res) => {
-      if (res.ok) {
-        showSuccessToaster("Upload Successfully");
-        props.onUpdate();
-      }
-      console.log(res.ok);
-    });
+    try {
+      await BaseURL.put(
+        `api/chapters/${props.chapter._id}/book/${props.id}`,
+        sendData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjUxMzZjM2JkNjAwMzFhMTM1ZjAyMSIsImlhdCI6MTY1MjY4Nzc2NiwiZXhwIjoxNjU1Mjc5NzY2fQ.Mn-j3D-KUVz1UDGQniyT6OhxAGDdJr-RheoOj9XZjQs",
+          },
+        }
+      );
+      showSuccessToaster("Update Successfully");
+      props.onUpdate();
+    } catch (err) {
+      console.log("error occurs", err);
+    }
   }
 
+  const titleChangeHandler = (event) => {
+    setTitle(event.target.value);
+  };
   const onChangeHandler = (event, editor) => {
     setDatas(editor.getData());
   };
@@ -59,8 +65,9 @@ const UpdateChapter = (props) => {
             type="text"
             id="chaptertitle"
             placeholder="Enter the title here"
-            ref={titleRef}
-            value={props.chapter.title}
+            // ref={titleRef}
+            value={title}
+            onChange={titleChangeHandler}
           />
           <CKEditor
             editor={ClassicEditor}
@@ -77,7 +84,7 @@ const UpdateChapter = (props) => {
             }}
             onChange={onChangeHandler}
           />
-          <UploadButton>Create</UploadButton>
+          <UploadButton>Update</UploadButton>
         </Form>
       </Container>
     </Modal>

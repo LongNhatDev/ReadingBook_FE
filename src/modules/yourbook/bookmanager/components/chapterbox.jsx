@@ -11,6 +11,7 @@ const ChapterBox = (props) => {
           key={chapter._id}
           chapter={chapter}
           index={index + 1}
+          onUpdate={props.onUpdate}
         />
       ))}
     </Box>

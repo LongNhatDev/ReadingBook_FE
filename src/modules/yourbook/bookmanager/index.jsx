@@ -7,8 +7,6 @@ import ChapterBox from "./components/chapterbox";
 import StatusBox from "./components/statusbox";
 import Button from "../../components/button";
 import UploadChapter from "../uploadchapter";
-import UpdateChapter from "../yourbooklist/components/updatechapter";
-
 const BookManager = () => {
   const [detail, setDetail] = useState({});
   const param = useParams();
@@ -57,7 +55,11 @@ const BookManager = () => {
             </Detail>
           </Bookpart>
           <Chapterpart>
-            <ChapterBox bookId={detail._id} chapters={detail.chapters} />
+            <ChapterBox
+              onUpdate={updateHandler}
+              bookId={detail._id}
+              chapters={detail.chapters}
+            />
             <CreateButton onClick={showUploadChapterHandler}>
               CREATE CHAPTER
             </CreateButton>

@@ -34,7 +34,7 @@ const ChapterItem = (props) => {
       {isShowUpdateChapter && (
         <UpdateChapter
           onClose={hideUpdateChapterHandler}
-          // onUpdate={updateHandler}
+          onUpdate={props.onUpdate}
           chapter={props.chapter}
           id={props.bookId}
         />
