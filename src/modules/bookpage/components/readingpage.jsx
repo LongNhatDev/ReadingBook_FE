@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ToolBar from "./toolbar";
 import ChaptersToolbar from "./chapterstoolbar";
@@ -23,36 +23,35 @@ const ReadingPage = () => {
   };
   const bookParam = useParams();
 
-  let chapterTitle = "";
-  let chapters = [];
-  const getChapter = async () => {
-    try {
-      const res = await BaseURL.get(`api/books/book/${bookParam.bookId}`);
-      chapters = res.data.chapters;
-      let targetChapter = chapters.findIndex(
-        (chapter) => chapter._id === bookParam.chapterId
-      );
-      chapterTitle = chapters[targetChapter].title;
-      const linkToChapter = chapters[targetChapter].contentLink;
+  useEffect(() => {
+    let chapterTitle = "";
+    let chapters = [];
+    const getChapter = async () => {
       try {
-        const res2 = await axios.get(linkToChapter);
-        setDatas({
-          chapters: chapters,
-          chapterTitle: chapterTitle,
-          chapterContent: res2.data,
-        });
-      } catch (err1) {
-        console.log("error occur", err1);
+        const res = await BaseURL.get(`api/books/book/${bookParam.bookId}`);
+        chapters = res.data.chapters;
+        let targetChapter = chapters.findIndex(
+          (chapter) => chapter._id === bookParam.chapterId
+        );
+        chapterTitle = chapters[targetChapter].title;
+        const linkToChapter = chapters[targetChapter].contentLink;
+        try {
+          const res2 = await axios.get(linkToChapter);
+          setDatas({
+            chapters: chapters,
+            chapterTitle: chapterTitle,
+            chapterContent: res2.data,
+          });
+        } catch (err1) {
+          console.log("error occur", err1);
+        }
+      } catch (err2) {
+        console.log("error occur", err2);
       }
-    } catch (err2) {
-      console.log("error occur", err2);
-    }
-  };
-  if (datas.chapterTitle.length === 0) {
-    {
-      getChapter();
-    }
-  }
+    };
+    getChapter();
+  }, [bookParam.chapterId, bookParam.bookId]);
+
   console.log(datas);
 
   return (
@@ -67,7 +66,7 @@ const ReadingPage = () => {
           <ToolBar onShowIndex={showIndexHandler} />
           {isShowIndex && (
             <ChaptersToolbar
-              chapters={chapters}
+              chapters={datas.chapters}
               bookId={bookParam.bookId}
               onHideIndex={hideIndexHandler}
             />
