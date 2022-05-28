@@ -60,7 +60,7 @@ const ReadingPage = () => {
         <Wrapper>
           <Reading>
             {console.log(datas.chapterTitle)}
-            <h2>{datas.chapterTitle}</h2>
+            <Title>{datas.chapterTitle}</Title>
             <div dangerouslySetInnerHTML={{ __html: datas.chapterContent }} />
           </Reading>
           <ToolBar onShowIndex={showIndexHandler} />
@@ -84,6 +84,12 @@ const Reading = styled.div`
   margin: 0 auto;
   line-height: 4rem;
   font-size: 1.6rem;
+`;
+
+const Title = styled.h2`
+  margin-bottom: 3rem;
+  text-align: center;
+  margin-top: 3rem;
 `;
 
 const Wrapper = styled.main`
