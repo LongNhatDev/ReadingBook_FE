@@ -25,7 +25,7 @@ const BookIntro = (props) => {
             <span style={{ color: "yellow" }}>
               <FaStar />
             </span>
-            <span> {props.bookinfo.bookrate}</span>
+            <span> {props.bookinfo.bookrate.toFixed(2)}</span>
           </BookRate>
           <BookChapter>
             <span style={{ fontSize: 14 + "px", color: "red" }}>
@@ -108,6 +108,7 @@ const BookBottom = styled.div`
 `;
 const BookRate = styled.div`
   width: 3.5rem;
+  display: flex;
 `;
 const BookChapter = styled.div`
   margin-left: 4rem;
