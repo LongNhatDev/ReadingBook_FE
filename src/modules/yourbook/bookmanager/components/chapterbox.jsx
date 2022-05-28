@@ -5,11 +5,12 @@ import ChapterItem from "./chapteritem";
 const ChapterBox = (props) => {
   return (
     <Box>
-      {props.chapters.map((chapter) => (
+      {props.chapters.map((chapter, index) => (
         <ChapterItem
           bookId={props.bookId}
           key={chapter._id}
           chapter={chapter}
+          index={index + 1}
         />
       ))}
     </Box>

@@ -8,7 +8,11 @@ const ChapterItem = (props) => {
     const path = `/books/${props.bookId}/${props.chapter._id}`;
     navigator(path);
   };
-  return <Item onClick={readingHandler}>{props.chapter.title}</Item>;
+  return (
+    <Item onClick={readingHandler}>
+      Chapter {props.index}: {props.chapter.title}
+    </Item>
+  );
 };
 
 export default ChapterItem;

@@ -14,7 +14,9 @@ const ChapterItem = (props) => {
 
   return (
     <Container>
-      <Title>{props.chapter.title}</Title>
+      <Title>
+        Chapter {props.index}. {props.chapter.title}
+      </Title>
       <IconWrapper>
         <span onClick={showUpdateChapterHandler} style={{ color: "yellow" }}>
           <AiFillEdit />
