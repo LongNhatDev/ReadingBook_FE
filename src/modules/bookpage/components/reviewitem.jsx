@@ -10,6 +10,7 @@ const ReviewItem = (props) => {
   const day = dateReview.toLocaleString("en-US", { day: "2-digit" });
   const year = dateReview.getFullYear();
   const dateReviewTransform = month + " " + day + ", " + year;
+  const token = localStorage.getItem("token");
 
   const deleteReviewHandler = async () => {
     try {
@@ -17,8 +18,7 @@ const ReviewItem = (props) => {
         `api/books/${props.bookId}/reviews/${props.review._id}`,
         {
           headers: {
-            Authorization:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjUxMzZjM2JkNjAwMzFhMTM1ZjAyMSIsImlhdCI6MTY1MjY4Nzc2NiwiZXhwIjoxNjU1Mjc5NzY2fQ.Mn-j3D-KUVz1UDGQniyT6OhxAGDdJr-RheoOj9XZjQs",
+            Authorization: token,
           },
         }
       );

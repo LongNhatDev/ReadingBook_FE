@@ -7,6 +7,7 @@ import { BaseURL } from "../AxiosInstance";
 import { showErrorToaster, showSuccessToaster } from "../../components/Toaster";
 
 const Review = (props) => {
+  const token = localStorage.getItem("token");
   const [color, setColor] = useState([
     "white",
     "white",
@@ -36,11 +37,11 @@ const Review = (props) => {
       await BaseURL.post(`api/books/${props.bookId}/reviews`, reviews, {
         headers: {
           "Content-Type": "application/json",
-          Authorization:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjUxMzZjM2JkNjAwMzFhMTM1ZjAyMSIsImlhdCI6MTY1MjY4Nzc2NiwiZXhwIjoxNjU1Mjc5NzY2fQ.Mn-j3D-KUVz1UDGQniyT6OhxAGDdJr-RheoOj9XZjQs",
+          Authorization: token,
         },
       });
       props.onUpdate();
+      props.onHideIndex();
       showSuccessToaster("Save review successfuly");
     } catch (err) {
       console.log("error occurs", err);
