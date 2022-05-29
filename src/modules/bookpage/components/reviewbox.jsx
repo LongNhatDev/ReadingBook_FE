@@ -9,7 +9,7 @@ const ReviewBox = (props) => {
   useEffect(() => {
     const getReview = async () => {
       try {
-        const res = await BaseURL.get(`api/reviews/${props.bookId}`);
+        const res = await BaseURL.get(`api/books/${props.bookId}/reviews/`);
         setReview(res.data);
       } catch (err) {
         console.log("error occur", err);
@@ -20,15 +20,19 @@ const ReviewBox = (props) => {
 
   return (
     <Container>
-      {review.map((item) => (
-        <ReviewItem
-          onUpdate={props.onUpdate}
-          isUpdated={props.isUpdated}
-          key={item._id}
-          bookId={props.bookId}
-          review={item}
-        />
-      ))}
+      {review.length > 0 ? (
+        review.map((item) => (
+          <ReviewItem
+            onUpdate={props.onUpdate}
+            isUpdated={props.isUpdated}
+            key={item._id}
+            bookId={props.bookId}
+            review={item}
+          />
+        ))
+      ) : (
+        <h2 style={{ textAlign: "center" }}>There's no review</h2>
+      )}
     </Container>
   );
 };

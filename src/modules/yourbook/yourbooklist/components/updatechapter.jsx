@@ -33,7 +33,7 @@ const UpdateChapter = (props) => {
     };
     try {
       await BaseURL.put(
-        `api/chapters/${props.chapter._id}/book/${props.id}`,
+        `api/books/${props.id}/chapters/${props.chapter._id}`,
         sendData,
         {
           headers: {

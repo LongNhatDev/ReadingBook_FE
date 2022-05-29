@@ -14,7 +14,7 @@ const ReviewItem = (props) => {
   const deleteReviewHandler = async () => {
     try {
       await BaseURL.delete(
-        `api/reviews/${props.review._id}/book/${props.bookId}`,
+        `api/books/${props.bookId}/reviews/${props.review._id}`,
         {
           headers: {
             Authorization:

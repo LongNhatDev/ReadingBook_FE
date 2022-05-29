@@ -4,7 +4,7 @@ import { BsStarFill } from "react-icons/bs";
 import Modal from "./modal";
 import Button from "../components/button";
 import { BaseURL } from "../AxiosInstance";
-import { showSuccessToaster } from "../../components/Toaster";
+import { showErrorToaster, showSuccessToaster } from "../../components/Toaster";
 
 const Review = (props) => {
   const [color, setColor] = useState([
@@ -29,12 +29,11 @@ const Review = (props) => {
 
   const saveReviewHandler = async () => {
     const reviews = {
-      bookId: props.bookId,
       comment: inputRef.current.value,
       starNumber: getStars(),
     };
     try {
-      await BaseURL.post("api/reviews", reviews, {
+      await BaseURL.post(`api/books/${props.bookId}/reviews`, reviews, {
         headers: {
           "Content-Type": "application/json",
           Authorization:
@@ -45,6 +44,7 @@ const Review = (props) => {
       showSuccessToaster("Save review successfuly");
     } catch (err) {
       console.log("error occurs", err);
+      showErrorToaster("Error occurs");
     }
   };
 

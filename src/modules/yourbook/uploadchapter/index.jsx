@@ -16,13 +16,13 @@ const UploadChapter = (props) => {
       content: data,
       audioLink: "",
     };
-    fetch(`http://localhost:3000/api/chapters?bookId=${props.id}`, {
+    fetch(`http://localhost:3000/api/books/${props.id}/chapters`, {
       method: "POST",
       body: JSON.stringify(sendData),
       headers: {
         "Content-Type": "application/json",
         Authorization:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjUxMzZjM2JkNjAwMzFhMTM1ZjAyMSIsImlhdCI6MTY1MjE5ODgzMSwiZXhwIjoxNjU0NzkwODMxfQ.sMhIs0EOK0kSwdAlsyReAiuMvK-4OmbwJyVz6QgyaDo",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjUxMzZjM2JkNjAwMzFhMTM1ZjAyMSIsImlhdCI6MTY1MjY4Nzc2NiwiZXhwIjoxNjU1Mjc5NzY2fQ.Mn-j3D-KUVz1UDGQniyT6OhxAGDdJr-RheoOj9XZjQs",
       },
     }).then((res) => {
       if (res.ok) {
