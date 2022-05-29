@@ -200,7 +200,7 @@ const Create = () => {
   };
 
   return (
-    <>
+    <div style={{ backgroundColor: "#ecebeb" }}>
       <UserNav />
       <Page>
         <Title>Create Your Book</Title>
@@ -301,18 +301,22 @@ const Create = () => {
           <Button onClick={handleCreate}>Confirm</Button>
         </WrapButton>
       </Page>
-    </>
+    </div>
   );
 };
 
 export default Create;
 
 const InformationOfBook = styled.div`
-  width: 100%;
+  width: 60%;
+  height: 40rem;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
+  background-color: white;
+  box-shadow: 2px 2px 6px grey;
+  border-radius: 5px;
 `;
 const CoverImageWrapper = styled.div`
   display: flex;
@@ -328,7 +332,7 @@ const Infor = styled.div`
   align-items: flex-start;
 `;
 const WrapButton = styled.div`
-  margin-top: 40px;
+  margin: 10px 0 40px 0;
   width: 30%;
   display: flex;
   flex-flow: row wrap;
@@ -342,7 +346,7 @@ const Select = styled.select`
   border: 2px solid #dddddd;
   height: 50px;
   font-size: 20px;
-  width: 60%;
+  width: 80%;
   border-radius: 5px;
   margin: 10px 0 5px;
   padding-left: 5px;
@@ -356,7 +360,7 @@ const Select = styled.select`
   }
 `;
 const InputCreate = styled(Input)`
-  width: 60%;
+  width: 80%;
   height: 50px;
   font-size: 20px;
   & .invalid {
@@ -376,7 +380,7 @@ const CoverImage = styled.div`
 `;
 const Title = styled.h1`
   text-shadow: 2px 2px 1px #00000033;
-  margin: 30px 0;
+  margin: 20px 0;
   text-transform: uppercase;
   background-image: linear-gradient(
     to right,

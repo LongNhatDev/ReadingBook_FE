@@ -38,7 +38,7 @@ const BookManager = () => {
   }, [param.bookId, isUpdate]);
 
   return (
-    <React.Fragment>
+    <div style={{ backgroundColor: "#ecebeb", paddingBottom: "3rem" }}>
       <UserNav />
       {detail._id !== undefined && (
         <Container>
@@ -46,7 +46,15 @@ const BookManager = () => {
             <Cover src={detail.coverImageURL} alt="Cover of a book" />
             <Detail>
               <Title>{detail.bookName}</Title>
-              <Category>Category: {detail.category.categoryName}</Category>
+              <Paragraph>
+                <span style={{ fontWeight: "bold" }}>- Category: </span>
+                {detail.category.categoryName}
+              </Paragraph>
+              <Paragraph>
+                <span style={{ fontWeight: "bold" }}>- Description: </span>
+                {detail.description}
+              </Paragraph>
+
               <StatusBox
                 chapters={detail.chapters.length}
                 views={detail.viewNumber}
@@ -54,6 +62,14 @@ const BookManager = () => {
               />
             </Detail>
           </Bookpart>
+          <div
+            style={{
+              width: "100%",
+              height: "3rem",
+              backgroundColor: "#ecebeb",
+            }}
+          ></div>
+
           <Chapterpart>
             <ChapterBox
               onUpdate={updateHandler}
@@ -73,7 +89,7 @@ const BookManager = () => {
           id={detail._id}
         />
       )}
-    </React.Fragment>
+    </div>
   );
 };
 
@@ -82,6 +98,7 @@ export default BookManager;
 const Container = styled.div`
   width: 80%;
   margin: 0 auto;
+  background-color: white;
 `;
 
 const Bookpart = styled.section`
@@ -89,21 +106,24 @@ const Bookpart = styled.section`
   height: 28rem;
   display: flex;
   margin-top: 2rem;
+  box-shadow: 2px 2px 6px grey;
+  border-bottom: 1.2px solid #cecece;
+  
 `;
 
 const Chapterpart = styled.section`
   width: 100%;
-  height: 23rem;
-  margin-top: 4rem;
+  height: 25rem;
   display: flex;
   flex-direction: column;
+  box-shadow: 2px 2px 6px grey;
 `;
 
 const Cover = styled.img`
   height: 100%;
   width: 21rem;
   flex-shrink: 0;
-  box-shadow: 8px -8px 10px 0 rgba(0, 0, 0, 0.2);
+  border: 0.5px solid #c2c2c2;
 `;
 
 const Detail = styled.div`
@@ -115,8 +135,11 @@ const Detail = styled.div`
 
 const Title = styled.h2`
   text-transform: capitalize;
+  margin-top: 10px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 45px;
 `;
-const Category = styled.i`
+const Paragraph = styled.i`
   font-size: 1.6rem;
   margin-top: 2rem;
 `;
@@ -124,5 +147,5 @@ const Category = styled.i`
 const CreateButton = styled(Button)`
   left: 50%;
   transform: translateX(-50%);
-  margin-top: auto;
+  margin: 5px 0 15px 0;
 `;

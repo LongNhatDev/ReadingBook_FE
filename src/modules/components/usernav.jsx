@@ -1,11 +1,4 @@
-import {
-  FaBook,
-  FaBraille,
-  FaCogs,
-  FaPlus,
-  FaSortAmountUpAlt,
-  FaUserAlt,
-} from "react-icons/fa";
+import { FaBook, FaBraille, FaCogs, FaPlus, FaUserAlt } from "react-icons/fa";
 import { FcReading } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -52,7 +45,7 @@ const UserNav = () => {
       </LogoContent>
       <NavbarItems>
         <SeachBox />
-        <Item>
+        <Item onClick={handleViewCategories}>
           <FaBraille />
           <Dropdown label={"Category"} />
         </Item>
