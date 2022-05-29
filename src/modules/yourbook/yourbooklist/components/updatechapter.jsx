@@ -11,6 +11,7 @@ import { BaseURL } from "../../../AxiosInstance";
 const UpdateChapter = (props) => {
   const [datas, setDatas] = useState({});
   const [title, setTitle] = useState(props.chapter.title);
+  const token = localStorage.getItem("token");
   useEffect(() => {
     async function getChapter() {
       try {
@@ -38,13 +39,13 @@ const UpdateChapter = (props) => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjUxMzZjM2JkNjAwMzFhMTM1ZjAyMSIsImlhdCI6MTY1MjY4Nzc2NiwiZXhwIjoxNjU1Mjc5NzY2fQ.Mn-j3D-KUVz1UDGQniyT6OhxAGDdJr-RheoOj9XZjQs",
+            Authorization: token,
           },
         }
       );
       showSuccessToaster("Update Successfully");
       props.onUpdate();
+      props.onClose();
     } catch (err) {
       console.log("error occurs", err);
     }
@@ -65,7 +66,6 @@ const UpdateChapter = (props) => {
             type="text"
             id="chaptertitle"
             placeholder="Enter the title here"
-            // ref={titleRef}
             value={title}
             onChange={titleChangeHandler}
           />

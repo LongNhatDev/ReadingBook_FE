@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import MainContext from "../../../store/main-context";
 import { BaseURL } from "../../AxiosInstance";
 import MainSide from "../components/mainside";
 import Side from "../components/side";

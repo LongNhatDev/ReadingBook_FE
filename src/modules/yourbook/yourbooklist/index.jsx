@@ -16,12 +16,12 @@ const YourBookList = () => {
     "Actions",
   ];
   useEffect(() => {
+    console.log("??");
     const getBook = async () => {
       const res = await BaseURL.get("api/books/author", {
         method: "GET",
         headers: {
           Authorization: token,
-
         },
       });
       const transformedBook = res.data.map((book) => ({
@@ -35,7 +35,7 @@ const YourBookList = () => {
       setBody(transformedBook);
     };
     getBook();
-  }, []);
+  }, [token]);
   return (
     <Container>
       <Table headers={headers} body={body} />

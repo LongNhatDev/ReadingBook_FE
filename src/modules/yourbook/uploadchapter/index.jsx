@@ -7,6 +7,7 @@ import { showSuccessToaster } from "../../../components/Toaster";
 import Modal from "../../components/modal";
 
 const UploadChapter = (props) => {
+  const token = localStorage.getItem("token");
   const [data, setData] = useState({});
   const titleRef = useRef();
   async function submitHandler(event) {
@@ -21,13 +22,13 @@ const UploadChapter = (props) => {
       body: JSON.stringify(sendData),
       headers: {
         "Content-Type": "application/json",
-        Authorization:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjUxMzZjM2JkNjAwMzFhMTM1ZjAyMSIsImlhdCI6MTY1MjY4Nzc2NiwiZXhwIjoxNjU1Mjc5NzY2fQ.Mn-j3D-KUVz1UDGQniyT6OhxAGDdJr-RheoOj9XZjQs",
+        Authorization: token,
       },
     }).then((res) => {
       if (res.ok) {
         showSuccessToaster("Upload Successfully");
         props.onUpdate();
+        props.onClose();
       }
       console.log(res.ok);
     });
