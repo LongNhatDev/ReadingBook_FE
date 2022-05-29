@@ -26,7 +26,19 @@ const CateDetail = () => {
       try {
         const response = await BaseURL.get("/api/books");
         const data = response.data;
-        data.books.forEach((element) => {
+        const dataFilter = data.books.filter((item) => {
+          if (
+            item._id !== null &&
+            item.coverImageURL !== null &&
+            item.category !== null &&
+            item.bookName !== null &&
+            item.description !== null
+          ) {
+            return true;
+          }
+          return false;
+        });
+        dataFilter.forEach((element) => {
           booksData.push({
             _id: element._id,
             coverImageURL: element.coverImageURL,
@@ -42,7 +54,7 @@ const CateDetail = () => {
           });
         });
       } catch (err) {
-        console.log("error occur");
+        console.log("error occur", err);
       }
 
       setBooks(booksData);
