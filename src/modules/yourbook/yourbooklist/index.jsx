@@ -4,23 +4,23 @@ import Table from "./components/table";
 import { BaseURL } from "../../AxiosInstance";
 
 const YourBookList = () => {
+  const token = localStorage.getItem("token");
   const [body, setBody] = useState([]);
   const headers = [
-    "NO",
-    "COVER",
-    "NAME",
-    "STATE",
-    "CHAPTERS",
-    "VIEWS",
-    "OPERATION",
+    "No.",
+    "Cover Image",
+    "Name of Book",
+    "Status",
+    "Chapters",
+    "Views",
+    "Actions",
   ];
   useEffect(() => {
     const getBook = async () => {
       const res = await BaseURL.get("api/books/author", {
         method: "GET",
         headers: {
-          Authorization:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjUxMzZjM2JkNjAwMzFhMTM1ZjAyMSIsImlhdCI6MTY1MDkxNTM4MywiZXhwIjoxNjUzNTA3MzgzfQ.sc8Ob9eTfk_onCrZim57m1I1V0RIKbZjDPJNGALJn_U",
+          Authorization: token,
         },
       });
       const transformedBook = res.data.map((book) => ({
@@ -46,5 +46,5 @@ export default YourBookList;
 
 const Container = styled.div`
   width: 100%;
-  padding: 5rem 10rem;
+  padding: 3% 5%;
 `;

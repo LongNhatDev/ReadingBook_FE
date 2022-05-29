@@ -21,8 +21,24 @@ const Tr = (props) => {
   };
 
   return (
-    <tr>
-      <td>{props.index + 1}</td>
+    <tr style={{ boxShadow: "0 0.4rem 0.4rem rgba(0, 0, 0, 0.25)" }}>
+      <td>
+        <p
+          style={{
+            fontSize: "2.5rem",
+            minWidth: "3rem",
+            backgroundColor: "#00a69d",
+            color: "white",
+            height: "4rem",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: "0.5rem",
+          }}
+        >
+          {props.index + 1}
+        </p>
+      </td>
       <td onClick={moveToBookManagePageHandler} key="bcover">
         <Image src={props.row.cover} alt="cover of a book" />
       </td>
@@ -40,11 +56,11 @@ const Table = (props) => {
   return (
     <TableCss>
       <thead>
-        <tr>
+        <TitleRow>
           {props.headers.map((header) => (
             <th key={header}>{header}</th>
           ))}
-        </tr>
+        </TitleRow>
       </thead>
       <tbody>
         {props.body.map((row, index) => (
@@ -58,6 +74,8 @@ const Table = (props) => {
 export default Table;
 
 const TableCss = styled.table`
+  box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
+  border-radius: 0.7rem;
   width: 100%;
   font-size: 1.6rem;
   border-collapse: collapse;
@@ -85,4 +103,10 @@ const Image = styled.img`
   object-fit: cover;
   border: 1px solid rgba(0, 0, 0, 0.5);
   box-shadow: 10px -5px 10px 0 rgba(0, 0, 0, 0.3);
+`;
+const TitleRow = styled.tr`
+  background-color: #00a69d;
+  height: 6rem;
+  color: white;
+  font-size: 2rem;
 `;
