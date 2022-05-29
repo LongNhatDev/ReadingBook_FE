@@ -4,7 +4,7 @@ import Button from "../components/button";
 import Input from "../components/input";
 import Page from "../components/page";
 import { useDropzone } from "react-dropzone";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import InvalidMessage from "../auth/components/invalidmessage";
 import { showErrorToaster, showSuccessToaster } from "../../components/Toaster";
 import UserNav from "../components/usernav";
@@ -12,8 +12,9 @@ import { BaseURL } from "../AxiosInstance";
 import axios from "axios";
 
 const Create = () => {
+  const location = useLocation();
   let navigate = useNavigate();
-  const path = "/home";
+  const path = "/yourbook";
   const reg = new RegExp("^[0-9]+$");
   const token = localStorage.getItem("token");
   const [bookCategory, setBookCategory] = React.useState([]);
@@ -23,12 +24,13 @@ const Create = () => {
     price: false,
     description: false,
   });
+  const [onDrop, setOnDrop] = React.useState(false);
   const [value, setValue] = React.useState({
-    name: "",
-    categoryId: "",
-    coverImage: "",
-    description: "",
-    price: "",
+    name: location.state === null ? "" : location.state.bookName,
+    categoryId: location.state === null ? "" : location.state.categoryId,
+    coverImage: location.state === null ? "" : location.state.coverImageURL,
+    description: location.state === null ? "" : location.state.description,
+    price: location.state === null ? "" : location.state.price,
   });
   let fileName = "";
   let fileType = "";
@@ -37,6 +39,7 @@ const Create = () => {
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: async (acceptedfile) => {
+      setOnDrop(true);
       setfile(
         acceptedfile.map((file) =>
           Object.assign(file, {
@@ -109,18 +112,24 @@ const Create = () => {
       const responeGetURL = await BaseURL.get(
         `/api/sign-s3?file-name=${fileName}&file-type=${fileType}&bucket-name=book-covers`
       );
-      if (responeGetURL !== undefined || responeGetURL !== null) {
-        const authorization = {
-          headers: {
-            Authorization: token,
-          },
-        };
-        const config = {
-          headers: {
-            "Content-Type": fileType,
-          },
-        };
-        await axios.put(responeGetURL.data.signedRequest, file[0], config);
+
+      const authorization = {
+        headers: {
+          Authorization: token,
+        },
+      };
+      const config = {
+        headers: {
+          "Content-Type": fileType,
+        },
+      };
+
+      if (location.state === null) {
+        await axios.put(
+          responeGetURL.data.signedRequest,
+          file[file.length - 1],
+          config
+        );
 
         const inforRequest = {
           bookName: value.name,
@@ -129,6 +138,7 @@ const Create = () => {
           price: value.price,
           coverImageURL: responeGetURL.data.url,
         };
+
         const respone = await BaseURL.post(
           "/api/books",
           inforRequest,
@@ -137,6 +147,47 @@ const Create = () => {
         if (respone !== null && respone !== undefined) {
           showSuccessToaster("Create book successfully!");
           navigate(path);
+        }
+      } else {
+        if (onDrop) {
+          await axios.put(
+            responeGetURL.data.signedRequest,
+            file[file.length - 1],
+            config
+          );
+          const inforRequest = {
+            bookName: value.name,
+            categoryId: value.categoryId,
+            description: value.description,
+            price: value.price,
+            coverImageURL: responeGetURL.data.url,
+          };
+          const respone = await BaseURL.put(
+            `api/books/book/${location.state.bookId}`,
+            inforRequest,
+            authorization
+          );
+          if (respone !== null && respone !== undefined) {
+            showSuccessToaster("Update book successfully!");
+            navigate(path);
+          }
+        } else {
+          const inforRequest = {
+            bookName: value.name,
+            categoryId: value.categoryId,
+            description: value.description,
+            price: value.price,
+            coverImageURL: value.coverImage,
+          };
+          const respone = await BaseURL.put(
+            `/api/books/book/${location.state.bookId}`,
+            inforRequest,
+            authorization
+          );
+          if (respone !== null && respone !== undefined) {
+            showSuccessToaster("Update book successfully!");
+            navigate(path);
+          }
         }
       }
     } catch (error) {
@@ -172,6 +223,7 @@ const Create = () => {
           </CoverImageWrapper>
           <Infor>
             <InputCreate
+              value={value.name}
               placeholder="Name of your book"
               className={error.name ? "invalid" : ""}
               onChange={(event) => {
@@ -189,6 +241,7 @@ const Create = () => {
             )}
 
             <Select
+              value={value.categoryId}
               name="category"
               id="category"
               onChange={(element) => {
@@ -200,6 +253,7 @@ const Create = () => {
               ))}
             </Select>
             <InputCreate
+              value={value.description}
               placeholder="Description of your book"
               className={error.description ? "invalid" : ""}
               onChange={(event) => {
@@ -217,6 +271,8 @@ const Create = () => {
             )}
 
             <InputCreate
+              type="text"
+              value={value.price}
               placeholder="Price (e.g: 0, 10, ...$)"
               className={error.price ? "invalid" : ""}
               onChange={(event) => {
@@ -242,7 +298,7 @@ const Create = () => {
 
         <WrapButton>
           <ButtonCancel onClick={handleCancel}>Cancel</ButtonCancel>
-          <Button onClick={handleCreate}>Create</Button>
+          <Button onClick={handleCreate}>Confirm</Button>
         </WrapButton>
       </Page>
     </>

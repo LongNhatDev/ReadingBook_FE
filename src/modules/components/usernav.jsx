@@ -27,10 +27,6 @@ const UserNav = () => {
     const path = "/category/all";
     navigation(path);
   };
-  const handleViewRanking = () => {
-    const path = "/rank";
-    navigation(path);
-  };
   const handleCreate = () => {
     const path = "/create";
     navigation(path);
@@ -59,10 +55,6 @@ const UserNav = () => {
         <Item>
           <FaBraille />
           <Dropdown label={"Category"} />
-        </Item>
-        <Item>
-          <FaSortAmountUpAlt />
-          <H3Css onClick={handleViewRanking}>Ranking</H3Css>
         </Item>
         <Item onClick={handleCreate}>
           <FaPlus />

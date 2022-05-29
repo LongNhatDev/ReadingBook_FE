@@ -15,13 +15,21 @@ const Tr = (props) => {
   };
 
   let navigator = useNavigate();
+  const [idOfBookWasChosen, setIdOfBookWasChosen] = React.useState(
+    props.row.id
+  );
   const moveToBookManagePageHandler = () => {
     const path = `${props.row.id}`;
     navigator(path);
   };
 
   return (
-    <tr style={{ boxShadow: "0 0.4rem 0.4rem rgba(0, 0, 0, 0.25)" }}>
+    <tr
+      style={{ boxShadow: "0 0.4rem 0.4rem rgba(0, 0, 0, 0.25)" }}
+      onClick={() => {
+        setIdOfBookWasChosen(props.row.id);
+      }}
+    >
       <td>
         <p
           style={{
@@ -46,7 +54,7 @@ const Tr = (props) => {
         <td key={props.row.Id + Math.random().toString()}>{value}</td>
       ))}
       <td key="icon">
-        <BtnBar onDetail={moveToBookManagePageHandler} />
+        <BtnBar id={idOfBookWasChosen} />
       </td>
     </tr>
   );
