@@ -23,24 +23,28 @@ const CateDetail = () => {
     async function getBooksData() {
       console.log("this is run again");
       const booksData = [];
-      const response = await BaseURL.get("/api/books");
-
-      const data = response.data;
-      data.books.forEach((element) => {
-        booksData.push({
-          _id: element._id,
-          coverImageURL: element.coverImageURL,
-          booktag: createTag(element.category.categoryName),
-          bookName: element.bookName,
-          description: element.description,
-          bookrate: element.avrStarNumber,
-          viewNumber: element.viewNumber,
-          author: element.author,
-          category: element.category,
-          chapters: element.chapters,
-          price: element.price,
+      try {
+        const response = await BaseURL.get("/api/books");
+        const data = response.data;
+        data.books.forEach((element) => {
+          booksData.push({
+            _id: element._id,
+            coverImageURL: element.coverImageURL,
+            booktag: createTag(element.category.categoryName),
+            bookName: element.bookName,
+            description: element.description,
+            bookrate: element.avrStarNumber,
+            viewNumber: element.viewNumber,
+            author: element.author,
+            category: element.category,
+            chapters: element.chapters,
+            price: element.price,
+          });
         });
-      });
+      } catch (err) {
+        console.log("error occur");
+      }
+
       setBooks(booksData);
     }
     getBooksData();
