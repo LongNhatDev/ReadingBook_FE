@@ -24,10 +24,13 @@ const ChapterItem = (props) => {
         Chapter {props.index}. {props.chapter.title}
       </Title>
       <IconWrapper>
-        <span onClick={showUpdateChapterHandler} style={{ color: "yellow" }}>
+        <span
+          onClick={showUpdateChapterHandler}
+          style={{ color: "#00B524", fontSize: "3rem", marginRight: "2rem" }}
+        >
           <AiFillEdit />
         </span>
-        <span style={{ color: "red" }}>
+        <span style={{ color: "red", fontSize: "3rem" }}>
           <AiTwotoneDelete />
         </span>
       </IconWrapper>
@@ -48,8 +51,9 @@ export default ChapterItem;
 const Container = styled.li`
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 5px 0;
+  margin-top: 5px;
   cursor: pointer;
 `;
 
@@ -75,4 +79,8 @@ const IconWrapper = styled.div`
       transform: scale(1.5);
     }
   }
+`;
+
+const SpanCustom = styled.span`
+  font-size: 1.5rem;
 `;

@@ -62,7 +62,7 @@ const Tr = (props) => {
 
 const Table = (props) => {
   return (
-    <TableCss>
+    <TableCss style={{ backgroundColor: "white" }}>
       <thead>
         <TitleRow>
           {props.headers.map((header) => (

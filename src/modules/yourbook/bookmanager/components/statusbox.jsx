@@ -1,24 +1,33 @@
 import React from "react";
 import styled from "styled-components";
+import { FaStar, FaEye, FaBook, FaHourglassStart } from "react-icons/fa";
 
 const StatusBox = (props) => {
   return (
     <Box>
       <Item>
-        <Header>STATUS</Header>
-        <span>Ongoing</span>
+        <Header>
+          STATUS <FaHourglassStart />{" "}
+        </Header>
+        <SpanCustom>Ongoing</SpanCustom>
       </Item>
       <Item>
-        <Header>CHAPTERS</Header>
-        <span>{props.chapters}</span>
+        <Header>
+          CHAPTERS <FaBook />
+        </Header>
+        <SpanCustom>{props.chapters}</SpanCustom>
       </Item>
       <Item>
-        <Header>VIEWS</Header>
-        <span>{props.views}</span>
+        <Header>
+          VIEWS <FaEye />
+        </Header>
+        <SpanCustom>{props.views}</SpanCustom>
       </Item>
       <Item>
-        <Header>RATING</Header>
-        <span>{props.rating}</span>
+        <Header>
+          RATING <FaStar />
+        </Header>
+        <SpanCustom>{props.rating}</SpanCustom>
       </Item>
     </Box>
   );
@@ -30,9 +39,9 @@ const Box = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  padding: 3rem 0;
+  padding: 2rem 0 1rem 0;
   margin-top: auto;
+  border-top: 1px solid black;
 `;
 
 const Item = styled.div`
@@ -49,4 +58,13 @@ const Item = styled.div`
   text-align: center;
 `;
 
-const Header = styled.div``;
+const Header = styled.div`
+  color: white;
+  line-height: 3rem;
+  background-color: #004468;
+  margin-bottom: 5px;
+`;
+
+const SpanCustom = styled.span`
+  font-size: 1.5rem;
+`;
