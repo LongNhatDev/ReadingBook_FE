@@ -53,7 +53,7 @@ const Login = () => {
       const requestSignUpInfor = {
         email: value.email,
         password: value.password,
-        fullname: value.fullname,
+        fullName: value.fullname,
       };
       const responeOfRequest = await BaseURL.post(
         "/api/auth/sign_up",
