@@ -16,15 +16,15 @@ const createUrl = (name) => {
   return returnValue.toLowerCase();
 };
 
-const createTag = (name) => {
-  let returnValue = "";
-  for (let i = 0; i < name.length; i++) {
-    if (name.charAt(i) !== " ") {
-      returnValue += name.charAt(i);
-    }
-  }
-  return returnValue.toLowerCase();
-};
+// const createTag = (name) => {
+//   let returnValue = "";
+//   for (let i = 0; i < name.length; i++) {
+//     if (name.charAt(i) !== " ") {
+//       returnValue += name.charAt(i);
+//     }
+//   }
+//   return returnValue.toLowerCase();
+// };
 
 export const MainContextProvider = (props) => {
   const [categories, setCategories] = useState([]);
@@ -50,33 +50,33 @@ export const MainContextProvider = (props) => {
     setCategories(categoriesData);
   }
 
-  async function getBooksData() {
-    console.log("this is run again");
-    const booksData = [];
-    const response = await BaseURL.get("/api/books");
+  // async function getBooksData() {
+  //   console.log("this is run again");
+  //   const booksData = [];
+  //   const response = await BaseURL.get("/api/books");
 
-    const data = response.data;
-    data.books.forEach((element) => {
-      booksData.push({
-        _id: element._id,
-        coverImageURL: element.coverImageURL,
-        booktag: createTag(element.category.categoryName),
-        bookName: element.bookName,
-        description: element.description,
-        bookrate: "5",
-        viewNumber: element.viewNumber,
-        author: element.author,
-        category: element.category,
-        chapters: element.chapters,
-        price: element.price,
-      });
-    });
-    setBooks(booksData);
-  }
+  //   const data = response.data;
+  //   data.books.forEach((element) => {
+  //     booksData.push({
+  //       _id: element._id,
+  //       coverImageURL: element.coverImageURL,
+  //       booktag: createTag(element.category.categoryName),
+  //       bookName: element.bookName,
+  //       description: element.description,
+  //       bookrate: "5",
+  //       viewNumber: element.viewNumber,
+  //       author: element.author,
+  //       category: element.category,
+  //       chapters: element.chapters,
+  //       price: element.price,
+  //     });
+  //   });
+  //   setBooks(booksData);
+  // }
 
   useEffect(() => {
     getData();
-    getBooksData();
+    // getBooksData();
     console.log("Effect run in main-context", Date.now());
   }, []);
 

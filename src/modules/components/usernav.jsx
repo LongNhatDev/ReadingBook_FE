@@ -56,7 +56,7 @@ const UserNav = () => {
       </LogoContent>
       <NavbarItems>
         <SeachBox />
-        <Item onClick={handleViewCategories}>
+        <Item>
           <FaBraille />
           <Dropdown label={"Category"} />
         </Item>

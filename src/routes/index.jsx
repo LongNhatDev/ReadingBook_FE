@@ -14,6 +14,7 @@ import YourBookList from "../modules/yourbook/yourbooklist";
 import ReadingPage from "../modules/bookpage/components/readingpage";
 import BookPage from "../modules/bookpage";
 import BookManager from "../modules/yourbook/bookmanager";
+import ReviewBox from "../modules/bookpage/components/reviewbox";
 
 export default function RoutesRoot() {
   return (
@@ -32,7 +33,7 @@ export default function RoutesRoot() {
         <Route path="/list" element={<YourBookList />} />
         <Route path="/reading" element={<ReadingPage />} />
         <Route path="/books/*" element={<BookPage />} />
-        <Route path="/bookmana" element={<BookManager />} />
+        <Route path="/review" element={<ReviewBox />} />
       </Routes>
     </BrowserRouter>
   );

@@ -5,8 +5,14 @@ import ChapterItem from "./chapteritem";
 const ChapterBox = (props) => {
   return (
     <Box>
-      {props.chapters.map((chapter) => (
-        <ChapterItem key={chapter._id} chapter={chapter} />
+      {props.chapters.map((chapter, index) => (
+        <ChapterItem
+          bookId={props.bookId}
+          key={chapter._id}
+          chapter={chapter}
+          index={index + 1}
+          onUpdate={props.onUpdate}
+        />
       ))}
     </Box>
   );

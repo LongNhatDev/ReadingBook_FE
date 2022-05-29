@@ -1,19 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { AiFillEdit, AiTwotoneDelete } from "react-icons/ai";
+import UpdateChapter from "../../yourbooklist/components/updatechapter";
+import { useNavigate } from "react-router-dom";
 
 const ChapterItem = (props) => {
+  const [isShowUpdateChapter, setIsShowUpdateChapter] = useState(false);
+  const showUpdateChapterHandler = () => {
+    setIsShowUpdateChapter(true);
+  };
+  const hideUpdateChapterHandler = () => {
+    setIsShowUpdateChapter(false);
+  };
+  let navigator = useNavigate();
+  const moveToReadingPageHandler = () => {
+    const path = `/books/${props.bookId}/${props.chapter._id}`;
+    navigator(path);
+  };
+
   return (
     <Container>
-      <Title>{props.chapter.title}</Title>
+      <Title onClick={moveToReadingPageHandler}>
+        Chapter {props.index}. {props.chapter.title}
+      </Title>
       <IconWrapper>
-        <span style={{ color: "yellow" }}>
+        <span onClick={showUpdateChapterHandler} style={{ color: "yellow" }}>
           <AiFillEdit />
         </span>
         <span style={{ color: "red" }}>
           <AiTwotoneDelete />
         </span>
       </IconWrapper>
+      {isShowUpdateChapter && (
+        <UpdateChapter
+          onClose={hideUpdateChapterHandler}
+          onUpdate={props.onUpdate}
+          chapter={props.chapter}
+          id={props.bookId}
+        />
+      )}
     </Container>
   );
 };
@@ -26,9 +51,6 @@ const Container = styled.li`
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   padding: 5px 0;
   cursor: pointer;
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-  }
 `;
 
 const Title = styled.strong`
@@ -39,6 +61,9 @@ const Title = styled.strong`
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-word;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const IconWrapper = styled.div`

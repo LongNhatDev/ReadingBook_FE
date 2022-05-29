@@ -9,11 +9,12 @@ const ChaptersToolbar = (props) => {
       <Index>
         <Title>Table of content</Title>
         <List>
-          {props.chapters.map((chapter) => (
+          {props.chapters.map((chapter, index) => (
             <ChapterItem
               key={chapter._id}
               chapter={chapter}
               bookId={props.bookId}
+              index={index + 1}
             />
           ))}
         </List>
