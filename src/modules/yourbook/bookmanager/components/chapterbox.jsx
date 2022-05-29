@@ -5,20 +5,29 @@ import ChapterItem from "./chapteritem";
 const ChapterBox = (props) => {
   return (
     <Box>
-      {props.chapters.map((chapter, index) => (
-        <ChapterItem
-          bookId={props.bookId}
-          key={chapter._id}
-          chapter={chapter}
-          index={index + 1}
-          onUpdate={props.onUpdate}
-        />
-      ))}
+      {props.chapters.length > 0 ? (
+        props.chapters.map((chapter, index) => (
+          <ChapterItem
+            bookId={props.bookId}
+            key={chapter._id}
+            chapter={chapter}
+            index={index + 1}
+            onUpdate={props.onUpdate}
+          />
+        ))
+      ) : (
+        <Noti>There's no chapter</Noti>
+      )}
     </Box>
   );
 };
 
 export default ChapterBox;
+
+const Noti = styled.h2`
+  width: fit-content;
+  margin: 0 auto;
+`;
 
 const Box = styled.ul`
   padding: 0;

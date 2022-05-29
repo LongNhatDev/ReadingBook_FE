@@ -3,6 +3,11 @@ import styled from "styled-components";
 import { AiFillEdit, AiTwotoneDelete } from "react-icons/ai";
 import UpdateChapter from "../../yourbooklist/components/updatechapter";
 import { useNavigate } from "react-router-dom";
+import { BaseURL } from "../../../AxiosInstance";
+import {
+  showErrorToaster,
+  showSuccessToaster,
+} from "../../../../components/Toaster";
 
 const ChapterItem = (props) => {
   const [isShowUpdateChapter, setIsShowUpdateChapter] = useState(false);
@@ -17,6 +22,24 @@ const ChapterItem = (props) => {
     const path = `/books/${props.bookId}/${props.chapter._id}`;
     navigator(path);
   };
+  const deleteChapterHandler = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      await BaseURL.delete(
+        `api/books/${props.bookId}/chapters/${props.chapter._id}`,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      props.onUpdate();
+      showSuccessToaster("Delete Successfully");
+    } catch (err) {
+      console.log("error occur in delete chapter", err);
+      showErrorToaster("Error occurs");
+    }
+  };
 
   return (
     <Container>
@@ -27,7 +50,7 @@ const ChapterItem = (props) => {
         <span onClick={showUpdateChapterHandler} style={{ color: "yellow" }}>
           <AiFillEdit />
         </span>
-        <span style={{ color: "red" }}>
+        <span onClick={deleteChapterHandler} style={{ color: "red" }}>
           <AiTwotoneDelete />
         </span>
       </IconWrapper>
