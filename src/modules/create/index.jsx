@@ -10,8 +10,10 @@ import { showErrorToaster, showSuccessToaster } from "../../components/Toaster";
 import UserNav from "../components/usernav";
 import { BaseURL } from "../AxiosInstance";
 import axios from "axios";
+import ConfirmBox from "../../components/ConfirmBox";
 
 const Create = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
   const location = useLocation();
   let navigate = useNavigate();
   const path = "/yourbook";
@@ -297,10 +299,27 @@ const Create = () => {
         </InformationOfBook>
 
         <WrapButton>
-          <ButtonCancel onClick={handleCancel}>Cancel</ButtonCancel>
+          <ButtonCancel
+            onClick={() => {
+              setIsOpen(true);
+              console.log("isopen: ", isOpen);
+            }}
+          >
+            Cancel
+          </ButtonCancel>
           <Button onClick={handleCreate}>Confirm</Button>
         </WrapButton>
       </PageCustom>
+
+      <ConfirmBox
+        isOpen={isOpen}
+        header="Cancel Create or Update"
+        message="Do you want to cancel ?"
+        onCancel={() => {
+          setIsOpen(false);
+        }}
+        onConfirm={handleCancel}
+      />
     </div>
   );
 };

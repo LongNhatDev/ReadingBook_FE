@@ -1,7 +1,9 @@
+import React from "react";
 import { FaBook, FaBraille, FaCogs, FaPlus, FaUserAlt } from "react-icons/fa";
 import { FcReading } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import ConfirmBox from "../../components/ConfirmBox";
 import Dropdown from "../home/components/dropdown";
 import SeachBox from "../home/components/searchbox";
 import Item from "./item";
@@ -9,6 +11,8 @@ import LogoContent from "./logocontent";
 import NavbarItems from "./navbaritems";
 
 const UserNav = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
+
   let navigation = useNavigate();
   const ava = localStorage.getItem("ava");
 
@@ -32,7 +36,14 @@ const UserNav = () => {
     const path = "/profile";
     navigation(path);
   };
-  const handleSignIn = () => {
+
+  const handleSigIn = () => {
+    const path = "/";
+    navigation(path);
+  };
+  const handleConfirm = () => {
+    localStorage.setItem("token", "");
+    localStorage.setItem("ava", "");
     const path = "/";
     navigation(path);
   };
@@ -61,17 +72,28 @@ const UserNav = () => {
           <FaCogs onClick={handleViewProfile} />
         </Item>
         <Item>
-          {ava === undefined && <FaUserAlt onClick={handleSignIn} />}
+          {ava === undefined && <FaUserAlt onClick={handleSigIn} />}
           {ava !== undefined && (
             <img
               src={ava}
               alt=""
               style={{ width: "30px", borderRadius: "20px" }}
-              onClick={handleSignIn}
+              onClick={() => {
+                setIsOpen(true);
+              }}
             />
           )}
         </Item>
       </NavbarItems>
+      <ConfirmBox
+        isOpen={isOpen}
+        header="LOG OUT"
+        message="Do you want to log out ?"
+        onCancel={() => {
+          setIsOpen(false);
+        }}
+        onConfirm={handleConfirm}
+      />
     </UserNavDiv>
   );
 };
