@@ -3,10 +3,15 @@ import styled from "styled-components";
 import { AiFillEdit, AiTwotoneDelete } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { BaseURL } from "../../../AxiosInstance";
-import { showErrorToaster } from "../../../../components/Toaster";
+import {
+  showErrorToaster,
+  showSuccessToaster,
+} from "../../../../components/Toaster";
 
 const BtnBar = (props) => {
   let navigate = useNavigate();
+  const token = localStorage.getItem("token");
+
   const handleEdit = async () => {
     try {
       const respone = await BaseURL.get(`/api/books/book/${props.id}`);
@@ -25,6 +30,22 @@ const BtnBar = (props) => {
       showErrorToaster("Error in Creating!");
     }
   };
+
+  const handleDelete = async () => {
+    try {
+      const authorization = {
+        headers: {
+          Authorization: token,
+        },
+      };
+      await BaseURL.delete(`/api/books/book/${props.id}`, authorization);
+      window.location.reload();
+      showSuccessToaster("Delete successful!");
+    } catch (err) {
+      showErrorToaster("Delete fail");
+    }
+  };
+
   return (
     <Bar>
       <div>
@@ -38,9 +59,7 @@ const BtnBar = (props) => {
       <div>
         <AiTwotoneDelete
           style={{ color: "red", fontSize: "3rem" }}
-          onClick={() => {
-            console.log("DELETE");
-          }}
+          onClick={handleDelete}
         />
       </div>
     </Bar>
@@ -59,10 +78,4 @@ const Bar = styled.div`
   & > div:active {
     transform: scale(1);
   }
-`;
-
-const Dialog = styled.div`
-  width: 20rem;
-  height: 10rem;
-  background-color: red;
 `;
