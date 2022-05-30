@@ -202,8 +202,8 @@ const Create = () => {
   return (
     <div style={{ backgroundColor: "#ecebeb" }}>
       <UserNav />
-      <Page>
-        <Title>Create Your Book</Title>
+      <PageCustom>
+        <Title>WRITE YOUR OWN STORY BOOK</Title>
 
         <InformationOfBook>
           <CoverImageWrapper>
@@ -300,7 +300,7 @@ const Create = () => {
           <ButtonCancel onClick={handleCancel}>Cancel</ButtonCancel>
           <Button onClick={handleCreate}>Confirm</Button>
         </WrapButton>
-      </Page>
+      </PageCustom>
     </div>
   );
 };
@@ -309,14 +309,15 @@ export default Create;
 
 const InformationOfBook = styled.div`
   width: 60%;
-  height: 40rem;
+  height: 30rem;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
   background-color: white;
-  box-shadow: 2px 2px 6px grey;
-  border-radius: 5px;
+  /* box-shadow: 2px 2px 6px grey; */
+  box-shadow: 2rem 2rem 1px -1rem #b9b9b9;
+  margin-bottom: 2rem;
 `;
 const CoverImageWrapper = styled.div`
   display: flex;
@@ -380,7 +381,6 @@ const CoverImage = styled.div`
 `;
 const Title = styled.h1`
   text-shadow: 2px 2px 1px #00000033;
-  margin: 20px 0;
   text-transform: uppercase;
   background-image: linear-gradient(
     to right,
@@ -411,4 +411,8 @@ const Title = styled.h1`
 `;
 const InvalidNoti = styled(InvalidMessage)`
   margin-bottom: 10px;
+`;
+const PageCustom = styled(Page)`
+  min-height: 82.5rem;
+  justify-content: flex-start;
 `;

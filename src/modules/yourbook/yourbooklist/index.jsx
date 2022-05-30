@@ -47,6 +47,7 @@ export default YourBookList;
 
 const Container = styled.div`
   width: 100%;
+  min-height: 82.5rem;
   padding: 3% 5%;
   background-color: #ecebeb;
 `;
