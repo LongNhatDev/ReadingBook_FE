@@ -52,8 +52,8 @@ const UserNav = () => {
   return (
     <UserNavDiv>
       <LogoContent onClick={handleReturnHomePage}>
-        <FcReading style={{ margin: "10px" }}></FcReading>
-        <p style={{ color: "white" }}>READING BOOK</p>
+        <FcReading style={{ marginRight: "10px" }}></FcReading>
+        <p style={{ color: "white", marginTop:"10px" }}>READING BOOK</p>
       </LogoContent>
       <NavbarItems>
         <SeachBox />
