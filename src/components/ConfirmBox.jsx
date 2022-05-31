@@ -27,6 +27,7 @@ const AlertCustom = styled(Alert)`
   justify-content: center;
   align-items: center;
   border-radius: 5px;
+  background-color: #68d69d;
 `;
 
 const AlertHeader = styled.h4`
@@ -34,8 +35,12 @@ const AlertHeader = styled.h4`
   width: 100%;
   display: flex;
   justify-content: center;
-  color: #00a69d;
+  color: white;
+  text-shadow: 2px 2px 6px #401d83;
   margin-bottom: 1.5rem;
+  button {
+    color: red;
+  }
 `;
 
 const AlertMessage = styled.p`

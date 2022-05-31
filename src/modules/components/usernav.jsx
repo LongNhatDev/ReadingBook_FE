@@ -44,6 +44,7 @@ const UserNav = () => {
   const handleConfirm = () => {
     localStorage.setItem("token", "");
     localStorage.setItem("ava", "");
+    localStorage.setItem("name", "");
     const path = "/";
     navigation(path);
   };
@@ -74,14 +75,23 @@ const UserNav = () => {
         <Item>
           {ava === undefined && <FaUserAlt onClick={handleSigIn} />}
           {ava !== undefined && (
-            <img
-              src={ava}
-              alt=""
-              style={{ width: "30px", borderRadius: "20px" }}
+            <DivCustom
               onClick={() => {
                 setIsOpen(true);
               }}
-            />
+            >
+              <img
+                src={ava}
+                alt=""
+                style={{
+                  height: "30px",
+                  borderRadius: "20px",
+                }}
+              />
+              <p style={{ fontSize: "15px", marginTop: "10px" }}>
+                {localStorage.getItem("name")}
+              </p>
+            </DivCustom>
           )}
         </Item>
       </NavbarItems>
@@ -118,4 +128,16 @@ const UserNavDiv = styled.header`
 `;
 const H3Css = styled.h3`
   margin-left: 10px;
+`;
+const DivCustom = styled.div`
+  min-height: 30px;
+  padding: 6px;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  :hover {
+    background-color: #00a69d;
+  }
 `;
