@@ -10,7 +10,13 @@ const ReviewBox = (props) => {
     const getReview = async () => {
       try {
         const res = await BaseURL.get(`api/books/${props.bookId}/reviews/`);
-        setReview(res.data);
+        const filterReview = res.data.filter((review) => {
+          if (review.user === null) {
+            return false;
+          }
+          return true;
+        });
+        setReview(filterReview);
       } catch (err) {
         console.log("error occur", err);
       }
@@ -20,6 +26,7 @@ const ReviewBox = (props) => {
 
   return (
     <Container>
+      {console.log(review.length)}
       {review.length > 0 ? (
         review.map((item) => (
           <ReviewItem
