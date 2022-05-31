@@ -36,8 +36,9 @@ const SignIn = () => {
 
       if (respone !== null || respone !== undefined) {
         let path = "/home";
-        localStorage.setItem("token",respone.data.token)
-        localStorage.setItem("ava",respone.data.avatar)
+        localStorage.setItem("token", respone.data.token);
+        localStorage.setItem("ava", respone.data.avatar);
+        localStorage.setItem("name", respone.data.fullName);
         navigate(path, { state: { token: respone.data.token } });
         showSuccessToaster("Sign In Successfully");
       } else showErrorToaster("Server not responed");

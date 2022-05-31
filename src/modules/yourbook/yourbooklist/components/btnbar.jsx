@@ -7,8 +7,10 @@ import {
   showErrorToaster,
   showSuccessToaster,
 } from "../../../../components/Toaster";
+import ConfirmBox from "../../../../components/ConfirmBox";
 
 const BtnBar = (props) => {
+  const [isOpen, setIsOpen] = React.useState(false);
   let navigate = useNavigate();
   const token = localStorage.getItem("token");
 
@@ -59,9 +61,20 @@ const BtnBar = (props) => {
       <div>
         <AiTwotoneDelete
           style={{ color: "red", fontSize: "3rem" }}
-          onClick={handleDelete}
+          onClick={() => {
+            setIsOpen(true);
+          }}
         />
       </div>
+      <ConfirmBox
+        isOpen={isOpen}
+        header="DELETE YOUR BOOK"
+        message="Do you want to delete this book?"
+        onCancel={() => {
+          setIsOpen(false);
+        }}
+        onConfirm={handleDelete}
+      />
     </Bar>
   );
 };
