@@ -1,10 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { showSuccessToaster } from "../../../components/Toaster";
+import ConfirmBox from "../../../components/ConfirmBox";
+import {
+  showErrorToaster,
+  showSuccessToaster,
+} from "../../../components/Toaster";
 import { BaseURL } from "../../AxiosInstance";
 import ReviewStar from "./reviewstar";
 
 const ReviewItem = (props) => {
+  const [isOpen, setIsOpen] = React.useState(false);
   const dateReview = new Date(props.review.createdAt);
   const month = dateReview.toLocaleString("en-US", { month: "long" });
   const day = dateReview.toLocaleString("en-US", { day: "2-digit" });
@@ -12,7 +17,7 @@ const ReviewItem = (props) => {
   const dateReviewTransform = month + " " + day + ", " + year;
   const token = localStorage.getItem("token");
 
-  const deleteReviewHandler = async () => {
+  const handleDeleteComment = async () => {
     try {
       await BaseURL.delete(
         `api/books/${props.bookId}/reviews/${props.review._id}`,
@@ -24,8 +29,9 @@ const ReviewItem = (props) => {
       );
       props.onUpdate();
       showSuccessToaster("Delete Succesfully");
+      setIsOpen(false);
     } catch (err) {
-      console.log("error occurs", err);
+      showErrorToaster("Delete Fail");
     }
   };
 
@@ -35,12 +41,27 @@ const ReviewItem = (props) => {
       <ReviewStatus>
         <DateReview>{dateReviewTransform}</DateReview>
         <Name>{props.review.user.fullName}</Name>
-        <DeleteButton onClick={deleteReviewHandler}>Delete</DeleteButton>
+        <DeleteButton
+          onClick={() => {
+            setIsOpen(true);
+          }}
+        >
+          Delete
+        </DeleteButton>
       </ReviewStatus>
       <ReviewDetail>
         <ReviewStar amount={props.review.starNumber} />
         <ReviewComment>{props.review.comment}</ReviewComment>
       </ReviewDetail>
+      <ConfirmBox
+        isOpen={isOpen}
+        header="DELETE COMMENT"
+        message="Do you want to delete this comment ?"
+        onCancel={() => {
+          setIsOpen(false);
+        }}
+        onConfirm={handleDeleteComment}
+      />
     </Item>
   );
 };
@@ -49,7 +70,7 @@ export default ReviewItem;
 
 const Item = styled.div`
   display: flex;
-  width: 70rem;
+  width: 100%;
   &:not(:first-child) {
     border-top: 1px solid rgba(0, 0, 0, 0.2);
   }
@@ -57,12 +78,8 @@ const Item = styled.div`
 `;
 
 const UserAvatar = styled.img`
-  width: 5rem;
-  height: 5rem;
-  overflow: hidden;
-  object-fit: cover;
-  border-radius: 100rem;
-  flex-shrink: 0;
+  width: 7rem;
+  height: 7rem;
   align-self: center;
 `;
 
@@ -75,7 +92,9 @@ const ReviewStatus = styled.div`
   justify-content: center;
 `;
 
-const Name = styled.strong``;
+const Name = styled.strong`
+  font-size: 2rem;
+`;
 
 const DeleteButton = styled.button`
   color: red;

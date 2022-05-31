@@ -35,7 +35,7 @@ const DetailPage = () => {
   }, [bookId, isUpdated]);
 
   return (
-    <React.Fragment>
+    <div style={{ padding: "20px 0" }}>
       {book._id !== undefined && (
         <BookDetail onUpdate={toggleUpdate} book={book} />
       )}
@@ -46,7 +46,7 @@ const DetailPage = () => {
           bookId={book._id}
         />
       )}
-    </React.Fragment>
+    </div>
   );
 };
 

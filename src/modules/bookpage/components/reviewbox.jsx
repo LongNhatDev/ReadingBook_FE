@@ -40,10 +40,11 @@ const ReviewBox = (props) => {
 export default ReviewBox;
 
 const Container = styled.div`
-  width: 60%;
+  width: 79%;
   border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 2rem 4rem;
   margin: 5rem auto;
   max-height: 40rem;
   overflow-y: scroll;
+
 `;
