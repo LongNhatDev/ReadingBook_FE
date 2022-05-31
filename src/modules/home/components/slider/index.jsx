@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { sliderData } from "../../../../slider-data";
-import Button from "../../../components/button";
 import styled from "styled-components";
+import BookDetail from "../../../components/bookdetail";
 
 const Slider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -42,17 +42,7 @@ const Slider = () => {
       {sliderData.map((slide, index) => {
         return (
           <Slide className={index === currentSlide && "current"} key={index}>
-            {index === currentSlide && (
-              <div>
-                <Image src={slide.image} alt="slide" />
-                <Content>
-                  <h2>{slide.heading}</h2>
-                  <p>{slide.desc}</p>
-                  <hr />
-                  <Button>Get Started</Button>
-                </Content>
-              </div>
-            )}
+            {index === currentSlide && <BookDetail book={slide} />}
           </Slide>
         );
       })}
@@ -90,7 +80,7 @@ const Slide = styled.div`
 const PrevArrow = styled(AiOutlineArrowLeft)`
   border: 2px solid white;
   background-color: transparent;
-  color: #fff;
+  color: #000;
   cursor: pointer;
   height: 2rem;
   width: 2rem;
@@ -109,7 +99,7 @@ const PrevArrow = styled(AiOutlineArrowLeft)`
 const NextArrow = styled(AiOutlineArrowRight)`
   border: 2px solid white;
   background-color: transparent;
-  color: #fff;
+  color: #000;
   cursor: pointer;
   height: 2rem;
   width: 2rem;
@@ -122,27 +112,5 @@ const NextArrow = styled(AiOutlineArrowRight)`
   &:hover {
     background-color: #fff;
     color: #777;
-  }
-`;
-
-const Image = styled.img`
-  width: 100%;
-`;
-
-const Content = styled.div`
-  position: absolute;
-  top: 23rem;
-  left: 5rem;
-  opacity: 0;
-  width: 50%;
-  color: #fff;
-  padding: 3rem;
-  background: rgba(0, 0, 0, 0.3);
-  animation: slide-up 1s ease 0.5s;
-  animation-fill-mode: forwards;
-  visibility: hidden;
-  & > * {
-    color: #fff;
-    margin-bottom: 1rem;
   }
 `;

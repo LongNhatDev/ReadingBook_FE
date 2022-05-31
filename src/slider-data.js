@@ -1,23 +1,622 @@
 export const sliderData = [
-    {
-        image: "https://www.pixelstalk.net/wp-content/uploads/images5/4K-Marvel-Wallpaper-HD.jpg",
-        heading: "Slide One",
-        desc: "This is the description of slide one Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quos quas, voluptatum nesciunt illum exercitationem.",
+  {
+    _id: "6265d7acf238e69acccf7451",
+    bookName: "Cương Thi Dị Truyện",
+    author: {
+      _id: "6265136c3bd60031a135f021",
+      email: "xxxtrglyn@gmail.com",
+      fullName: "Trương Văn Luyn",
     },
-    {
-        image: "https://wallpaperaccess.com/full/3872049.jpg",
-        heading: "Slide Three",
-        desc: "This is the description of slide three Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quos quas, voluptatum nesciunt illum exercitationem.",
+    category: {
+      _id: "626720a6b2c0963a06667c9c",
+      categoryName: "Horror",
     },
-    {
-        image: "https://www.pixelstalk.net/wp-content/uploads/images5/4K-Marvel-HD-Wallpaper-Free-download.jpg",
-        heading: "Slide Two",
-        desc: "This is the description of slide two Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quos quas, voluptatum nesciunt illum exercitationem.",
+    description:
+      "Đề tài cương thi vẫn chưa bao giờ là lỗi thời, nhàm chán đối với những câu chuyện kinh dị. Bí ẩn về những xác chết đáng sợ này khiến không ít bạn đọc tò mò và muốn tìm hiểu qua những câu chuyện cương thi. Tác phẩm “Cương Thi Dị Truyện” của tác giả Tiểu Hỏa Long chắc chắn sẽ không khiến độc giả thất vọng.",
+    coverImageURL:
+      "https://reading-books-management.s3.amazonaws.com/book-covers/1650791738792Book_cover_cuong_thi_di_truyen.png",
+    chapters: [
+      {
+        title: "Chương 1",
+        contentLink:
+          "https://reading-books-management.s3.amazonaws.com/chapters/Chapter1_cuong_thi_di_truyen.txt",
+        audioLink:
+          "https://reading-books-management.s3.amazonaws.com/book-audios/1650793841871Chapter1_cuong_thi_di_truyen.mp3",
+        chapterNumber: 1,
+        _id: "6265e820c90ec85c6fc7b493",
+        createdAt: "2022-04-25T00:15:28.295Z",
+        updatedAt: "2022-04-25T00:15:28.295Z",
+      },
+      {
+        title: "Chương 2",
+        contentLink:
+          "s3://reading-books-management/chapters/Chapter2_cuong_thi_di_truyen.txt",
+        audioLink: "",
+        chapterNumber: 30,
+        _id: "627df46c7feeecec0bd1106e",
+        createdAt: "2022-05-13T06:02:20.539Z",
+        updatedAt: "2022-05-13T06:02:20.539Z",
+      },
+      {
+        title: "Chương 3",
+        contentLink:
+          "s3://reading-books-management/chapters/Chapter3_cuong_thi_di_truyen.txt",
+        audioLink: "",
+        chapterNumber: 31,
+        _id: "627df4c67feeecec0bd11073",
+        createdAt: "2022-05-13T06:03:50.666Z",
+        updatedAt: "2022-05-13T06:03:50.666Z",
+      },
+      {
+        title: "test title",
+        contentLink:
+          "https://reading-books-management.s3.amazonaws.com/chapters/1652611270449.txt",
+        audioLink: "",
+        chapterNumber: 4,
+        _id: "6280d8c75a82b440565343b8",
+        createdAt: "2022-05-15T10:41:11.666Z",
+        updatedAt: "2022-05-15T10:41:11.666Z",
+      },
+      {
+        title: "test title",
+        contentLink:
+          "https://reading-books-management.s3.amazonaws.com/chapters/1652611304679.txt",
+        audioLink: "",
+        chapterNumber: 5,
+        _id: "6280d8e95a82b440565343bc",
+        createdAt: "2022-05-15T10:41:45.787Z",
+        updatedAt: "2022-05-15T10:41:45.787Z",
+      },
+      {
+        title: "Thư gửi từ Benares",
+        contentLink:
+          "https://reading-books-management.s3.amazonaws.com/chapters/1653714345598.txt",
+        audioLink: "",
+        chapterNumber: 6,
+        _id: "6291adaace8eb29b33b8db0f",
+        createdAt: "2022-05-28T05:05:46.984Z",
+        updatedAt: "2022-05-28T05:05:46.984Z",
+      },
+    ],
+    viewNumber: 0,
+    reviews: [],
+    price: 0,
+    bookFollowers: [],
+    createdAt: "2022-04-24T23:05:16.303Z",
+    updatedAt: "2022-05-28T05:05:46.987Z",
+    __v: 107,
+    avrStarNumber: 4.47,
+    reviewTotal: 26,
+  },
+  {
+    _id: "6266346424ee0ff143481418",
+    bookName: "Biết người, dùng người, quản người",
+    author: {
+      _id: "6265136c3bd60031a135f021",
+      email: "xxxtrglyn@gmail.com",
+      fullName: "Trương Văn Luyn",
     },
-    {
-        image: "https://www.pixelstalk.net/wp-content/uploads/images5/4K-Marvel-Wallpaper-Computer.jpg",
-        heading: "Slide Three",
-        desc: "This is the description of slide three Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quos quas, voluptatum nesciunt illum exercitationem.",
-    }
-
+    category: {
+      _id: "626720b2b2c0963a06667c9f",
+      categoryName: "Life skills",
+    },
+    description:
+      "Cuốn sách thuộc tủ sách kiến thức xã hội giới thiệu những bí quyết để hiểu biết về con người, đối sách sử dụng người và phương sách quản lý con người một cách khoa học thực tiễn và hiệu quả.",
+    coverImageURL:
+      "https://reading-books-management.s3.amazonaws.com/book-covers/1650865232499Book_cover_biết_người_dùng_người_quản_người.png",
+    viewNumber: 0,
+    reviews: [],
+    price: 0,
+    bookFollowers: [],
+    chapters: [
+      {
+        title: "Chương 1",
+        contentLink:
+          "s3://reading-books-management/chapters/Chapter1_biet_nguoi_dung_nguoi_quan_nguoi.txt",
+        audioLink:
+          "https://reading-books-management.s3.amazonaws.com/book-audios/1650865294638Chapter1_biết_người_dùng_người_quản_người.mp3",
+        chapterNumber: 1,
+        _id: "6266349f24ee0ff14348141c",
+        createdAt: "2022-04-25T05:41:51.364Z",
+        updatedAt: "2022-04-25T05:41:51.364Z",
+      },
+    ],
+    createdAt: "2022-04-25T05:40:52.386Z",
+    updatedAt: "2022-05-13T05:47:06.372Z",
+    __v: 23,
+    avrStarNumber: 4.89,
+    reviewTotal: 31,
+  },
+  {
+    _id: "62665fbd1ddd2205ac2d4e5a",
+    bookName: "Ác quỷ nam kinh",
+    author: {
+      _id: "6265136c3bd60031a135f021",
+      email: "xxxtrglyn@gmail.com",
+      fullName: "Trương Văn Luyn",
+    },
+    category: {
+      _id: "626720d8b2c0963a06667ca8",
+      categoryName: "Novel",
+    },
+    description:
+      "Grey tới Tokyo để theo đuổi một nơi ám ảnh. Cô muốn tìm kiếm một cuộn phim về cuộc tham sát khủng khiếp ở Nam Kinh năm 1937 bị thất lạc. Nhiều ngưòi cho rằng đoạn phim đó không hề tồn tại.",
+    coverImageURL:
+      "https://reading-books-management.s3.amazonaws.com/book-covers/1650876331390Book_cover_ác_qủy_nam_kinh.png",
+    viewNumber: 0,
+    reviews: [],
+    price: 0,
+    bookFollowers: [],
+    chapters: [
+      {
+        title: "Chương 1",
+        contentLink:
+          "s3://reading-books-management/chapters/Chapter1_ac_quy_nam_kinh.txt",
+        audioLink:
+          "https://reading-books-management.s3.amazonaws.com/book-audios/1650876388152Chapter1_ác_qủy_nam_kinh.mp3",
+        chapterNumber: 1,
+        _id: "62665ff81ddd2205ac2d4e5e",
+        createdAt: "2022-04-25T08:46:48.373Z",
+        updatedAt: "2022-04-25T08:46:48.373Z",
+      },
+      {
+        title: "Chương 2",
+        contentLink:
+          "s3://reading-books-management/chapters/Chapter2_ac_quy_nam_kinh.txt",
+        audioLink:
+          "https://reading-books-management.s3.amazonaws.com/book-audios/1650876439202Chapter2_ác_qủy_nam_kinh.mp3",
+        chapterNumber: 2,
+        _id: "626660261ddd2205ac2d4e62",
+        createdAt: "2022-04-25T08:47:34.858Z",
+        updatedAt: "2022-04-25T08:47:34.858Z",
+      },
+      {
+        title: "Chương 3",
+        contentLink:
+          "s3://reading-books-management/chapters/Chapter3_ac_quy_nam_kinh.txt",
+        audioLink:
+          "https://reading-books-management.s3.amazonaws.com/book-audios/1650876489149Chapter3_ác_qủy_nam_kinh.mp3",
+        chapterNumber: 3,
+        _id: "626660581ddd2205ac2d4e66",
+        createdAt: "2022-04-25T08:48:24.677Z",
+        updatedAt: "2022-04-25T08:48:24.677Z",
+      },
+      {
+        title: "Chương 4",
+        contentLink:
+          "s3://reading-books-management/chapters/Chapter4_ac_quy_nam_kinh.txt",
+        audioLink:
+          "https://reading-books-management.s3.amazonaws.com/book-audios/1650876531983Chapter4_ác_qủy_nam_kinh.mp3",
+        chapterNumber: 4,
+        _id: "626660841ddd2205ac2d4e6a",
+        createdAt: "2022-04-25T08:49:08.714Z",
+        updatedAt: "2022-04-25T08:49:08.714Z",
+      },
+    ],
+    createdAt: "2022-04-25T08:45:49.214Z",
+    updatedAt: "2022-04-25T08:49:08.714Z",
+    __v: 4,
+    avrStarNumber: 4.81,
+    reviewTotal: 40,
+  },
+  {
+    _id: "6280fec2b5307f322ac1df3a",
+    bookName: "Cương Thi Dị Truyện",
+    author: {
+      _id: "6265136c3bd60031a135f021",
+      email: "xxxtrglyn@gmail.com",
+      fullName: "Trương Văn Luyn",
+    },
+    category: {
+      _id: "626720a6b2c0963a06667c9c",
+      categoryName: "Horror",
+    },
+    description:
+      "Đề tài cương thi vẫn chưa bao giờ là lỗi thời, nhàm chán đối với những câu chuyện kinh dị. Bí ẩn về những xác chết đáng sợ này khiến không ít bạn đọc tò mò và muốn tìm hiểu qua những câu chuyện cương thi. Tác phẩm “Cương Thi Dị Truyện” của tác giả Tiểu Hỏa Long chắc chắn sẽ không khiến độc giả thất vọng.",
+    coverImageURL:
+      "https://reading-books-management.s3.amazonaws.com/book-covers/1650791738792Book_cover_cuong_thi_di_truyen.png",
+    viewNumber: 0,
+    reviews: [],
+    price: 0,
+    bookFollowers: [],
+    chapters: [],
+    createdAt: "2022-05-15T13:23:14.301Z",
+    updatedAt: "2022-05-15T13:23:14.301Z",
+    __v: 0,
+    avrStarNumber: 4.59,
+    reviewTotal: 28,
+  },
+  {
+    _id: "6280ff08b5307f322ac1df43",
+    bookName: "Cương Thi Dị Truyện",
+    author: {
+      _id: "6265136c3bd60031a135f021",
+      email: "xxxtrglyn@gmail.com",
+      fullName: "Trương Văn Luyn",
+    },
+    category: {
+      _id: "626720a6b2c0963a06667c9c",
+      categoryName: "Horror",
+    },
+    description:
+      "Đề tài cương thi vẫn chưa bao giờ là lỗi thời, nhàm chán đối với những câu chuyện kinh dị. Bí ẩn về những xác chết đáng sợ này khiến không ít bạn đọc tò mò và muốn tìm hiểu qua những câu chuyện cương thi. Tác phẩm “Cương Thi Dị Truyện” của tác giả Tiểu Hỏa Long chắc chắn sẽ không khiến độc giả thất vọng.",
+    coverImageURL:
+      "https://reading-books-management.s3.amazonaws.com/book-covers/1650791738792Book_cover_cuong_thi_di_truyen.png",
+    viewNumber: 0,
+    reviews: [],
+    price: 0,
+    bookFollowers: [],
+    chapters: [],
+    createdAt: "2022-05-15T13:24:24.359Z",
+    updatedAt: "2022-05-15T13:24:24.359Z",
+    __v: 0,
+    avrStarNumber: 4.62,
+    reviewTotal: 14,
+  },
+  {
+    _id: "6282053daf31daa83b74c194",
+    bookName: "Hyouka",
+    author: {
+      _id: "6265136c3bd60031a135f021",
+      email: "xxxtrglyn@gmail.com",
+      fullName: "Trương Văn Luyn",
+    },
+    category: {
+      _id: "626720d8b2c0963a06667ca8",
+      categoryName: "Novel",
+    },
+    description:
+      "Xám xịt - có lẽ là từ ngắn gọn thích hợp nhất để miêu tả Oreki Houtarou, một nam sinh cấp 3 trung thành với chủ nghĩa 'tiết kiệm năng lượng' của mình. Nghĩa là, cậu luôn cố né tránh tất cả những công việc mà cậu xem là năng nhọc hay không quá cần thiết, và gia nhập một CLB ở 'Thánh địa' của hoạt động ngoại khoá Cao trung Kamiyama' là một việc như vậy. Houtarou đã luôn tận hưởng cuộc sống chậm chạp nhẹ nhàng của mình cho đến khi một lá thư mang theo một đề nghị kì lạ từ Benares được gửi tới. Thế là cậu đã đến phòng họp của CLB Cổ Điển hiện-tại-không-có-thành-viên, đứng trước một cánh cửa bị khoá",
+    coverImageURL: "https://cdn.myanimelist.net/images/anime/13/50521.jpg",
+    viewNumber: 0,
+    reviews: [
+      {
+        user: "6265136c3bd60031a135f021",
+        comment:
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing so",
+        starNumber: 4,
+        _id: "628fa67bcbf4bcdba229a232",
+        createdAt: "2022-05-26T16:10:35.408Z",
+        updatedAt: "2022-05-26T16:10:35.408Z",
+      },
+      {
+        user: "6265136c3bd60031a135f021",
+        comment:
+          "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions hav",
+        starNumber: 3,
+        _id: "628fa687cbf4bcdba229a237",
+        createdAt: "2022-05-26T16:10:47.563Z",
+        updatedAt: "2022-05-26T16:10:47.563Z",
+      },
+      {
+        user: "6265136c3bd60031a135f021",
+        comment:
+          'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malor',
+        starNumber: 4,
+        _id: "628fa694cbf4bcdba229a23c",
+        createdAt: "2022-05-26T16:11:00.906Z",
+        updatedAt: "2022-05-26T16:11:00.906Z",
+      },
+      {
+        user: "6265136c3bd60031a135f021",
+        comment:
+          "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of ove",
+        starNumber: 5,
+        _id: "628fa69ccbf4bcdba229a241",
+        createdAt: "2022-05-26T16:11:08.743Z",
+        updatedAt: "2022-05-26T16:11:08.743Z",
+      },
+      {
+        user: "6265136c3bd60031a135f021",
+        comment: "Luyn",
+        starNumber: 5,
+        _id: "6291174bde1ce5306741e522",
+        createdAt: "2022-05-27T18:24:11.287Z",
+        updatedAt: "2022-05-27T18:24:11.287Z",
+      },
+    ],
+    price: 0,
+    bookFollowers: [],
+    chapters: [
+      {
+        title: "Day la tieu de",
+        contentLink:
+          "https://reading-books-management.s3.amazonaws.com/chapters/1652706070696.txt",
+        audioLink: "",
+        chapterNumber: 1,
+        _id: "62824b17af31daa83b74c3fe",
+        createdAt: "2022-05-16T13:01:11.918Z",
+        updatedAt: "2022-05-16T13:01:11.918Z",
+      },
+      {
+        title: "SỰ HỒI SINH CỦA CLB CỔ ĐIỂN GIÀU TRUYỀN THỐNG",
+        contentLink:
+          "https://reading-books-management.s3.amazonaws.com/chapters/1652977544021.txt",
+        audioLink: "",
+        chapterNumber: 2,
+        _id: "62866f89a5eba68a325181f7",
+        createdAt: "2022-05-19T16:25:45.938Z",
+        updatedAt: "2022-05-19T16:25:45.938Z",
+      },
+      {
+        title: "NHỮNG HOẠT ĐỘNG CỦA CLB CỔ ĐIỂN LÂU ĐỜI",
+        contentLink:
+          "https://reading-books-management.s3.amazonaws.com/chapters/1653064341992.txt",
+        audioLink: "",
+        chapterNumber: 3,
+        _id: "6287c297a1c41eb17636f70a",
+        createdAt: "2022-05-20T16:32:23.806Z",
+        updatedAt: "2022-05-20T16:32:23.806Z",
+      },
+      {
+        title: "LỚP HẬU BỐI CỦA CLB CỔ ĐIỂN NHIỀU TRẦM THĂNG",
+        contentLink:
+          "https://reading-books-management.s3.amazonaws.com/chapters/1653296151738.txt",
+        audioLink: "",
+        chapterNumber: 4,
+        _id: "628b4c19a374ae7c91491ecc",
+        createdAt: "2022-05-23T08:55:53.960Z",
+        updatedAt: "2022-05-23T08:55:53.960Z",
+      },
+      {
+        title: "ẨN TÍCH TRONG KỈ YẾU CỦA CLB CỔ ĐIỂN",
+        contentLink:
+          "https://reading-books-management.s3.amazonaws.com/chapters/1653296657737.txt",
+        audioLink: "",
+        chapterNumber: 5,
+        _id: "628b4e13a374ae7c91491ee4",
+        createdAt: "2022-05-23T09:04:19.527Z",
+        updatedAt: "2022-05-23T09:04:19.527Z",
+      },
+      {
+        title: "THỜI VÀNG SON CỦA CLB CỔ ĐIỂN ĐẦY HÀO HOA",
+        contentLink:
+          "https://reading-books-management.s3.amazonaws.com/chapters/1653296913573.txt",
+        audioLink: "",
+        chapterNumber: 6,
+        _id: "628b4f13a374ae7c91491f04",
+        createdAt: "2022-05-23T09:08:35.298Z",
+        updatedAt: "2022-05-23T09:08:35.298Z",
+      },
+      {
+        title: "SỰ THẬT VỀ CLB VĂN HỌC CỔ ĐIỂN",
+        contentLink:
+          "https://reading-books-management.s3.amazonaws.com/chapters/1653297219123.txt",
+        audioLink: "",
+        chapterNumber: 7,
+        _id: "628b5044a374ae7c91491f0b",
+        createdAt: "2022-05-23T09:13:40.766Z",
+        updatedAt: "2022-05-23T09:13:40.766Z",
+      },
+      {
+        title: "CUỘC SỐNG THƯỜNG NHẬT CỦA CLB CỔ ĐIỂN HƯỚNG TỚI TƯƠNG LAI",
+        contentLink:
+          "https://reading-books-management.s3.amazonaws.com/chapters/1653300074843.txt",
+        audioLink: "",
+        chapterNumber: 8,
+        _id: "628b5b6ca374ae7c9149204b",
+        createdAt: "2022-05-23T10:01:16.028Z",
+        updatedAt: "2022-05-23T10:01:16.028Z",
+      },
+      {
+        title: "THƯ GỬI TỚI SARAJEVO",
+        contentLink:
+          "https://reading-books-management.s3.amazonaws.com/chapters/1653300158420.txt",
+        audioLink: "",
+        chapterNumber: 9,
+        _id: "628b5bbfa374ae7c91492052",
+        createdAt: "2022-05-23T10:02:39.576Z",
+        updatedAt: "2022-05-23T10:02:39.576Z",
+      },
+      {
+        title: "Cùng đi xem Review nào!",
+        contentLink:
+          "https://reading-books-management.s3.amazonaws.com/chapters/1653300309481.txt",
+        audioLink: "",
+        chapterNumber: 10,
+        _id: "628b5c57a374ae7c91492059",
+        createdAt: "2022-05-23T10:05:11.135Z",
+        updatedAt: "2022-05-23T10:05:11.135Z",
+      },
+      {
+        title: "Vụ án trong ngôi làng hoang ở Furuoka",
+        contentLink:
+          "https://reading-books-management.s3.amazonaws.com/chapters/1653309573743.txt",
+        audioLink: "",
+        chapterNumber: 11,
+        _id: "628b8087d4872601d25c8558",
+        createdAt: "2022-05-23T12:39:35.602Z",
+        updatedAt: "2022-05-23T12:39:35.602Z",
+      },
+      {
+        title: "Kẻ đột nhập vô hình",
+        contentLink:
+          "https://reading-books-management.s3.amazonaws.com/chapters/1653314768857.txt",
+        audioLink: "",
+        chapterNumber: 12,
+        _id: "628b94d29cb582d1056abb8d",
+        createdAt: "2022-05-23T14:06:10.773Z",
+        updatedAt: "2022-05-23T14:06:10.773Z",
+      },
+      {
+        title: "Bloody Beast",
+        contentLink:
+          "https://reading-books-management.s3.amazonaws.com/chapters/1653489108069.txt",
+        audioLink: "",
+        chapterNumber: 13,
+        _id: "628e3dd55f768975369081c4",
+        createdAt: "2022-05-25T14:31:49.761Z",
+        updatedAt: "2022-05-25T14:31:49.761Z",
+      },
+      {
+        title: "Thử xem nào",
+        contentLink:
+          "https://reading-books-management.s3.amazonaws.com/chapters/1653489648104.txt",
+        audioLink: "",
+        chapterNumber: 14,
+        _id: "628e3ff15f768975369081f2",
+        createdAt: "2022-05-25T14:40:49.515Z",
+        updatedAt: "2022-05-25T14:40:49.515Z",
+      },
+    ],
+    createdAt: "2022-05-16T08:03:09.454Z",
+    updatedAt: "2022-05-28T06:56:06.156Z",
+    __v: 73,
+    avrStarNumber: 3.86,
+    reviewTotal: 30,
+  },
+  {
+    _id: "6291a9e931e69c953fbb0191",
+    bookName: "Test",
+    author: {
+      _id: "6265136c3bd60031a135f021",
+      email: "xxxtrglyn@gmail.com",
+      fullName: "Trương Văn Luyn",
+    },
+    category: {
+      _id: "626720d8b2c0963a06667ca8",
+      categoryName: "Novel",
+    },
+    description:
+      "Xám xịt - có lẽ là từ ngắn gọn thích hợp nhất để miêu tả Oreki Houtarou, một nam sinh cấp 3 trung thành với chủ nghĩa 'tiết kiệm năng lượng' của mình. Nghĩa là, cậu luôn cố né tránh tất cả những công việc mà cậu xem là năng nhọc hay không quá cần thiết, và gia nhập một CLB ở 'Thánh địa' của hoạt động ngoại khoá Cao trung Kamiyama' là một việc như vậy. Houtarou đã luôn tận hưởng cuộc sống chậm chạp nhẹ nhàng của mình cho đến khi một lá thư mang theo một đề nghị kì lạ từ Benares được gửi tới. Thế là cậu đã đến phòng họp của CLB Cổ Điển hiện-tại-không-có-thành-viên, đứng trước một cánh cửa bị khoá",
+    coverImageURL: "https://cdn.myanimelist.net/images/anime/13/50521.jpg",
+    viewNumber: 0,
+    avrStarNumber: 4,
+    reviewTotal: 1,
+    price: 0,
+    bookFollowers: [],
+    chapters: [
+      {
+        title: "Chapter1",
+        contentLink:
+          "https://reading-books-management.s3.amazonaws.com/chapters/1653713405160.txt",
+        audioLink: "",
+        chapterNumber: 1,
+        _id: "6291a9fe31e69c953fbb01a2",
+        createdAt: "2022-05-28T04:50:06.470Z",
+        updatedAt: "2022-05-28T04:50:06.470Z",
+      },
+      {
+        title: "Hello",
+        contentLink:
+          "https://reading-books-management.s3.amazonaws.com/chapters/1653713709937.txt",
+        audioLink: "",
+        chapterNumber: 2,
+        _id: "6291ab3031e69c953fbb01c5",
+        createdAt: "2022-05-28T04:55:12.172Z",
+        updatedAt: "2022-05-28T04:55:12.172Z",
+      },
+      {
+        title: "NHỮNG HOẠT ĐỘNG CỦA CLB CỔ ĐIỂN LÂU ĐỜI",
+        contentLink:
+          "https://reading-books-management.s3.amazonaws.com/chapters/1653720057530.txt",
+        audioLink: "",
+        chapterNumber: 3,
+        _id: "6291c3face8eb29b33b8ead2",
+        createdAt: "2022-05-28T06:40:58.782Z",
+        updatedAt: "2022-05-28T06:40:58.782Z",
+      },
+      {
+        title: "ẨN TÍCH TRONG KỈ YẾU CỦA CLB CỔ ĐIỂN",
+        contentLink:
+          "https://reading-books-management.s3.amazonaws.com/chapters/1653720674853.txt",
+        audioLink: "",
+        chapterNumber: 4,
+        _id: "6291c664ce8eb29b33b8eb18",
+        createdAt: "2022-05-28T06:51:16.105Z",
+        updatedAt: "2022-05-28T06:51:16.105Z",
+      },
+    ],
+    reviews: [
+      {
+        user: "6265136c3bd60031a135f021",
+        comment: "s",
+        starNumber: 4,
+        _id: "6291ac4431e69c953fbb0207",
+        createdAt: "2022-05-28T04:59:48.331Z",
+        updatedAt: "2022-05-28T04:59:48.331Z",
+      },
+    ],
+    createdAt: "2022-05-28T04:49:45.624Z",
+    updatedAt: "2022-05-28T06:51:16.106Z",
+    __v: 7,
+  },
+  {
+    _id: "6291b362ce8eb29b33b8db3e",
+    bookName: "Test 2",
+    author: {
+      _id: "6265136c3bd60031a135f021",
+      email: "xxxtrglyn@gmail.com",
+      fullName: "Trương Văn Luyn",
+    },
+    category: {
+      _id: "626720d8b2c0963a06667ca8",
+      categoryName: "Novel",
+    },
+    description:
+      "Xám xịt - có lẽ là từ ngắn gọn thích hợp nhất để miêu tả Oreki Houtarou, một nam sinh cấp 3 trung thành với chủ nghĩa 'tiết kiệm năng lượng' của mình. Nghĩa là, cậu luôn cố né tránh tất cả những công việc mà cậu xem là năng nhọc hay không quá cần thiết, và gia nhập một CLB ở 'Thánh địa' của hoạt động ngoại khoá Cao trung Kamiyama' là một việc như vậy. Houtarou đã luôn tận hưởng cuộc sống chậm chạp nhẹ nhàng của mình cho đến khi một lá thư mang theo một đề nghị kì lạ từ Benares được gửi tới. Thế là cậu đã đến phòng họp của CLB Cổ Điển hiện-tại-không-có-thành-viên, đứng trước một cánh cửa bị khoá",
+    coverImageURL: "https://cdn.myanimelist.net/images/anime/13/50521.jpg",
+    viewNumber: 0,
+    avrStarNumber: 0,
+    reviewTotal: 0,
+    price: 0,
+    bookFollowers: [],
+    chapters: [],
+    reviews: [],
+    createdAt: "2022-05-28T05:30:10.160Z",
+    updatedAt: "2022-05-28T05:30:10.160Z",
+    __v: 0,
+  },
+  {
+    _id: "6291cca0ce8eb29b33b8ebc3",
+    bookName: "Test 3",
+    author: {
+      _id: "6265136c3bd60031a135f021",
+      email: "xxxtrglyn@gmail.com",
+      fullName: "Trương Văn Luyn",
+    },
+    category: {
+      _id: "626720d8b2c0963a06667ca8",
+      categoryName: "Novel",
+    },
+    description:
+      "Xám xịt - có lẽ là từ ngắn gọn thích hợp nhất để miêu tả Oreki Houtarou, một nam sinh cấp 3 trung thành với chủ nghĩa 'tiết kiệm năng lượng' của mình. Nghĩa là, cậu luôn cố né tránh tất cả những công việc mà cậu xem là năng nhọc hay không quá cần thiết, và gia nhập một CLB ở 'Thánh địa' của hoạt động ngoại khoá Cao trung Kamiyama' là một việc như vậy. Houtarou đã luôn tận hưởng cuộc sống chậm chạp nhẹ nhàng của mình cho đến khi một lá thư mang theo một đề nghị kì lạ từ Benares được gửi tới. Thế là cậu đã đến phòng họp của CLB Cổ Điển hiện-tại-không-có-thành-viên, đứng trước một cánh cửa bị khoá",
+    coverImageURL: "https://cdn.myanimelist.net/images/anime/13/50521.jpg",
+    viewNumber: 0,
+    avrStarNumber: 0,
+    reviewTotal: 0,
+    price: 0,
+    bookFollowers: [],
+    chapters: [],
+    reviews: [],
+    createdAt: "2022-05-28T07:17:52.334Z",
+    updatedAt: "2022-05-28T07:17:52.334Z",
+    __v: 0,
+  },
+  {
+    _id: "6291cd332811c04f0cd7aa1c",
+    bookName: "Test 4",
+    author: {
+      _id: "6265136c3bd60031a135f021",
+      email: "xxxtrglyn@gmail.com",
+      fullName: "Trương Văn Luyn",
+    },
+    category: {
+      _id: "626720d8b2c0963a06667ca8",
+      categoryName: "Novel",
+    },
+    description:
+      "Xám xịt - có lẽ là từ ngắn gọn thích hợp nhất để miêu tả Oreki Houtarou, một nam sinh cấp 3 trung thành với chủ nghĩa 'tiết kiệm năng lượng' của mình. Nghĩa là, cậu luôn cố né tránh tất cả những công việc mà cậu xem là năng nhọc hay không quá cần thiết, và gia nhập một CLB ở 'Thánh địa' của hoạt động ngoại khoá Cao trung Kamiyama' là một việc như vậy. Houtarou đã luôn tận hưởng cuộc sống chậm chạp nhẹ nhàng của mình cho đến khi một lá thư mang theo một đề nghị kì lạ từ Benares được gửi tới. Thế là cậu đã đến phòng họp của CLB Cổ Điển hiện-tại-không-có-thành-viên, đứng trước một cánh cửa bị khoá",
+    coverImageURL: "https://cdn.myanimelist.net/images/anime/13/50521.jpg",
+    viewNumber: 0,
+    avrStarNumber: 0,
+    reviewTotal: 0,
+    price: 0,
+    bookFollowers: [],
+    chapters: [],
+    reviews: [],
+    createdAt: "2022-05-28T07:20:19.247Z",
+    updatedAt: "2022-05-28T07:20:19.247Z",
+    __v: 0,
+  },
 ];

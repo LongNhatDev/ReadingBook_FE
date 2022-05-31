@@ -29,6 +29,14 @@ export const showSuccessToaster = (message) => {
   });
 };
 
+export const showInstructionToaster = (message) => {
+  Toaster.show({
+    message,
+    intent: Intent.WARNING,
+    timeout: 4000,
+  });
+};
+
 export const showProgressBarToaster = (loadedPercent, fileName) => {
   const progressBarValue = loadedPercent / 100; // value from 0 to 1
   const toasterTimeout = Math.floor(progressBarValue); //0 or 1 value

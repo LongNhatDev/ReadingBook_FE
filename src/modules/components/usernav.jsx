@@ -1,11 +1,4 @@
-import {
-  FaBook,
-  FaBraille,
-  FaCogs,
-  FaPlus,
-  FaSortAmountUpAlt,
-  FaUserAlt,
-} from "react-icons/fa";
+import { FaBook, FaBraille, FaCogs, FaPlus, FaUserAlt } from "react-icons/fa";
 import { FcReading } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -17,53 +10,66 @@ import NavbarItems from "./navbaritems";
 
 const UserNav = () => {
   let navigation = useNavigate();
+  const ava = localStorage.getItem("ava");
 
-  const HandleLogin = () => {
-    const path = "/";
+  const handleReturnHomePage = () => {
+    const path = "/home";
     navigation(path);
   };
-  const HandleCreate = () => {
+  const handleViewCategories = () => {
+    const path = "/category/all";
+    navigation(path);
+  };
+  const handleCreate = () => {
     const path = "/create";
     navigation(path);
   };
-  const HandleYourBook = () => {
-    const path = "yourbook";
+  const handleViewYourBook = () => {
+    const path = "/yourbook";
     navigation(path);
   };
-  const HandleHome = () => {
-    const path = "/home";
+  const handleViewProfile = () => {
+    const path = "/profile";
+    navigation(path);
+  };
+  const handleSignIn = () => {
+    const path = "/";
     navigation(path);
   };
 
   return (
     <UserNavDiv>
-      <LogoContent onClick={HandleHome}>
+      <LogoContent onClick={handleReturnHomePage}>
         <FcReading style={{ margin: "10px" }}></FcReading>
         <p style={{ color: "white" }}>READING BOOK</p>
       </LogoContent>
       <NavbarItems>
         <SeachBox />
-        <Item>
+        <Item onClick={handleViewCategories}>
           <FaBraille />
           <Dropdown label={"Category"} />
         </Item>
-        <Item>
-          <FaSortAmountUpAlt />
-          <H3Css>Ranking</H3Css>
-        </Item>
-        <Item onClick={HandleCreate}>
+        <Item onClick={handleCreate}>
           <FaPlus />
           <H3Css>Create</H3Css>
         </Item>
-        <Item onClick={HandleYourBook}>
+        <Item onClick={handleViewYourBook}>
           <FaBook />
           <H3Css>Your Book</H3Css>
         </Item>
         <Item>
-          <FaCogs />
+          <FaCogs onClick={handleViewProfile} />
         </Item>
         <Item>
-          <FaUserAlt onClick={HandleLogin} />
+          {ava === undefined && <FaUserAlt onClick={handleSignIn} />}
+          {ava !== undefined && (
+            <img
+              src={ava}
+              alt=""
+              style={{ width: "30px", borderRadius: "20px" }}
+              onClick={handleSignIn}
+            />
+          )}
         </Item>
       </NavbarItems>
     </UserNavDiv>

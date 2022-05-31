@@ -46,4 +46,5 @@ const Container = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
+  border-radius: 1rem;
 `;

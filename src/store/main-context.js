@@ -3,7 +3,6 @@ import { BaseURL } from "../modules/AxiosInstance";
 
 const MainContext = React.createContext({
   categories: [],
-  books: [],
 });
 
 const createUrl = (name) => {
@@ -16,19 +15,8 @@ const createUrl = (name) => {
   return returnValue.toLowerCase();
 };
 
-const createTag = (name) => {
-  let returnValue = "";
-  for (let i = 0; i < name.length; i++) {
-    if (name.charAt(i) !== " ") {
-      returnValue += name.charAt(i);
-    }
-  }
-  return returnValue.toLowerCase();
-};
-
 export const MainContextProvider = (props) => {
   const [categories, setCategories] = useState([]);
-  const [books, setBooks] = useState([]);
 
   async function getData() {
     const categoriesData = [
@@ -38,10 +26,8 @@ export const MainContextProvider = (props) => {
         cateLink: "/category/all",
       },
     ];
-    const response = await fetch(
-      "https://reading-book-api.herokuapp.com/api/categories"
-    );
-    const data = await response.json();
+    const response = await BaseURL.get("api/categories");
+    const data = response.data;
     data.forEach((element) => {
       categoriesData.push({
         cateId: element._id,
@@ -52,35 +38,13 @@ export const MainContextProvider = (props) => {
     setCategories(categoriesData);
   }
 
-  async function getBooksData() {
-    const booksData = [];
-    const response = await BaseURL.get(
-      "/api/books"
-    );
-
-    const data = await response.json();
-    data.books.forEach((element) => {
-      booksData.push({
-        bookId: element._id,
-        bookimg: element.coverImageURL,
-        booktag: createTag(element.category.categoryName),
-        bookname: element.bookName,
-        bookdes: element.description,
-        bookrate: "5",
-        bookchapter: element.viewNumber,
-      });
-    });
-    setBooks(booksData);
-  }
-
   useEffect(() => {
     getData();
-    getBooksData();
-    console.log("Effect run in main-context");
+    console.log("Effect run in main-context", Date.now());
   }, []);
 
   return (
-    <MainContext.Provider value={{ categories: categories, books: books }}>
+    <MainContext.Provider value={{ categories: categories }}>
       {props.children}
     </MainContext.Provider>
   );

@@ -1,55 +1,77 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import styled from "styled-components";
-import Button from "../../components/button";
-import { showSuccessToaster } from "../../../components/Toaster";
-import Modal from "../../components/modal";
+import Button from "../../../components/button";
+import { showSuccessToaster } from "../../../../components/Toaster";
+import Modal from "../../../components/modal";
+import axios from "axios";
+import { BaseURL } from "../../../AxiosInstance";
 
-const UploadChapter = (props) => {
+const UpdateChapter = (props) => {
+  const [datas, setDatas] = useState({});
+  const [title, setTitle] = useState(props.chapter.title);
   const token = localStorage.getItem("token");
-  const [data, setData] = useState({});
-  const titleRef = useRef();
+  useEffect(() => {
+    async function getChapter() {
+      try {
+        const res = await axios.get(props.chapter.contentLink);
+        const data = res.data;
+        console.log(data);
+        setDatas(data);
+      } catch (err) {
+        console.log("error occurs", err);
+      }
+    }
+    getChapter();
+  }, [props.chapter.contentLink]);
   async function submitHandler(event) {
     event.preventDefault();
     const sendData = {
-      title: titleRef.current.value,
-      content: data,
+      title: title,
+      content: datas,
       audioLink: "",
     };
-    fetch(`http://localhost:3000/api/books/${props.id}/chapters`, {
-      method: "POST",
-      body: JSON.stringify(sendData),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-    }).then((res) => {
-      if (res.ok) {
-        showSuccessToaster("Upload Successfully");
-        props.onUpdate();
-        props.onClose();
-      }
-      console.log(res.ok);
-    });
+    try {
+      await BaseURL.put(
+        `api/books/${props.id}/chapters/${props.chapter._id}`,
+        sendData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        }
+      );
+      showSuccessToaster("Update Successfully");
+      props.onUpdate();
+      props.onClose();
+    } catch (err) {
+      console.log("error occurs", err);
+    }
   }
 
+  const titleChangeHandler = (event) => {
+    setTitle(event.target.value);
+  };
   const onChangeHandler = (event, editor) => {
-    setData(editor.getData());
+    setDatas(editor.getData());
   };
   return (
     <Modal onHideIndex={props.onClose}>
       <Container>
-        <Title>CREATE NEW CHAPTER</Title>
+        <Title>UPDATE CHAPTER</Title>
         <Form onSubmit={submitHandler}>
           <Input
             type="text"
             id="chaptertitle"
             placeholder="Enter the title here"
-            ref={titleRef}
+            value={title}
+            onChange={titleChangeHandler}
           />
           <CKEditor
             editor={ClassicEditor}
+            data={datas}
             onReady={(editor) => {
               console.log("Editor is ready to use!", editor);
               editor.editing.view.change((writer) => {
@@ -62,14 +84,14 @@ const UploadChapter = (props) => {
             }}
             onChange={onChangeHandler}
           />
-          <UploadButton>Create</UploadButton>
+          <UploadButton>Update</UploadButton>
         </Form>
       </Container>
     </Modal>
   );
 };
 
-export default UploadChapter;
+export default UpdateChapter;
 
 const Container = styled.div`
   width: 100rem;

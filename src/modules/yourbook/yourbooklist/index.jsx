@@ -1,119 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Table from "./components/table";
+import { BaseURL } from "../../AxiosInstance";
 
 const YourBookList = () => {
-  const headers = [" ", "NAME", "STATE", "CHAPTERS", "VIEWS", "OPERATION"];
-  const body = [
-    {
-      Id: "1",
-      Name: "Skeleton Knight In Another World",
-      State: "Ongoing",
-      Chapters: 99,
-      Views: 11111,
-    },
-    {
-      Id: "2",
-      Name: "Skeleton Knight In Another World",
-      State: "Ongoing",
-      Chapters: 99,
-      Views: 11111,
-    },
-    {
-      Id: "3",
-      Name: "Skeleton Knight In Another World",
-      State: "Ongoing",
-      Chapters: 99,
-      Views: 11111,
-    },
-    {
-      Id: "4",
-      Name: "Skeleton Knight In Another World",
-      State: "Ongoing",
-      Chapters: 99,
-      Views: 11111,
-    },
-    {
-      Id: "5",
-      Name: "Skeleton Knight In Another World",
-      State: "Ongoing",
-      Chapters: 99,
-      Views: 11111,
-    },
-    {
-      Id: "6",
-      Name: "Skeleton Knight In Another World",
-      State: "Ongoing",
-      Chapters: 99,
-      Views: 11111,
-    },
-    {
-      Id: "7",
-      Name: "Skeleton Knight In Another World",
-      State: "Ongoing",
-      Chapters: 99,
-      Views: 11111,
-    },
-    {
-      Id: "8",
-      Name: "Skeleton Knight In Another World",
-      State: "Ongoing",
-      Chapters: 99,
-      Views: 11111,
-    },
-    {
-      Id: "9",
-      Name: "Skeleton Knight In Another World",
-      State: "Ongoing",
-      Chapters: 99,
-      Views: 11111,
-    },
-    {
-      Id: "10",
-      Name: "Skeleton Knight In Another World",
-      State: "Ongoing",
-      Chapters: 99,
-      Views: 11111,
-    },
-    {
-      Id: "11",
-      Name: "Skeleton Knight In Another World",
-      State: "Ongoing",
-      Chapters: 99,
-      Views: 11111,
-    },
-    {
-      Id: "12",
-      Name: "Skeleton Knight In Another World",
-      State: "Ongoing",
-      Chapters: 99,
-      Views: 11111,
-    },
-    {
-      Id: "13",
-      Name: "Skeleton Knight In Another World",
-      State: "Ongoing",
-      Chapters: 99,
-      Views: 11111,
-    },
-    {
-      Id: "14",
-      Name: "Skeleton Knight In Another World",
-      State: "Ongoing",
-      Chapters: 99,
-      Views: 11111,
-    },
-    {
-      Id: "15",
-      Name: "Skeleton Knight In Another World",
-      State: "Ongoing",
-      Chapters: 99,
-      Views: 11111,
-    },
+  const token = localStorage.getItem("token");
+  const [body, setBody] = useState([]);
+  const headers = [
+    "No.",
+    "Cover Image",
+    "Name of Book",
+    "Status",
+    "Chapters",
+    "Views",
+    "Actions",
   ];
+  useEffect(() => {
+    console.log("??");
+    const getBook = async () => {
+      const res = await BaseURL.get("api/books/author", {
+        method: "GET",
+        headers: {
+          Authorization: token,
+        },
+      });
+      const transformedBook = res.data.map((book) => ({
+        cover: book.coverImageURL,
+        id: book._id,
+        name: book.bookName,
+        state: "ONGOING",
+        chapters: book.chapters.length,
+        views: book.viewNumber,
+      }));
+      setBody(transformedBook);
+    };
+    getBook();
+  }, [token]);
   return (
     <Container>
-      <Table headers={headers} body={body} />;
+      <Table headers={headers} body={body} />
     </Container>
   );
 };
@@ -122,5 +47,7 @@ export default YourBookList;
 
 const Container = styled.div`
   width: 100%;
-  padding: 5rem 10rem;
+  min-height: 82.5rem;
+  padding: 3% 5%;
+  background-color: #ecebeb;
 `;

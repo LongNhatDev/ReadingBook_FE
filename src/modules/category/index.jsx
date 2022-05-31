@@ -1,12 +1,16 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import UserNav from "../components/usernav";
 import CateDetail from "./catedetail";
 
 const Category = () => {
   return (
-    <Routes>
-      <Route path="/:catename" element={<CateDetail />} />
-    </Routes>
+    <>
+      <UserNav />
+      <Routes>
+        <Route path="/:catename" element={<CateDetail />} />
+      </Routes>
+    </>
   );
 };
 

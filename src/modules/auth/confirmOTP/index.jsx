@@ -1,29 +1,59 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import BackgroundCSS from "../components/background";
 import DivlogIn from "../components/divlogin";
-import Input from "../../components/input"
+import Input from "../../components/input";
 import InputWrapper from "../components/inputwrapper";
 import InvalidMessage from "../components/invalidmessage";
 import Logo from "../components/logo";
 import SignUpWrapper from "../components/signupwrapper";
 import Button from "../../components/button";
+import { BaseURL } from "../../AxiosInstance";
+import {
+  showErrorToaster,
+  showSuccessToaster,
+} from "../../../components/Toaster";
 
 const ConfirmOTP = () => {
+  const location = useLocation();
+
   const [errorOTP, setErrorOTP] = useState(false);
 
   const [OTP, setOTP] = useState("");
 
   let navigate = useNavigate();
-  const handleClick = () => {
-    let path = "/auth/resetpassword";
-    if (OTP === "") {
-      setErrorOTP(true);
-    } else {
-      navigate(path);
+
+  const handleConfirm = async () => {
+    try {
+      if (OTP === "") {
+        setErrorOTP(true);
+      }
+      const requestInfor = {
+        email: location.state.email,
+        resetPasswordCode: OTP,
+      };
+      const respone = await BaseURL.post(
+        "/api/auth/verify_reset_password_code",
+        requestInfor
+      );
+
+
+      if (respone !== null || respone !== undefined) {
+        showSuccessToaster("Sucessfully!");
+        let path = "/auth/resetpassword";
+        navigate(path, {
+          state: { email: location.state.email, token: respone.data.token},
+        });
+      } else {
+        showErrorToaster("Server not respone !");
+      }
+    } catch (error) {
+      showErrorToaster("Wrong OTP. Please try again!");
     }
   };
+
+
 
   return (
     <BackgroundCSS>
@@ -54,12 +84,8 @@ const ConfirmOTP = () => {
                 </div>
               )}
             </InputWrapper>
-            <Button onClick={handleClick}>CONFIRM</Button>
+            <Button onClick={handleConfirm}>CONFIRM</Button>
           </Content>
-          <SignUpWrapper>
-            <Ptype>Didn't receive OTP code?</Ptype>
-            <LinkResend to={"/auth/confirmotp"}>Resend</LinkResend>
-          </SignUpWrapper>
         </FormOTP>
       </DivlogIn>
     </BackgroundCSS>
@@ -68,19 +94,6 @@ const ConfirmOTP = () => {
 
 export default ConfirmOTP;
 
-const Ptype = styled.p`
-  margin: 10px 5px 0 0;
-`;
-const LinkResend = styled(Link)`
-  font-size: 16px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #444444;
-  margin-top: 10px;
-  :hover {
-    color: #68d69d;
-  }
-`;
 const Content = styled.div`
   width: 100%;
   display: flex;
@@ -93,7 +106,7 @@ const FormOTP = styled.div`
   height: 100%;
   display: flex;
   flex-flow: column wrap;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
 
   & h1 {

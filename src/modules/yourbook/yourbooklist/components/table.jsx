@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import BtnBar from "./btnbar";
 
@@ -6,26 +7,54 @@ const Tr = (props) => {
   const toArray = (item) => {
     const newArr = [];
     for (const x in item) {
-      if (x !== "Id") {
+      if (x !== "id" && x !== "cover") {
         newArr.push(item[x]);
       }
     }
     return newArr;
   };
 
+  let navigator = useNavigate();
+  const [idOfBookWasChosen, setIdOfBookWasChosen] = React.useState(
+    props.row.id
+  );
+  const moveToBookManagePageHandler = () => {
+    const path = `${props.row.id}`;
+    navigator(path);
+  };
+
   return (
-    <tr>
-      <td key="bcover">
-        <Image
-          src="https://i0.wp.com/wp-corp.qoo-app.com/en/wp-content/uploads/sites/3/2021/04/21042004284294.jpeg?resize=506%2C640&ssl=1"
-          alt="cover"
-        />
+    <tr
+      style={{ boxShadow: "0 0.4rem 0.4rem rgba(0, 0, 0, 0.25)" }}
+      onClick={() => {
+        setIdOfBookWasChosen(props.row.id);
+      }}
+    >
+      <td>
+        <p
+          style={{
+            fontSize: "2.5rem",
+            minWidth: "3rem",
+            backgroundColor: "#00a69d",
+            color: "white",
+            height: "4rem",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: "0.5rem",
+          }}
+        >
+          {props.index + 1}
+        </p>
+      </td>
+      <td onClick={moveToBookManagePageHandler} key="bcover">
+        <Image src={props.row.cover} alt="cover of a book" />
       </td>
       {toArray(props.row).map((value) => (
         <td key={props.row.Id + Math.random().toString()}>{value}</td>
       ))}
       <td key="icon">
-        <BtnBar />
+        <BtnBar id={idOfBookWasChosen} />
       </td>
     </tr>
   );
@@ -33,17 +62,17 @@ const Tr = (props) => {
 
 const Table = (props) => {
   return (
-    <TableCss>
+    <TableCss style={{ backgroundColor: "white" }}>
       <thead>
-        <tr>
+        <TitleRow>
           {props.headers.map((header) => (
             <th key={header}>{header}</th>
           ))}
-        </tr>
+        </TitleRow>
       </thead>
       <tbody>
-        {props.body.map((row) => (
-          <Tr key={"id" + row.Id} row={row} />
+        {props.body.map((row, index) => (
+          <Tr index={index} key={row.id} row={row} />
         ))}
       </tbody>
     </TableCss>
@@ -53,6 +82,8 @@ const Table = (props) => {
 export default Table;
 
 const TableCss = styled.table`
+  box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
+  border-radius: 0.7rem;
   width: 100%;
   font-size: 1.6rem;
   border-collapse: collapse;
@@ -64,6 +95,9 @@ const TableCss = styled.table`
 
   & th {
     padding: 1rem 2rem;
+  }
+  & tr {
+    cursor: pointer;
   }
 
   & tbody tr:hover {
@@ -77,4 +111,10 @@ const Image = styled.img`
   object-fit: cover;
   border: 1px solid rgba(0, 0, 0, 0.5);
   box-shadow: 10px -5px 10px 0 rgba(0, 0, 0, 0.3);
+`;
+const TitleRow = styled.tr`
+  background-color: #00a69d;
+  height: 6rem;
+  color: white;
+  font-size: 2rem;
 `;
