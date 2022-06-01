@@ -53,11 +53,7 @@ const ChapterItem = (props) => {
         >
           <AiFillEdit />
         </span>
-<<<<<<< HEAD
-        <span style={{ color: "red", fontSize: "3rem" }}>
-=======
         <span onClick={deleteChapterHandler} style={{ color: "red" }}>
->>>>>>> feature/CNPM-53-rb-fe-update-and-delete-chapter
           <AiTwotoneDelete />
         </span>
       </IconWrapper>
