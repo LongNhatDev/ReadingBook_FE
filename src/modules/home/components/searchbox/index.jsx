@@ -12,6 +12,10 @@ const SeachBox = () => {
 
   const handleSearchBook = async () => {
     try {
+      if (value === "") {
+        showErrorToaster("Please fill book name before clicking search!");
+        return;
+      }
       const respone = await BaseURL.get(
         `/api/books?pageSize=20&pageNumber=1&keyword=${value}`
       );
@@ -26,7 +30,7 @@ const SeachBox = () => {
       <Icon onClick={handleSearchBook} title="Search" />
       <Input
         type="text"
-        placeholder="What do you looking for ... ? "
+        placeholder="What's book do you looking for ... ? "
         onChange={(event) => {
           setValue(event.target.value);
         }}
