@@ -1,12 +1,36 @@
 import React from "react";
 import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
+import { BaseURL } from "../../../AxiosInstance";
+import { showErrorToaster } from "../../../../components/Toaster";
+import { useNavigate } from "react-router-dom";
 
 const SeachBox = () => {
+  const [value, setValue] = React.useState("");
+  let navigate = useNavigate();
+  const path = "/searchbook";
+
+  const handleSearchBook = async () => {
+    try {
+      const respone = await BaseURL.get(
+        `/api/books?pageSize=20&pageNumber=1&keyword=${value}`
+      );
+      const arrayOfBooks = respone.data.books;
+      navigate(path, { state: { array: arrayOfBooks } });
+    } catch (error) {
+      showErrorToaster("Error, please check!");
+    }
+  };
   return (
     <SearchBar>
-      <Icon />
-      <Input type="text" placeholder="What do you looking for ... ? " />
+      <Icon onClick={handleSearchBook} title="Search" />
+      <Input
+        type="text"
+        placeholder="What do you looking for ... ? "
+        onChange={(event) => {
+          setValue(event.target.value);
+        }}
+      />
     </SearchBar>
   );
 };
@@ -37,4 +61,8 @@ const Icon = styled(FaSearch)`
   color: rgba(0, 0, 0, 0.247);
   font-size: 20px;
   flex: 1;
+  :hover {
+    cursor: pointer;
+    color: #00a69d;
+  }
 `;
