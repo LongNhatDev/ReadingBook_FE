@@ -1,239 +1,303 @@
 import React, { useState, useEffect } from "react";
+import { BaseURL } from "../AxiosInstance";
+import { useDropzone } from "react-dropzone";
 import Page from "../components/page";
 import UserNav from "../components/usernav";
 import styled from "styled-components";
 import Button from "../components/button";
+import Button1 from "../components/button1";
 import { useNavigate } from "react-router-dom";
 import { showErrorToaster, showSuccessToaster } from "../../components/Toaster";
-import ChangePassword from "./changePassword";
+import InvalidMessage from "../auth/components/invalidmessage";
+import ChangePassword from "./components/changePassword";
+import axios from "axios";
 
-const Profile = () => {
-  const [name, setName] = useState("mailinh");
-  const [email, setEmail] = useState("abc@gmail.com");
-  const [password, setPassword] = useState("123456");
-  const [file, setFile] = useState(null);
-  const [pic, setPic] = useState(
-    "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"
-  );
-  const [list, setList] = useState([]);
-  const [error, setError] = useState(false);
-
+const Profile = (props) => {
+  const { name, email, avatar } = props;
+  useEffect(() => {
+    setFullName(name);
+  }, [name]);
+  const [file, setFile] = useState([]);
+  const [activeTab, setActiveTab] = useState("edit");
   const [isShowChangePassword, setIsShowChangePassword] = useState(false);
+  const token = localStorage.getItem("token");
+  const [fullname, setFullName] = useState(name);
+
+  const [er, setEr] = useState({
+    name: false,
+  });
+
+  let fileName = "";
+  let fileType = "";
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: "image/*",
+    onDrop: async (acceptedfile) => {
+      setFile(
+        acceptedfile.map((file) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          })
+        )
+      );
+    },
+  });
+
+  const images = file.map((file) => (
+    <div key={file.name}>
+      <div>
+        <img
+          src={file.preview}
+          style={{
+            position: "relative",
+            zIndex: "2",
+            height: "200px",
+            width: "200px",
+            marginTop: "4px",
+          }}
+          alt="preview"
+        />
+      </div>
+    </div>
+  ));
+
+  file.forEach((file) => {
+    fileName = file.name;
+    fileType = file.type;
+  });
   const handleChangePassword = (e) => {
     e.preventDefault();
     setIsShowChangePassword(true);
+    setActiveTab("change");
   };
 
   const hideChangePassword = () => {
     setIsShowChangePassword(false);
+    setActiveTab("edit");
   };
 
   let navigate = useNavigate();
   const path = "/home";
 
-  const getProfile = () => {
-    return fetch("/api/users").then((data) => data.json());
-  };
-
-  useEffect(() => {
-    getProfile().then((items) => {
-      setList(items);
-    });
-  }, []);
-
-  const [er, setEr] = useState({
-    name: false,
-    email: false,
-  });
-
-  const handleChangeAvatar = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setFile(file);
-      setPic(URL.createObjectURL(file));
-    }
-    console.log(pic);
-  };
-
-  const handleUpdate = () => {
-    let path = "/profile";
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    console.log(fullname);
     setEr({
       ...er,
-      name: name === "",
-      email: email === "",
+      name: fullname === "",
     });
 
-    if (er.name || er.email || name === "" || email === "") {
-      showErrorToaster("Something Wrong, Check again !");
-    } else {
-      showSuccessToaster("Update Successfully !");
-      navigate(path);
+    const responeGetURL = await BaseURL.get(
+      `/api/sign-s3?file-name=${fileName}&file-type=${fileType}&bucket-name=avatars`
+    );
+    console.log(responeGetURL.data.signedRequest);
+    try {
+      if (er.name || fullname === "") {
+        showErrorToaster("Something Wrong, Check again !");
+      } else {
+        console.log("hiiii");
+        await BaseURL.put(
+          responeGetURL.data.signedRequest,
+          file[file.length - 1],
+          {
+            headers: {
+              "Content-Type": fileType,
+            },
+          }
+        );
+
+        const sendData = {
+          fullName: fullname,
+          avatar: responeGetURL.data.url,
+        };
+        console.log("fullName:", sendData.fullName, "url:", sendData.avatar);
+
+        await BaseURL.put("/api/users/profile", sendData, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        });
+        showSuccessToaster("Update Successfully !");
+        let path = "/profile";
+        navigate(path);
+      }
+    } catch (error) {
+      showErrorToaster("Error !");
     }
-
-    const sendData = {
-      title: "",
-      content: { name, email, password },
-    };
-    fetch("/api/users/profile", {
-      method: "POST",
-      body: JSON.stringify(sendData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
   };
 
   return (
-    <>
+    <Background>
       <UserNav></UserNav>
-      <Page>
-        <Title>Account Settings</Title>
+      <Page style={{ flexFlow: "nowrap", width: "100%" }}>
+        <div style={{ position: "absolute", left: "25px", top: "125px" }}>
+          <WrapButton1>
+            <Button1
+              className={activeTab === "edit" ? "active" : ""}
+              onClick={() => setActiveTab("edit")}
+              style={{ padding: "0.6em 2.18em" }}
+            >
+              Edit profile
+            </Button1>
+            <Button1
+              className={activeTab === "change" ? "active" : ""}
+              onClick={handleChangePassword}
+            >
+              Change Password
+            </Button1>
+          </WrapButton1>
+        </div>
         <WrapForm>
           <ProfileWapper>
-            <CoverImage title="Avatar">
-              <input
-                accept="image/*"
-                id="profilePhoto"
-                type="file"
-                style={{ display: "none" }}
-                onChange={handleChangeAvatar}
-              />
-              <p
-                style={{ position: "absolute", zIndex: "-1", fontSize: "18px" }}
+            <CoverImage title="Avatar" {...getRootProps()}>
+              <input {...getInputProps()} />
+              {/* <p
+                style={{ position: "absolute", zIndex: "1", fontSize: "18px" }}
               >
                 + Add Image Avatar
-              </p>
-              <Image src={pic} alt="" />
+              </p> */}
+              <img
+                src={avatar}
+                alt=""
+                style={{
+                  position: "absolute",
+                  zIndex: "1",
+                  height: "200px",
+                  width: "200px",
+                }}
+              />
+              {images}
             </CoverImage>
             <Infor>
+              <label htmlFor="" style={{ fontWeight: "600" }}>
+                Full Name
+              </label>
               <InputInfo
                 placeholder="Enter user name"
                 type="text"
                 className={er.name ? "invalid" : ""}
-                value={name}
+                value={fullname}
                 onChange={(e) => {
                   setEr({ ...er, name: false });
-                  setName(e.target.value.trim());
+                  setFullName(e.target.value);
                 }}
                 onBlur={() => {
                   setEr({ ...er, name: name === "" });
                 }}
               />
-
-              <InputInfo
-                placeholder="Enter email"
-                type="email"
-                value={email}
-                onChange={(e) => {
-                  setEr({ ...er, name: false });
-                  setEmail(e.target.value.trim());
-                }}
-                onBlur={() => {
-                  setEr({ ...er, name: name === "" });
-                }}
-              />
-
-              <InputInfo type="password" value={password} />
+              {er.name && (
+                <div>
+                  <InvalidNoti>
+                    Please fill full name (e.g: Nguyen Van A)
+                  </InvalidNoti>
+                </div>
+              )}
+              <label htmlFor="" style={{ fontWeight: "600" }}>
+                Email
+              </label>
+              <InputInfo placeholder="Enter email" type="email" value={email} />
             </Infor>
           </ProfileWapper>
-
-          <Button
-            style={{ margin: "10px 1.5rem" }}
-            onClick={handleChangePassword}
-          >
-            Change Password
-          </Button>
-          <Button style={{ margin: "10px 1.5rem" }} onClick={handleUpdate}>
-            Update
-          </Button>
+          <WrapButton>
+            <ButtonCancel
+              style={{ margin: "0 10px" }}
+              onClick={() => {
+                navigate(path);
+              }}
+            >
+              Cancel
+            </ButtonCancel>
+            <Button style={{ margin: "0 10px" }} onClick={handleUpdate}>
+              Update
+            </Button>
+          </WrapButton>
         </WrapForm>
         {isShowChangePassword && (
           <ChangePassword onClose={hideChangePassword} />
         )}
       </Page>
-    </>
+    </Background>
   );
 };
 
 export default Profile;
+const ButtonCancel = styled(Button)`
+  background-color: red;
+`;
+
+const Background = styled.div`
+  background-color: #eaeaeaa9;
+  width: 100%;
+  height: 100%;
+  min-height: 712px;
+`;
 const ProfileWapper = styled.div`
   width: 100%;
+  height: 30rem;
   display: flex;
-
-  flex-flow: row wrap;
+  flex-flow: row;
   justify-content: center;
   align-items: center;
+  background-color: white;
+  /* box-shadow: 2px 2px 6px grey; */
+  box-shadow: 2rem 2rem 1px -1rem #b9b9b9;
+  margin-bottom: 2rem;
 `;
 const CoverImage = styled.label`
   position: relative;
   height: 200px;
   width: 200px;
-  margin-right: 100px;
-  border-radius: 100%;
+  margin-right: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: 2px 2px 6px #004468;
-  margin: 2rem 0;
-`;
-const Image = styled.img`
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  cursor: "pointer";
-  vertical-align: middle;
 `;
 const WrapForm = styled.form`
-  //margin-top: 15px;
   width: 40%;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column;
   justify-content: center;
   align-items: center;
+  left: 0;
+  top: 100px;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  position: absolute;
 `;
-const Title = styled.h1`
-  text-shadow: 2px 2px 1px #00000033;
-  margin: 30px 0;
-  text-transform: uppercase;
-  background-image: linear-gradient(
-    to right,
-    #051937,
-    #004468,
-    #00748c,
-    #00a69d,
-    #68d69d
-  );
-  background-size: auto auto;
-  background-clip: border-box;
-  background-size: 200% auto;
-  color: #fff;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: textclip 2s linear infinite;
-  display: inline-block;
-  font-weight: bold;
-  font-size: 60px;
-  font-family: "Comic Sans MS", Courier, monospace;
+const WrapButton = styled.div`
+  margin: 10px 0 0 0;
+  width: 50%;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-evenly;
+  align-items: center;
+`;
 
-  @keyframes textclip {
-    to {
-      background-position: 200% center;
-    }
+const WrapButton1 = styled.div`
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 10px;
+  .active {
+    background: linear-gradient(35deg, #ced4d8, #acacac);
+    color: #000000;
   }
 `;
 const Infor = styled.div`
   display: flex;
-  width: 80%;
-
-  flex-flow: column wrap;
-  justify-content: center;
-  align-items: center;
+  margin-left: 20px;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 `;
 
 const InputInfo = styled.input`
   width: 100%;
-  height: 50px;
+  height: 45px;
   margin: 10px 0 5px;
   padding-left: 5px;
   line-height: 30px;
@@ -247,4 +311,7 @@ const InputInfo = styled.input`
   & .invalid {
     border: 1px solid red;
   }
+`;
+const InvalidNoti = styled(InvalidMessage)`
+  margin-bottom: 10px;
 `;
