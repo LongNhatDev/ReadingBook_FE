@@ -26,7 +26,7 @@ const CateDetail = () => {
       try {
         const response = await BaseURL.get("/api/books");
         const data = response.data;
-        const dataFilter = data.books.filter((item) => {
+        const dataFilter = data.filter((item) => {
           if (
             item._id !== null &&
             item.coverImageURL !== null &&

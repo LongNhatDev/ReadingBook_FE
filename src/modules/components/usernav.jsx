@@ -21,8 +21,8 @@ const UserNav = () => {
     navigation(path);
   };
   const handleViewCategories = () => {
-    const path = "/category/all";
-    navigation(path);
+    // const path = "/category/all";
+    // navigation(path);
   };
   const handleCreate = () => {
     const path = "/create";
@@ -53,7 +53,7 @@ const UserNav = () => {
     <UserNavDiv>
       <LogoContent onClick={handleReturnHomePage}>
         <FcReading style={{ marginRight: "10px" }}></FcReading>
-        <p style={{ color: "white", marginTop:"10px" }}>READING BOOK</p>
+        <p style={{ color: "white", marginTop: "10px" }}>READING BOOK</p>
       </LogoContent>
       <NavbarItems>
         <SeachBox />
