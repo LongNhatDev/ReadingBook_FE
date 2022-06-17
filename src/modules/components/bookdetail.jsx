@@ -6,7 +6,7 @@ import SideFeature from "./sidefeature";
 const BookDetail = (props) => {
   let navigator = useNavigate();
   const moveToFirstChapterHandler = () => {
-    const path = `/books/${props.book._id}/${props.book.chapters[0]._id}`;
+    const path = `/books/${props.book._id}`;
     navigator(path);
   };
   return (

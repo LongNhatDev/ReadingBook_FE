@@ -58,7 +58,7 @@ const Sliders = styled.div`
   position: relative;
   overflow: hidden;
   box-shadow: 2px 2px 6px grey;
-  background-color: #ecebeb;
+  background-color: #f6f7fc;
 `;
 const Slide = styled.div`
   position: absolute;
@@ -68,7 +68,7 @@ const Slide = styled.div`
   height: 100%;
   opacity: 0;
   transform: translateX(-50%);
-  
+
   &.current {
     opacity: 1;
     transform: translateX(0);

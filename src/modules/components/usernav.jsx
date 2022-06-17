@@ -21,8 +21,8 @@ const UserNav = () => {
     navigation(path);
   };
   const handleViewCategories = () => {
-    // const path = "/category/all";
-    // navigation(path);
+    const path = "/category/all";
+    navigation(path);
   };
   const handleCreate = () => {
     const path = "/create";

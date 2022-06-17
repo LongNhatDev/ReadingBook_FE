@@ -5,7 +5,6 @@ import Authentic from "../modules/auth";
 import Category from "../modules/category";
 import Home from "../modules/home";
 import Profile from "../modules/profile";
-import Rank from "../modules/rank";
 import SignIn from "../modules/auth/signin";
 import Create from "../modules/create";
 import YourBook from "../modules/yourbook";
@@ -26,7 +25,6 @@ export default function RoutesRoot() {
         <Route path="/auth/*" element={<Authentic />} />
         <Route path="/category/*" element={<Category />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/rank/*" element={<Rank />} />
         <Route path="/create" element={<Create />} />
         <Route path="/yourbook" element={<YourBook />} />
         <Route path="/yourbook/:bookId" element={<BookManager />} />
