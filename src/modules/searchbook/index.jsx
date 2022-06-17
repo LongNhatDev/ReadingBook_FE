@@ -7,7 +7,7 @@ const Tr = (props) => {
   let navigator = useNavigate();
 
   const moveToBookManagePageHandler = () => {
-    const path = `/books/${props.row._id}`;
+    const path = `books/${props.row._id}`;
     navigator(path);
   };
 

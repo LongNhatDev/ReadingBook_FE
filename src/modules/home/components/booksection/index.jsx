@@ -18,6 +18,7 @@ const BookSection = () => {
           <BookName>Hyouka</BookName>
           <BookCategory>Mystery</BookCategory>
         </BookInfo>
+
         <BookInfo>
           <BookLink>
             to="/"
@@ -29,6 +30,7 @@ const BookSection = () => {
           <BookName>Hyouka</BookName>
           <BookCategory>Mystery</BookCategory>
         </BookInfo>
+
         <BookInfo>
           <BookLink>
             to="/"
@@ -40,6 +42,7 @@ const BookSection = () => {
           <BookName>Hyouka</BookName>
           <BookCategory>Mystery</BookCategory>
         </BookInfo>
+
         <BookInfo>
           <BookLink>
             to="/"
@@ -51,6 +54,7 @@ const BookSection = () => {
           <BookName>Hyouka</BookName>
           <BookCategory>Mystery</BookCategory>
         </BookInfo>
+
         <BookInfo>
           <BookLink>
             to="/"
@@ -62,6 +66,7 @@ const BookSection = () => {
           <BookName>Hyouka</BookName>
           <BookCategory>Mystery</BookCategory>
         </BookInfo>
+
         <BookInfo>
           <BookLink>
             to="/"
@@ -73,6 +78,7 @@ const BookSection = () => {
           <BookName>Hyouka</BookName>
           <BookCategory>Mystery</BookCategory>
         </BookInfo>
+
         <BookInfo>
           <BookLink>
             to="/"
@@ -84,6 +90,7 @@ const BookSection = () => {
           <BookName>Hyouka</BookName>
           <BookCategory>Mystery</BookCategory>
         </BookInfo>
+
         <BookInfo>
           <BookLink>
             to="/"
@@ -95,6 +102,7 @@ const BookSection = () => {
           <BookName>Hyouka</BookName>
           <BookCategory>Mystery</BookCategory>
         </BookInfo>
+        
       </ListBook>
     </BookSections>
   );

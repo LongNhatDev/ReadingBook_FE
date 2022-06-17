@@ -68,7 +68,7 @@ const Slide = styled.div`
   height: 100%;
   opacity: 0;
   transform: translateX(-50%);
-  
+
   &.current {
     opacity: 1;
     transform: translateX(0);

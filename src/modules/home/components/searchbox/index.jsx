@@ -17,9 +17,9 @@ const SeachBox = () => {
         return;
       }
       const respone = await BaseURL.get(
-        `/api/books?pageSize=20&pageNumber=1&keyword=${value}`
+        `api/books?pageSize=20&pageNumber=1&keyword=${value}`
       );
-      const arrayOfBooks = respone.data.books;
+      const arrayOfBooks = respone.data;
       navigate(path, { state: { array: arrayOfBooks } });
     } catch (error) {
       showErrorToaster("Error, please check!");
