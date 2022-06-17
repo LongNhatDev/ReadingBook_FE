@@ -21,16 +21,9 @@ const Footer = () => {
         </Social>
         <Social>
           <FaCopyright />
-          <p>2022 Reading Book</p>
+          <p style={{ marginTop: "10px" }}>2022 Reading Book</p>
         </Social>
       </ColSocial>
-      <Col>
-        <H2Css>TEAM MEMBER</H2Css>
-        <p>Tran Long Nhat</p>
-        <p>Truong Van Luyn</p>
-        <p>Ngo Thi Ngoc</p>
-        <p>Hoang Thi Mai Linh</p>
-      </Col>
       <Col>
         <H2Css>RESOURCE</H2Css>
         <p>WebNovel.com</p>
@@ -46,13 +39,19 @@ const Footer = () => {
         <p>GG meet</p>
       </Col>
       <Col>
-        <H2Css>FRAMEWORK & INFRASTRUCTURE</H2Css>
+        <H2Css>LIBRARY & INFRA</H2Css>
         <p>React JS</p>
         <p>Node JS</p>
         <p>Monggo DB</p>
         <p>Amazon S3</p>
       </Col>
-      <Col></Col>
+      <Col>
+        <H2Css>TEAM MEMBER</H2Css>
+        <p>Tran Long Nhat</p>
+        <p>Truong Van Luyn</p>
+        <p>Ngo Thi Ngoc</p>
+        <p>Hoang Thi Mai Linh</p>
+      </Col>
     </FooterDiv>
   );
 };
@@ -66,7 +65,7 @@ const FooterDiv = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
-  align-items: center;
+  align-items: flex-start;
   color: white;
   padding: 70px 200px;
 `;

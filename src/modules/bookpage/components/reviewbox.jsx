@@ -10,7 +10,13 @@ const ReviewBox = (props) => {
     const getReview = async () => {
       try {
         const res = await BaseURL.get(`api/books/${props.bookId}/reviews/`);
-        setReview(res.data);
+        const filterReview = res.data.filter((review) => {
+          if (review.user === null) {
+            return false;
+          }
+          return true;
+        });
+        setReview(filterReview);
       } catch (err) {
         console.log("error occur", err);
       }
@@ -40,7 +46,7 @@ const ReviewBox = (props) => {
 export default ReviewBox;
 
 const Container = styled.div`
-  width: 60%;
+  width: 79%;
   border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 2rem 4rem;
   margin: 5rem auto;

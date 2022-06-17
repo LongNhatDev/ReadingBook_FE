@@ -6,7 +6,7 @@ import SideFeature from "./sidefeature";
 const BookDetail = (props) => {
   let navigator = useNavigate();
   const moveToFirstChapterHandler = () => {
-    const path = `/books/${props.book._id}/${props.book.chapters[0]._id}`;
+    const path = `/books/${props.book._id}`;
     navigator(path);
   };
   return (
@@ -39,8 +39,8 @@ const Container = styled.div`
 `;
 
 const Cover = styled.img`
-  width: 30%;
-  height: 100%;
+  width: 30rem;
+  height: 40rem;
   object-fit: cover;
   box-shadow: 0 0 1px 3px rgba(0, 0, 0, 0.1);
 `;
