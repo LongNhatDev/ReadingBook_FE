@@ -31,6 +31,22 @@ const Login = () => {
     confirmPassword: "",
   });
 
+  const emailField = React.useRef(null);
+  const passwordField = React.useRef(null);
+
+  React.useEffect(() => {
+    let interval = setInterval(() => {
+      if (emailField.current) {
+        setValue({
+          ...value,
+          email: emailField.current.value,
+          password: passwordField.current.value,
+        });
+        clearInterval(interval);
+      }
+    }, 100);
+  });
+
   const handleSignUp = async () => {
     try {
       let path = "/";
@@ -102,6 +118,7 @@ const Login = () => {
           <InputWrapper>
             <Input
               type="text"
+              ref={emailField}
               placeholder="Enter Email"
               className={error.email ? "invalid" : ""}
               onChange={(event) => {
@@ -121,6 +138,7 @@ const Login = () => {
           <InputWrapper>
             <Input
               type="password"
+              ref={passwordField}
               placeholder="Enter Password"
               className={error.password ? "invalid" : ""}
               onChange={(event) => {

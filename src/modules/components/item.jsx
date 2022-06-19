@@ -6,6 +6,9 @@ const Item = styled.li`
   font-weight: bold;
   cursor: pointer;
   transition-duration: 0.5s;
+  :hover {
+    text-decoration: underline;
+  }
 `;
 
 export default Item;

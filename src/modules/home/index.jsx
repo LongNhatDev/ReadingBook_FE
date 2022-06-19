@@ -106,7 +106,7 @@ const Home = () => {
                   <DivCustom
                     style={{
                       marginBottom: "10px",
-                      width: "30px",
+                      width: "50px",
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "center",
