@@ -23,6 +23,22 @@ const SignIn = () => {
 
   let navigate = useNavigate();
 
+  const emailField = React.useRef(null);
+  const passwordField = React.useRef(null);
+
+  React.useEffect(() => {
+    let interval = setInterval(() => {
+      if (emailField.current) {
+        setValue({
+          ...value,
+          email: emailField.current.value,
+          password: passwordField.current.value,
+        });
+        clearInterval(interval);
+      }
+    }, 100);
+  });
+
   const handleSignIn = async () => {
     try {
       const inforRequestToSignIn = {
@@ -83,6 +99,7 @@ const SignIn = () => {
           <InputWrapper>
             <Input
               type="text"
+              ref={emailField}
               placeholder="Enter Email"
               className={error.email ? "invalid" : ""}
               onClick={() => {
@@ -102,6 +119,7 @@ const SignIn = () => {
           <InputWrapper>
             <Input
               type="password"
+              ref={passwordField}
               placeholder="Enter Password"
               className={error.password ? "invalid" : ""}
               onClick={() => {
