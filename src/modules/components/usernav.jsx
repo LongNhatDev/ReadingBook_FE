@@ -33,7 +33,7 @@ const UserNav = () => {
     navigation(path);
   };
   const handleViewProfile = () => {
-    const path = "/profile";
+    const path = "/myprofile";
     navigation(path);
   };
 
@@ -42,9 +42,7 @@ const UserNav = () => {
     navigation(path);
   };
   const handleConfirm = () => {
-    localStorage.setItem("token", "");
-    localStorage.setItem("ava", "");
-    localStorage.setItem("name", "");
+    window.localStorage.clear();
     const path = "/";
     navigation(path);
   };
@@ -60,7 +58,7 @@ const UserNav = () => {
 
         <Item onClick={handleViewCategories}>
           <FaBraille />
-          <Dropdown label={"Category"} />
+          <Dropdown label="Category" />
         </Item>
         <Item onClick={handleCreate}>
           <FaPlus />
@@ -70,8 +68,9 @@ const UserNav = () => {
           <FaBook />
           <H3Css>Your Book</H3Css>
         </Item>
-        <Item>
-          <FaCogs onClick={handleViewProfile} />
+        <Item onClick={handleViewProfile}>
+          <FaCogs />
+          <H3Css>Profile</H3Css>
         </Item>
         <Item>
           {ava === undefined && <FaUserAlt onClick={handleSigIn} />}
@@ -127,7 +126,7 @@ const UserNavDiv = styled.header`
   );
   color: #051937;
 `;
-const H3Css = styled.h3`
+const H3Css = styled.h4`
   margin-left: 10px;
 `;
 const DivCustom = styled.div`

@@ -20,7 +20,7 @@ const BookDetail = (props) => {
           isUpdated={props.isUpdated}
           onUpdate={props.onUpdate}
           book={props.book}
-        />
+        /> 
       </Content>
     </Container>
   );

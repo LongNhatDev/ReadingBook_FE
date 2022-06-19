@@ -46,7 +46,7 @@ const DropdownSelect = styled.div`
 `;
 
 const DropdownSelected = styled.span`
-  font-size: 25px;
+  font-size: 19px;
 `;
 
 const DropdownList = styled.ul`

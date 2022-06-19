@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Authentic from "../modules/auth";
 import Category from "../modules/category";
 import Home from "../modules/home";
-import Profile from "../modules/profile";
 import SignIn from "../modules/auth/signin";
 import Create from "../modules/create";
 import YourBook from "../modules/yourbook";
@@ -15,6 +14,7 @@ import BookPage from "../modules/bookpage";
 import BookManager from "../modules/yourbook/bookmanager";
 import ReviewBox from "../modules/bookpage/components/reviewbox";
 import Searchbook from "../modules/searchbook";
+import MyProfile from "../modules/myprofile";
 
 export default function RoutesRoot() {
   return (
@@ -24,7 +24,7 @@ export default function RoutesRoot() {
         <Route path="/home" element={<Home />} />
         <Route path="/auth/*" element={<Authentic />} />
         <Route path="/category/*" element={<Category />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/myprofile/*" element={<MyProfile />} />
         <Route path="/create" element={<Create />} />
         <Route path="/yourbook" element={<YourBook />} />
         <Route path="/yourbook/:bookId" element={<BookManager />} />
