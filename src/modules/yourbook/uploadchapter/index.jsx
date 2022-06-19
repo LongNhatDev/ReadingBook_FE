@@ -5,9 +5,12 @@ import styled from "styled-components";
 import Button from "../../components/button";
 import { showSuccessToaster } from "../../../components/Toaster";
 import Modal from "../../components/modal";
+import { useContext } from "react";
+import { authentication } from "../../../authProvider";
 
 const UploadChapter = (props) => {
-  const token = localStorage.getItem("token");
+  const context = useContext(authentication);
+  const token = context.accessToken;
   const [data, setData] = useState({});
   const titleRef = useRef();
   async function submitHandler(event) {

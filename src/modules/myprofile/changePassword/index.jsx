@@ -1,6 +1,8 @@
 import React from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { authentication } from "../../../authProvider";
 import {
   showErrorToaster,
   showSuccessToaster,
@@ -13,6 +15,8 @@ import UserNav from "../../components/usernav";
 
 const ChangePassword = () => {
   const navigate = useNavigate();
+
+  const context = useContext(authentication);
 
   const [value, setValue] = React.useState({
     oldPass: "",
@@ -51,7 +55,7 @@ const ChangePassword = () => {
       } else {
         const queryChangePassword = `api/users/change-password`;
         const authorization = {
-          headers: { Authorization: localStorage.getItem("token") },
+          headers: { Authorization: context.accessToken },
         };
         const body = {
           oldPassword: value.oldPass,

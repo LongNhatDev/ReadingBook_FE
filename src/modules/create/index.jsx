@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import Button from "../components/button";
 import Input from "../components/input";
@@ -11,6 +11,7 @@ import UserNav from "../components/usernav";
 import { BaseURL } from "../AxiosInstance";
 import axios from "axios";
 import ConfirmBox from "../../components/ConfirmBox";
+import { authentication } from "../../authProvider";
 
 const Create = () => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -18,7 +19,8 @@ const Create = () => {
   let navigate = useNavigate();
   const path = "/yourbook";
   const reg = new RegExp("^[0-9]+$");
-  const token = localStorage.getItem("token");
+  const context = useContext(authentication);
+  const token = context.accessToken;
   const [bookCategory, setBookCategory] = React.useState([]);
   const [error, setError] = React.useState({
     name: false,
@@ -26,6 +28,7 @@ const Create = () => {
     price: false,
     description: false,
   });
+
   const [onDrop, setOnDrop] = React.useState(false);
   const [value, setValue] = React.useState({
     name: location.state === null ? "" : location.state.bookName,

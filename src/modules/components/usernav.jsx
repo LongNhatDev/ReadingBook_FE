@@ -1,8 +1,10 @@
 import React from "react";
+import { useContext } from "react";
 import { FaBook, FaBraille, FaCogs, FaPlus, FaUserAlt } from "react-icons/fa";
 import { FcReading } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { authentication } from "../../authProvider";
 import ConfirmBox from "../../components/ConfirmBox";
 import Dropdown from "../home/components/dropdown";
 import SeachBox from "../home/components/searchbox";
@@ -13,8 +15,10 @@ import NavbarItems from "./navbaritems";
 const UserNav = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
+  const context = useContext(authentication);
+
   let navigation = useNavigate();
-  const ava = localStorage.getItem("ava");
+  const ava = context.avatar;
 
   const handleReturnHomePage = () => {
     const path = "/home";
@@ -89,7 +93,7 @@ const UserNav = () => {
                 }}
               />
               <p style={{ fontSize: "15px", marginTop: "10px" }}>
-                {localStorage.getItem("name")}
+                {context.fullName}
               </p>
             </DivCustom>
           )}

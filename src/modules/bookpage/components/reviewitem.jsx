@@ -1,5 +1,7 @@
 import React from "react";
+import { useContext } from "react";
 import styled from "styled-components";
+import { authentication } from "../../../authProvider";
 import ConfirmBox from "../../../components/ConfirmBox";
 import {
   showErrorToaster,
@@ -15,7 +17,8 @@ const ReviewItem = (props) => {
   const day = dateReview.toLocaleString("en-US", { day: "2-digit" });
   const year = dateReview.getFullYear();
   const dateReviewTransform = month + " " + day + ", " + year;
-  const token = localStorage.getItem("token");
+  const context = useContext(authentication);
+  const token = context.accessToken;
 
   const handleDeleteComment = async () => {
     try {

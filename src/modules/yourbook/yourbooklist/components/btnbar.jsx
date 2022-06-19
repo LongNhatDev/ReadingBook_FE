@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { AiFillEdit, AiTwotoneDelete } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
@@ -8,11 +8,13 @@ import {
   showSuccessToaster,
 } from "../../../../components/Toaster";
 import ConfirmBox from "../../../../components/ConfirmBox";
+import { authentication } from "../../../../authProvider";
 
 const BtnBar = (props) => {
   const [isOpen, setIsOpen] = React.useState(false);
   let navigate = useNavigate();
-  const token = localStorage.getItem("token");
+  const context = useContext(authentication);
+  const token = context.accessToken;
 
   const handleEdit = async () => {
     try {

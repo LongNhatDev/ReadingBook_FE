@@ -5,9 +5,12 @@ import Modal from "./modal";
 import Button from "../components/button";
 import { BaseURL } from "../AxiosInstance";
 import { showErrorToaster, showSuccessToaster } from "../../components/Toaster";
+import { useContext } from "react";
+import { authentication } from "../../authProvider";
 
 const Review = (props) => {
-  const token = localStorage.getItem("token");
+  const context = useContext(authentication);
+  const token = context.accessToken;
   const [color, setColor] = useState([
     "white",
     "white",

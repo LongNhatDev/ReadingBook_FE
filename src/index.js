@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { AuthProvider } from "./authProvider";
 import "./index.css";
 
 import reportWebVitals from "./reportWebVitals";
@@ -10,7 +11,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <MainContextProvider>
-    <RoutesRoot />
+    <AuthProvider>
+      <RoutesRoot />
+    </AuthProvider>
   </MainContextProvider>
 );
 

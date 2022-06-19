@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { AiFillEdit, AiTwotoneDelete } from "react-icons/ai";
 import UpdateChapter from "../../yourbooklist/components/updatechapter";
@@ -8,9 +8,12 @@ import {
   showErrorToaster,
   showSuccessToaster,
 } from "../../../../components/Toaster";
+import { authentication } from "../../../../authProvider";
 
 const ChapterItem = (props) => {
   const [isShowUpdateChapter, setIsShowUpdateChapter] = useState(false);
+  const context = useContext(authentication);
+  const token = context.accessToken;
   const showUpdateChapterHandler = () => {
     setIsShowUpdateChapter(true);
   };
@@ -23,7 +26,6 @@ const ChapterItem = (props) => {
     navigator(path);
   };
   const deleteChapterHandler = async () => {
-    const token = localStorage.getItem("token");
     try {
       await BaseURL.delete(
         `api/books/${props.bookId}/chapters/${props.chapter._id}`,

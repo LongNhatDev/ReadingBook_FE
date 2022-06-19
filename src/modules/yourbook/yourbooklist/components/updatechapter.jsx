@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import styled from "styled-components";
@@ -7,11 +7,14 @@ import { showSuccessToaster } from "../../../../components/Toaster";
 import Modal from "../../../components/modal";
 import axios from "axios";
 import { BaseURL } from "../../../AxiosInstance";
+import { authentication } from "../../../../authProvider";
 
 const UpdateChapter = (props) => {
   const [datas, setDatas] = useState({});
   const [title, setTitle] = useState(props.chapter.title);
-  const token = localStorage.getItem("token");
+  const context = useContext(authentication);
+  const token = context.accessToken;
+
   useEffect(() => {
     async function getChapter() {
       try {

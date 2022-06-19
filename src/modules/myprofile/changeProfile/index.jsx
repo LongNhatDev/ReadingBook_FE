@@ -1,11 +1,12 @@
 import axios from "axios";
 import React from "react";
+import { useContext } from "react";
 import { useDropzone } from "react-dropzone";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { authentication } from "../../../authProvider";
 import {
   showErrorToaster,
-  showSuccessToaster,
   showInstructionToaster,
 } from "../../../components/Toaster";
 import InputWrapper from "../../auth/components/inputwrapper";
@@ -19,6 +20,8 @@ const ChangeProfile = () => {
   let fileName = "";
   let fileType = "";
   let avaURL = "";
+  const context = useContext(authentication);
+
   const [infor, setInfor] = React.useState({
     _id: "",
     fullName: "",
@@ -75,7 +78,7 @@ const ChangeProfile = () => {
     async function getProfile() {
       const query = "api/users/profile";
       const authorization = {
-        headers: { Authorization: localStorage.getItem("token") },
+        headers: { Authorization: context.accessToken },
       };
       const respone = await BaseURL.get(query, authorization);
       setInfor({
@@ -119,7 +122,7 @@ const ChangeProfile = () => {
           );
         }
         const authorization = {
-          headers: { Authorization: localStorage.getItem("token") },
+          headers: { Authorization: context.accessToken },
         };
         const body = {
           fullName: fullname === "" ? infor.fullName : fullname,

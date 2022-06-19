@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import Table from "./components/table";
 import { BaseURL } from "../../AxiosInstance";
+import { authentication } from "../../../authProvider";
 
 const YourBookList = () => {
-  const token = localStorage.getItem("token");
+  const context = useContext(authentication);
+  const token = context.accessToken;
   const [body, setBody] = useState([]);
   const headers = [
     "No.",
