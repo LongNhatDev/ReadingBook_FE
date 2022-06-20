@@ -15,6 +15,7 @@ import BookPage from "../modules/bookpage";
 import BookManager from "../modules/yourbook/bookmanager";
 import ReviewBox from "../modules/bookpage/components/reviewbox";
 import Searchbook from "../modules/searchbook";
+import AdminRoute from "../modules/admin";
 
 export default function RoutesRoot() {
   return (
@@ -34,6 +35,7 @@ export default function RoutesRoot() {
         <Route path="/books/*" element={<BookPage />} />
         <Route path="/review" element={<ReviewBox />} />
         <Route path="/searchbook" element={<Searchbook />} />
+        <Route path="/admin" element={<AdminRoute />} />
       </Routes>
     </BrowserRouter>
   );
