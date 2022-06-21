@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import Modal from "../../../../components/modal"
 import Button from "../../../../components/button"
 import { showErrorToaster, showSuccessToaster } from '../../../../../components/Toaster'
 import { BaseURL } from "../../../../AxiosInstance"
+import { authentication } from '../../../../../authProvider'
 
 const CreateForm = (props) => {
     const [email, setEmail] = useState("");
@@ -11,7 +12,8 @@ const CreateForm = (props) => {
     const [password, setPassword] = useState("");
     const [role, setRole] = useState("user");
 
-    const token = localStorage.getItem("token");
+    const authCtx = useContext(authentication);
+    const token = authCtx.accessToken;
 
     const addUserHandler = async (event) => {
         event.preventDefault();

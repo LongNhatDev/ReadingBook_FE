@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { BaseURL } from '../../AxiosInstance'
 import styled from "styled-components"
 import Content from "../components/content"
 import AnalyticsChart from '../components/Chart/AnalyticsChart'
+import { authentication } from '../../../authProvider'
 
 const UserAnalytics = () => {
     const now = new Date();
@@ -28,7 +29,8 @@ const UserAnalytics = () => {
         setFilter(event.target.value);
     }
 
-    const token = localStorage.getItem("token")
+    const authCtx = useContext(authentication);
+    const token = authCtx.accessToken;
     useEffect(() => {
         async function getAllUser() {
             try {

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { BaseURL } from '../../AxiosInstance'
 import Content from "../components/content"
 import TableA from '../components/table'
 import { IoPersonAdd } from "react-icons/io5"
 import styled from 'styled-components'
 import CreateForm from '../components/table/components/createform'
+import { authentication } from '../../../authProvider'
 
 const UserPage = () => {
     const [userData, setUserData] = useState([]);
@@ -39,7 +40,8 @@ const UserPage = () => {
         setUserData(newData)
     }
 
-    const token = localStorage.getItem("token")
+    const authCtx = useContext(authentication);
+    const token = authCtx.accessToken;
     useEffect(() => {
         async function getAllUser() {
             try {

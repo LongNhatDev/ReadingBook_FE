@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import styled from 'styled-components'
 import { AiOutlineEdit } from "react-icons/ai"
 import EditForm from './editform'
 import { BsLock, BsUnlock } from "react-icons/bs"
 import { BaseURL } from '../../../../AxiosInstance'
 import { showSuccessToaster } from '../../../../../components/Toaster'
+import { authentication } from '../../../../../authProvider'
 
 const TableLine = (props) => {
     const [isShowEditForm, setIsShowEditForm] = useState(false);
@@ -14,7 +15,8 @@ const TableLine = (props) => {
     const closeEditHandler = () => {
         setIsShowEditForm(false);
     }
-    const token = localStorage.getItem("token");
+    const authCtx = useContext(authentication);
+    const token = authCtx.accessToken;
     const toggleLock = async () => {
         const newUser = { isLock: !props.data.isLock };
         props.onDelete(props.data._id);

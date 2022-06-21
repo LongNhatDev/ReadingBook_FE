@@ -118,7 +118,11 @@ export default function RoutesRoot() {
 
         <Route path="/*" element={<Navigate to="/home" replace />} />
         <Route path="/*/*" element={<Navigate to="/home" replace />} />
-        <Route path="/admin" element={<AdminRoute />} />
+        <Route path="/admin" element={
+          <ProtectedRoute>
+            <AdminRoute />
+          </ProtectedRoute>
+        } />
       </Routes>
     </BrowserRouter>
   );

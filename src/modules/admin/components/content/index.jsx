@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
+import { authentication } from '../../../../authProvider';
 const Content = ({ children, header }) => {
-    const name = localStorage.getItem("name");
-    const avatar = localStorage.getItem("ava");
+    const authCtx = useContext(authentication)
+    const avatar = authCtx.avatar;
+    const name = authCtx.fullName;
     return (
         <Container>
             <Header>
