@@ -4,24 +4,24 @@ import { useState } from "react";
 const authentication = React.createContext();
 
 function AuthProvider({ children }) {
-
-  const [accessToken, setAccessToken] = useState(localStorage.getItem("token"))
-  const [avatar, setAvatar] = useState(localStorage.getItem("ava"))
-  const [fullName, setFullname] = useState(localStorage.getItem("name"))
+  const [accessToken, setAccessToken] = useState(
+    localStorage.getItem("accessToken")
+  );
+  const [avatar, setAvatar] = useState(localStorage.getItem("avatar"));
+  const [fullName, setFullname] = useState(localStorage.getItem("fullName"));
 
   const setAuthInfo = (token, avatar, name) => {
     setAccessToken(token);
     setAvatar(avatar);
-    setFullname(name)
-  }
+    setFullname(name);
+  };
 
   let value = {
     accessToken: accessToken,
     avatar: avatar,
     fullName: fullName,
-    setAuthInfo
+    setAuthInfo,
   };
-
 
   return (
     <authentication.Provider value={value}>{children}</authentication.Provider>

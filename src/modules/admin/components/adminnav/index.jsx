@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { TiUser, TiBook } from "react-icons/ti"
 import { FcReading } from 'react-icons/fc'
 import { MdLogout } from "react-icons/md"
 import { IoAnalyticsOutline } from "react-icons/io5"
+import { authentication } from '../../../../authProvider'
+import { useNavigate } from 'react-router-dom'
 
 const AdminNav = (props) => {
+  const authCtx = useContext(authentication);
+  const navigate = useNavigate();
+  const logoutHandler = () => {
+    authCtx.setAuthInfo("", "", "");
+    navigate("/");
+    localStorage.clear();
+  }
   return <Navbar>
     <Logo>
       <Icon style={{ fontSize: "2rem" }}>
@@ -39,7 +48,7 @@ const AdminNav = (props) => {
         <Text>User Analytics</Text>
       </Item>
     </ListItem>
-    <Item style={{ marginTop: "auto" }}>
+    <Item style={{ marginTop: "auto" }} onClick={logoutHandler}>
       <Icon>
         <MdLogout />
       </Icon>
