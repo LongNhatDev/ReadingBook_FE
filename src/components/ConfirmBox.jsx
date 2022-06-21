@@ -5,6 +5,7 @@ import styled from "styled-components";
 const ConfirmBox = (props) => {
   return (
     <AlertCustom
+      className="alert"
       isOpen={props.isOpen}
       cancelButtonText="NO"
       confirmButtonText="YES"
