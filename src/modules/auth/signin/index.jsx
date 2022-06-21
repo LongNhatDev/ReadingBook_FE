@@ -69,6 +69,9 @@ const SignIn = () => {
           respone.data.avatar,
           respone.data.fullName
         );
+        localStorage.setItem("accessToken", respone.data.token);
+        localStorage.setItem("avatar", respone.data.avatar);
+        localStorage.setItem("fullName", respone.data.fullName);
         navigate(path);
         showSuccessToaster("Sign In Successfully");
       } else showErrorToaster("Server not responed");

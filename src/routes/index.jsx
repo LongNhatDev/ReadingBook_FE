@@ -16,6 +16,7 @@ import ReviewBox from "../modules/bookpage/components/reviewbox";
 import Searchbook from "../modules/searchbook";
 import MyProfile from "../modules/myprofile";
 import ProtectedRoute from "../components/ProtectRoute";
+import AdminRoute from "../modules/admin";
 import StaffPage from "../staff_modules";
 
 export default function RoutesRoot() {
@@ -26,6 +27,23 @@ export default function RoutesRoot() {
         <Route path="/auth/*" element={<Authentic />} />
         <Route path="/yourbook/:bookId" element={<BookManager />} />
         <Route path="/searchbook" element={<Searchbook />} />
+        
+        <Route
+          path="/staff/*"
+          element={
+            <ProtectedRoute>
+              <StaffPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminRoute />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/home"
           element={
@@ -103,14 +121,6 @@ export default function RoutesRoot() {
           element={
             <ProtectedRoute>
               <BookPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/staff/*"
-          element={
-            <ProtectedRoute>
-              <StaffPage />
             </ProtectedRoute>
           }
         />
