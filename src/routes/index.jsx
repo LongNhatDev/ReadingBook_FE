@@ -16,6 +16,7 @@ import ReviewBox from "../modules/bookpage/components/reviewbox";
 import Searchbook from "../modules/searchbook";
 import MyProfile from "../modules/myprofile";
 import ProtectedRoute from "../components/ProtectRoute";
+import AdminRoute from "../modules/admin";
 
 export default function RoutesRoot() {
   return (
@@ -108,6 +109,7 @@ export default function RoutesRoot() {
 
         <Route path="/*" element={<Navigate to="/home" replace />} />
         <Route path="/*/*" element={<Navigate to="/home" replace />} />
+        <Route path="/admin" element={<AdminRoute />} />
       </Routes>
     </BrowserRouter>
   );
