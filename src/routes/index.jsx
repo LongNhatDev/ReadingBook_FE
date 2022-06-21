@@ -17,6 +17,7 @@ import Searchbook from "../modules/searchbook";
 import MyProfile from "../modules/myprofile";
 import ProtectedRoute from "../components/ProtectRoute";
 import AdminRoute from "../modules/admin";
+import StaffPage from "../staff_modules";
 
 export default function RoutesRoot() {
   return (
@@ -103,6 +104,14 @@ export default function RoutesRoot() {
           element={
             <ProtectedRoute>
               <BookPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/staff/*"
+          element={
+            <ProtectedRoute>
+              <StaffPage />
             </ProtectedRoute>
           }
         />
