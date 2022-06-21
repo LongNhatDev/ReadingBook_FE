@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import BackgroundCSS from "../components/background";
@@ -16,10 +16,12 @@ import {
   showSuccessToaster,
 } from "../../../components/Toaster";
 import { BaseURL } from "../../AxiosInstance";
+import { authentication } from "../../../authProvider";
 
 const SignIn = () => {
   const [error, setError] = useState({ email: false, password: false });
   const [value, setValue] = useState({ email: "", password: "" });
+  const auth = useContext(authentication);
 
   let navigate = useNavigate();
 
@@ -52,10 +54,21 @@ const SignIn = () => {
 
       if (respone !== null || respone !== undefined) {
         let path = "/home";
-        localStorage.setItem("token", respone.data.token);
-        localStorage.setItem("ava", respone.data.avatar);
-        localStorage.setItem("name", respone.data.fullName);
-        navigate(path, { state: { token: respone.data.token } });
+        respone.data.roles.forEach((item) => {
+          if (item === "admin") {
+            path = "/admin";
+          }
+          if (item === "mod") {
+            path = "/staff";
+          }
+        });
+
+        auth.setAuthInfo(
+          respone.data.token,
+          respone.data.avatar,
+          respone.data.fullName
+        );
+        navigate(path);
         showSuccessToaster("Sign In Successfully");
       } else showErrorToaster("Server not responed");
     } catch (error) {
