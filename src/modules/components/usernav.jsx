@@ -13,6 +13,7 @@ import LogoContent from "./logocontent";
 import NavbarItems from "./navbaritems";
 import { IoMdNotifications } from "react-icons/io"
 import { IoLibrarySharp } from "react-icons/io5"
+import { MdAdminPanelSettings } from "react-icons/md"
 import { useState } from "react";
 import Notification from "./notification";
 
@@ -33,9 +34,9 @@ const UserNav = () => {
     const path = "/home";
     navigation(path);
   };
-  const handleViewCategories = () => {
-    const path = "/category/all";
-    navigation(path);
+  const handleViewCategories = (event) => {
+    // const path = "/category/all";
+    // navigation(path);
   };
   const handleCreate = () => {
     const path = "/create";
@@ -61,6 +62,10 @@ const UserNav = () => {
   };
   const navigateToLibraryHandler = () => {
     const path = "/library";
+    navigation(path);
+  }
+  const navigateToAdminPage = () => {
+    const path = "/admin";
     navigation(path);
   }
 
@@ -95,6 +100,7 @@ const UserNav = () => {
         <Icon onClick={toggleNotification}>
           <IoMdNotifications />
         </Icon>
+        {context.role === "admin" && <Icon onClick={navigateToAdminPage}><MdAdminPanelSettings /></Icon>}
         <Item>
           {ava === undefined && <FaUserAlt onClick={handleSigIn} />}
           {ava !== undefined && (
@@ -140,18 +146,18 @@ const UserNavDiv = styled.header`
 const H3Css = styled.h4`
   margin-left: 10px;
 `;
-const DivCustom = styled.div`
-  min-height: 30px;
-  padding: 6px;
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  :hover {
-    background-color: #00a69d;
-  }
-`;
+// const DivCustom = styled.div`
+//   min-height: 30px;
+//   padding: 6px;
+//   display: flex;
+//   flex-flow: column wrap;
+//   justify-content: center;
+//   align-items: center;
+//   border-radius: 10px;
+//   :hover {
+//     background-color: #00a69d;
+//   }
+// `;
 
 const Icon = styled.span`
   display: flex;

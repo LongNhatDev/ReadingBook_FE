@@ -54,23 +54,24 @@ const SignIn = () => {
 
       if (respone !== null || respone !== undefined) {
         let path = "/home";
-        respone.data.roles.forEach((item) => {
-          if (item === "admin") {
-            path = "/admin";
-          }
-          if (item === "mod") {
-            path = "/staff";
-          }
-        });
+        if (respone.data.roles[0] === "admin") {
+          path = "/admin"
+        }
+        if (respone.data.roles[0] === "mod") {
+          path = "/staff"
+        }
+        ;
 
         auth.setAuthInfo(
           respone.data.token,
           respone.data.avatar,
-          respone.data.fullName
+          respone.data.fullName,
+          respone.data.roles[0]
         );
         localStorage.setItem("accessToken", respone.data.token);
         localStorage.setItem("avatar", respone.data.avatar);
         localStorage.setItem("fullName", respone.data.fullName);
+        localStorage.setItem("role", respone.data.roles[0]);
         navigate(path);
         showSuccessToaster("Sign In Successfully");
       } else showErrorToaster("Server not responed");
