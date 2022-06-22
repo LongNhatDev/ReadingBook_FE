@@ -33,7 +33,7 @@ const SideFeature = (props) => {
           <span style={{ color: "red" }}>
             <BsSuitHeart />
           </span>
-          <Text>1000 followers</Text>
+          <Text>{props.book.followTotal} followers</Text>
         </Item>
         <Item onClick={showRatingHandler}>
           <Rating>

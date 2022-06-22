@@ -7,6 +7,17 @@ import BookIntro from '../../category/components/bookintro';
 const FollowedBook = () => {
     const [books, setBooks] = useState([]);
     const authCtx = useContext(authentication);
+
+    const updateHandler = (id) => {
+        const newBooks = books.filter((book) => {
+            if (book._id === id) {
+                return false;
+            }
+            return true;
+        })
+        console.log(newBooks);
+        setBooks(newBooks);
+    }
     useEffect(() => {
         async function getFollowedBook() {
             try {
@@ -15,7 +26,6 @@ const FollowedBook = () => {
                         Authorization: authCtx.accessToken
                     }
                 });
-                console.log(res.data);
                 const dataFilter = res.data.filter((item) => {
                     if (
                         item._id !== null &&
@@ -30,7 +40,6 @@ const FollowedBook = () => {
                 });
                 const booksData = [];
                 dataFilter.forEach((element) => {
-                    console.log(element.avrStarNumber);
                     booksData.push({
                         _id: element._id,
                         coverImageURL: element.coverImageURL,
@@ -41,6 +50,7 @@ const FollowedBook = () => {
                         author: element.author,
                         chapters: element.chapters,
                         price: element.price,
+                        isFollowed: true
                     });
                 });
                 setBooks(booksData);
@@ -52,7 +62,7 @@ const FollowedBook = () => {
     }, [authCtx.accessToken])
     return (
         <Main>
-            {books.map((book) => (<BookIntro key={book._id} bookinfo={book} />))}
+            {books.map((book) => (<BookIntro key={book._id} onUpdate={updateHandler} bookinfo={book} />))}
         </Main>
     )
 }

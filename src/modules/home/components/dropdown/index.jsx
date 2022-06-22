@@ -37,7 +37,8 @@ const DropdownSelect = styled.div`
   width: 100%;
   height: 100%;
   max-height: 3rem;
-  padding: 3rem 1.5rem;
+  padding: 3rem 0;
+  padding-left: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;

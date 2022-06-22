@@ -115,6 +115,7 @@ const Text = styled.span`
 
 const Logo = styled.div`
   display: flex;
+  cursor: pointer;
 `
 const LogoText = styled.span`
   color: #DDE2FF;

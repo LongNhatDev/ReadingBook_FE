@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { authentication } from "../../../authProvider";
 import { BaseURL } from "../../AxiosInstance";
 import MainSide from "../components/mainside";
 import Side from "../components/side";
@@ -19,13 +20,30 @@ const CateDetail = () => {
     return returnValue.toLowerCase();
   };
 
+  const updateHandler = (id) => {
+    const newBooks = books.map((book) => {
+      if (book._id === id) {
+        return { ...book, isFollowed: !book.isFollowed }
+      }
+      return book;
+    })
+    console.log(newBooks);
+    setBooks(newBooks);
+  }
+
+  const authCtx = useContext(authentication);
+
   useEffect(() => {
     async function getBooksData() {
       console.log("this is run again");
       const booksData = [];
       try {
-        const response = await BaseURL.get("/api/books");
-        const data = response.data;
+        const response = !!authCtx.accessToken ? await BaseURL.get("/api/books", {
+          headers: {
+            Authorization: authCtx.accessToken
+          }
+        }) : await BaseURL.get("/api/books");
+        const data = !!authCtx.accessToken ? response.data.result : response.data;
         const dataFilter = data.filter((item) => {
           if (
             item._id !== null &&
@@ -51,6 +69,7 @@ const CateDetail = () => {
             category: element.category,
             chapters: element.chapters,
             price: element.price,
+            isFollowed: element.isFollowed
           });
         });
       } catch (err) {
@@ -60,7 +79,7 @@ const CateDetail = () => {
       setBooks(booksData);
     }
     getBooksData();
-  }, [categoryType.catename]);
+  }, [categoryType.catename, authCtx.accessToken]);
 
   let booksData = books.filter((book) => {
     return book.booktag === categoryType.catename;
@@ -73,7 +92,7 @@ const CateDetail = () => {
   return (
     <MainSection>
       <Side selected={"/category/" + categoryType.catename} />
-      <MainSide data={booksData} />
+      <MainSide data={booksData} onUpdate={updateHandler} />
     </MainSection>
   );
 };
