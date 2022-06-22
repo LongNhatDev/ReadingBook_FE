@@ -11,9 +11,18 @@ import SeachBox from "../home/components/searchbox";
 import Item from "./item";
 import LogoContent from "./logocontent";
 import NavbarItems from "./navbaritems";
+import { IoMdNotifications } from "react-icons/io"
+import { IoLibrarySharp } from "react-icons/io5"
+import { useState } from "react";
+import Notification from "./notification";
 
 const UserNav = () => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [isShowNotifications, setIsShowNotifications] = useState(false);
+
+  const toggleNotification = () => {
+    setIsShowNotifications((prev) => !prev);
+  }
 
   const context = useContext(authentication);
 
@@ -50,6 +59,10 @@ const UserNav = () => {
     const path = "/";
     navigation(path);
   };
+  const navigateToLibraryHandler = () => {
+    const path = "/library";
+    navigation(path);
+  }
 
   return (
     <UserNavDiv>
@@ -76,26 +89,18 @@ const UserNav = () => {
           <FaCogs />
           <H3Css>Profile</H3Css>
         </Item>
+        <Icon onClick={navigateToLibraryHandler}>
+          <IoLibrarySharp />
+        </Icon>
+        <Icon onClick={toggleNotification}>
+          <IoMdNotifications />
+        </Icon>
         <Item>
           {ava === undefined && <FaUserAlt onClick={handleSigIn} />}
           {ava !== undefined && (
-            <DivCustom
-              onClick={() => {
-                setIsOpen(true);
-              }}
-            >
-              <img
-                src={ava}
-                alt=""
-                style={{
-                  height: "30px",
-                  borderRadius: "20px",
-                }}
-              />
-              <p style={{ fontSize: "15px", marginTop: "10px" }}>
-                {context.fullName}
-              </p>
-            </DivCustom>
+            <Image src={ava} alt="avatar of user" onClick={() => {
+              setIsOpen(true)
+            }} />
           )}
         </Item>
       </NavbarItems>
@@ -108,6 +113,7 @@ const UserNav = () => {
         }}
         onConfirm={handleConfirm}
       />
+      {isShowNotifications && <Notification />}
     </UserNavDiv>
   );
 };
@@ -129,6 +135,7 @@ const UserNavDiv = styled.header`
     #68d69d
   );
   color: #051937;
+  position: relative;
 `;
 const H3Css = styled.h4`
   margin-left: 10px;
@@ -145,3 +152,30 @@ const DivCustom = styled.div`
     background-color: #00a69d;
   }
 `;
+
+const Icon = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  width: 4rem;
+  height: 4rem;
+  cursor: pointer;
+  color: white;
+  background-color: rgba(0,0,0,0.4);
+  &:hover {
+    transform: scale(1.2);
+  }
+  border-radius: 100rem;
+  box-shadow: 0 0 2rem rgba(0,0,0,0.15);
+`
+
+const Image = styled.img`
+    width: 44px;
+    height: 44px;
+    object-fit: cover;
+    border-radius: 100rem;
+    border: 2px solid white;
+    box-shadow: 0 0 2rem rgba(0,0,0,0.15);
+    margin-left: 1rem;
+  `
