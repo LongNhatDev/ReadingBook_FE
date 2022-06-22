@@ -45,7 +45,7 @@ const CateDetail = () => {
             booktag: createTag(element.category.categoryName),
             bookName: element.bookName,
             description: element.description,
-            bookrate: element.avrStarNumber,
+            bookrate: element.avrStarNumber.toFixed(2),
             viewNumber: element.viewNumber,
             author: element.author,
             category: element.category,

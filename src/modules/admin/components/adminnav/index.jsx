@@ -15,8 +15,11 @@ const AdminNav = (props) => {
     navigate("/");
     localStorage.clear();
   }
+  const navigateToHomeHandler = () => {
+    navigate("/home");
+  }
   return <Navbar>
-    <Logo>
+    <Logo onClick={navigateToHomeHandler}>
       <Icon style={{ fontSize: "2rem" }}>
         <FcReading />
       </Icon>

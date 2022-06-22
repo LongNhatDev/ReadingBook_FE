@@ -17,7 +17,7 @@ const BookIntro = (props) => {
         alt="gkvl1"
       ></BookImage>
       <BookDetail>
-        <BookTag>#{props.bookinfo.booktag}</BookTag>
+        {!!props.bookinfo.category && <BookTag>#{props.bookinfo.booktag}</BookTag>}
         <BookName>{props.bookinfo.bookName}</BookName>
         <BookDes>{props.bookinfo.description}</BookDes>
         <BookBottom>
@@ -25,7 +25,7 @@ const BookIntro = (props) => {
             <span style={{ color: "yellow" }}>
               <FaStar />
             </span>
-            <span> {props.bookinfo.bookrate.toFixed(2)}</span>
+            <span> {props.bookinfo.bookrate}</span>
           </BookRate>
           <BookChapter>
             <span style={{ fontSize: 14 + "px", color: "red" }}>
