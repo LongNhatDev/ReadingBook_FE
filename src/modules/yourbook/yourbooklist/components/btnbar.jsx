@@ -55,7 +55,6 @@ const BtnBar = (props) => {
       <div>
         <AiFillEdit
           style={{ color: "#00B524", fontSize: "3rem", marginRight: "2rem" }}
-          on
           onClick={handleEdit}
         />
       </div>

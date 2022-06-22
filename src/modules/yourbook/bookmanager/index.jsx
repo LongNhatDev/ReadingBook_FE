@@ -28,7 +28,6 @@ const BookManager = () => {
     const getBookDetail = async () => {
       try {
         const res = await BaseURL.get(`api/books/book/${param.bookId}`);
-        console.log(res.data);
         setDetail(res.data);
       } catch (err) {
         console.log(err);
@@ -56,6 +55,8 @@ const BookManager = () => {
               </Paragraph>
 
               <StatusBox
+                id={detail._id}
+                status={detail.status}
                 chapters={detail.chapters.length}
                 views={detail.viewNumber}
                 rating={detail.avrStarNumber}
@@ -124,6 +125,8 @@ const Cover = styled.img`
   width: 21rem;
   flex-shrink: 0;
   border: 0.5px solid #c2c2c2;
+  object-fit: cover;
+  border-radius: 8px;
 `;
 
 const Detail = styled.div`

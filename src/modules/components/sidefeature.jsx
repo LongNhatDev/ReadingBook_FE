@@ -3,10 +3,10 @@ import styled from "styled-components";
 import {
   BsSuitHeart,
   BsStarFill,
-  BsChatSquareText,
   BsListUl,
   BsShare,
 } from "react-icons/bs";
+import { FaEye } from "react-icons/fa"
 import ChaptersToolbar from "../bookpage/components/chapterstoolbar";
 import Review from "./review";
 
@@ -54,9 +54,9 @@ const SideFeature = (props) => {
         </Item>
         <Item>
           <span style={{ color: "green" }}>
-            <BsChatSquareText />
+            <FaEye />
           </span>
-          <Text>Comments</Text>
+          <Text>{props.book.viewNumber} views</Text>
         </Item>
         <Item>
           <span style={{ color: "blue" }}>
