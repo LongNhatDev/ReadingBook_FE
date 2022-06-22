@@ -49,17 +49,19 @@ const ReadingPage = () => {
         console.log("error occur", err2);
       }
     };
+
+    const increaseView = () => {
+      BaseURL.put(`api/books/book/${bookParam.bookId}/viewNumber`)
+    }
+    increaseView();
     getChapter();
   }, [bookParam.chapterId, bookParam.bookId]);
-
-  console.log(datas);
 
   return (
     <React.Fragment>
       {datas.chapterTitle.length > 0 && (
         <Wrapper>
           <Reading>
-            {console.log(datas.chapterTitle)}
             <Title>{datas.chapterTitle}</Title>
             <div dangerouslySetInnerHTML={{ __html: datas.chapterContent }} />
           </Reading>

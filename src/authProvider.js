@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
+import { BaseURL } from "./modules/AxiosInstance";
 
 const authentication = React.createContext();
 
@@ -17,6 +18,37 @@ function AuthProvider({ children }) {
     setFullname(name);
     setRole(role);
   };
+
+  const TIME_TO_REFRESH_TOKEN = 29 * 60 * 1000;
+  const refreshToken = localStorage.getItem("refreshToken");
+
+  useEffect(() => {
+    async function refreshTokenHandler() {
+      try {
+        const res = await BaseURL.post(
+          "api/auth/refreshToken",
+          { refreshToken: refreshToken },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        localStorage.setItem("accessToken", res.data.token);
+        setAccessToken(res.data.token);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    if (refreshToken) {
+      refreshTokenHandler();
+    }
+    setInterval(() => {
+      if (refreshToken) {
+        refreshTokenHandler();
+      }
+    }, TIME_TO_REFRESH_TOKEN);
+  }, [TIME_TO_REFRESH_TOKEN, refreshToken]);
 
   let value = {
     accessToken: accessToken,

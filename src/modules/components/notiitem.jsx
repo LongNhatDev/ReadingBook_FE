@@ -33,9 +33,10 @@ const NotiItem = ({ noti }) => {
     };
 
 
+
     return (
         <Item onClick={navigateToDetail}>
-            <Image src='https://dwtr67e3ikfml.cloudfront.net/bookCovers/ac048dd770193139f871e067d4b885c5c47f23af' alt="Cover of a book" />
+            <Image src={noti.book.coverImageURL} alt="Cover of a book" />
             <NotiDetail>
                 <Content>{noti.message}</Content>
                 <Time>{time}</Time>

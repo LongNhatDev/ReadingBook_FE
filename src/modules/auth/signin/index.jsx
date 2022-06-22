@@ -69,6 +69,7 @@ const SignIn = () => {
           respone.data.roles[0]
         );
         localStorage.setItem("accessToken", respone.data.token);
+        localStorage.setItem("refreshToken", respone.data.refreshToken);
         localStorage.setItem("avatar", respone.data.avatar);
         localStorage.setItem("fullName", respone.data.fullName);
         localStorage.setItem("role", respone.data.roles[0]);

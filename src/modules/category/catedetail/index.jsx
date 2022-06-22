@@ -27,7 +27,6 @@ const CateDetail = () => {
       }
       return book;
     })
-    console.log(newBooks);
     setBooks(newBooks);
   }
 

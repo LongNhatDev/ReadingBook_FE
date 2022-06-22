@@ -166,14 +166,15 @@ const Icon = styled.span`
   font-size: 2rem;
   width: 4rem;
   height: 4rem;
-  cursor: pointer;
   color: white;
   background-color: rgba(0,0,0,0.4);
   &:hover {
     transform: scale(1.2);
   }
   border-radius: 100rem;
+  border: 2px solid white;
   box-shadow: 0 0 2rem rgba(0,0,0,0.15);
+  cursor: pointer;
 `
 
 const Image = styled.img`

@@ -15,7 +15,6 @@ const FollowedBook = () => {
             }
             return true;
         })
-        console.log(newBooks);
         setBooks(newBooks);
     }
     useEffect(() => {

@@ -1,15 +1,41 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { FaStar, FaEye, FaBook, FaHourglassStart } from "react-icons/fa";
+import { BaseURL } from "../../../AxiosInstance";
+import { authentication } from "../../../../authProvider";
 
 const StatusBox = (props) => {
+  const authCtx = useContext(authentication);
+  const changeStatusHandler = async (event) => {
+
+    try {
+      BaseURL.patch(`/api/books/book/${props.id}/status`, { status: event.target.value }, {
+        headers: {
+          Authorization: authCtx.accessToken,
+          "Content-Type": "application/json"
+        }
+      })
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <Box>
       <Item>
         <Header>
           STATUS <FaHourglassStart />{" "}
         </Header>
-        <SpanCustom>Ongoing</SpanCustom>
+        <select defaultValue={props.status} style={{ borderRadius: "8px" }} onChange={changeStatusHandler}>
+          <option>
+            Ongoing
+          </option>
+          <option>
+            Paused
+          </option>
+          <option>
+            Completed
+          </option>
+        </select>
       </Item>
       <Item>
         <Header>

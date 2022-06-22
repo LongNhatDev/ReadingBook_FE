@@ -18,7 +18,6 @@ const YourBookList = () => {
     "Actions",
   ];
   useEffect(() => {
-    console.log("??");
     const getBook = async () => {
       const res = await BaseURL.get("api/books/author", {
         method: "GET",
@@ -30,7 +29,7 @@ const YourBookList = () => {
         cover: book.coverImageURL,
         id: book._id,
         name: book.bookName,
-        state: "ONGOING",
+        state: book.status,
         chapters: book.chapters.length,
         views: book.viewNumber,
       }));

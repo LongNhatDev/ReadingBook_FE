@@ -12,11 +12,9 @@ const DetailPage = () => {
   const [isUpdated, setIsUpdated] = useState(false);
   const toggleUpdate = () => {
     setIsUpdated((prevStatus) => !prevStatus);
-    console.log("updated");
   };
 
   useEffect(() => {
-    console.log("run in detailpage");
     async function getABook() {
       try {
         const res = await BaseURL.get(`api/books/book/${bookId}`);
@@ -28,7 +26,6 @@ const DetailPage = () => {
         }
       } catch (err) {
         showErrorToaster("Error: ", err);
-        console("some err ocurr in detailpage");
       }
     }
     getABook();
