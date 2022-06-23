@@ -4,20 +4,33 @@ import { TiBook, TiTime } from "react-icons/ti";
 import { FcReading } from "react-icons/fc";
 import { MdLogout } from "react-icons/md";
 import { IoAnalyticsOutline } from "react-icons/io5";
-import ConfirmBox from "../../components/ConfirmBox";
 import { useNavigate } from "react-router-dom";
+import ConfirmBox from "../../../components/ConfirmBox";
 
 const StaffNav = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   let navigate = useNavigate();
 
   const handleConfirm = () => {
-    const path = "/";
+    window.localStorage.clear();
+    const path = "/auth/signin";
     navigate(path);
   };
 
   const reloadPage = () => {
     window.location.reload();
+  };
+
+  const handleGetBooksCensored = () => {
+    navigate("/staff/bookscensored");
+  };
+
+  const handleGetBooksPending = () => {
+    navigate("/staff/bookspending");
+  };
+
+  const handleCreateCategory = () => {
+    navigate("/staff/createcategory");
   };
 
   return (
@@ -30,25 +43,25 @@ const StaffNav = () => {
       </Logo>
 
       <ListItem>
-        <Item>
+        <Item onClick={handleGetBooksCensored}>
           <Icon>
             <TiBook />
           </Icon>
-          <Text>All Books</Text>
+          <Text>Books Censored</Text>
         </Item>
 
-        <Item>
+        <Item onClick={handleGetBooksPending}>
           <Icon>
             <TiTime />
           </Icon>
-          <Text> Book Pending</Text>
+          <Text>Book Pending</Text>
         </Item>
 
-        <Item>
+        <Item onClick={handleCreateCategory}>
           <Icon>
             <IoAnalyticsOutline />
           </Icon>
-          <Text>Book Chart</Text>
+          <Text>Create Category</Text>
         </Item>
       </ListItem>
 
@@ -82,6 +95,7 @@ const Navbar = styled.nav`
   padding-bottom: 1rem;
   display: flex;
   flex-direction: column;
+  position: fixed;
 `;
 
 const ListItem = styled.ul`

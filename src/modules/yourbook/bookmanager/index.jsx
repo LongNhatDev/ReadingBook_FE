@@ -24,11 +24,9 @@ const BookManager = () => {
   };
 
   useEffect(() => {
-    console.log("run");
     const getBookDetail = async () => {
       try {
         const res = await BaseURL.get(`api/books/book/${param.bookId}`);
-        console.log(res.data);
         setDetail(res.data);
       } catch (err) {
         console.log(err);
@@ -108,7 +106,6 @@ const Bookpart = styled.section`
   margin-top: 2rem;
   box-shadow: 2px 2px 6px grey;
   border-bottom: 1.2px solid #cecece;
-  
 `;
 
 const Chapterpart = styled.section`

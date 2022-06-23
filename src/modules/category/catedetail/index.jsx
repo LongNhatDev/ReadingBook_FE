@@ -21,11 +21,10 @@ const CateDetail = () => {
 
   useEffect(() => {
     async function getBooksData() {
-      console.log("this is run again");
       const booksData = [];
       try {
-        const response = await BaseURL.get("/api/books");
-        const data = response.data;
+        const response = await BaseURL.get("api/books");
+        const data = response.data.books;
         const dataFilter = data.filter((item) => {
           if (
             item._id !== null &&

@@ -17,17 +17,30 @@ import Searchbook from "../modules/searchbook";
 import MyProfile from "../modules/myprofile";
 import ProtectedRoute from "../components/ProtectRoute";
 import AdminRoute from "../modules/admin";
-import StaffPage from "../staff_modules";
+import StaffPage from "../modules/staff";
 
 export default function RoutesRoot() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<SignIn />} />
+        {/* Don't need to Sign in */}
+        <Route path="/home" element={<Home />} />
         <Route path="/auth/*" element={<Authentic />} />
-        <Route path="/yourbook/:bookId" element={<BookManager />} />
         <Route path="/searchbook" element={<Searchbook />} />
-        
+        <Route path="/category/*" element={<Category />} />
+        <Route path="/reading" element={<ReadingPage />} />
+        <Route path="/books/*" element={<BookPage />} />
+        <Route path="/review" element={<ReviewBox />} />
+
+        {/* Need to Sign in */}
+        <Route
+          path="/yourbook/:bookId"
+          element={
+            <ProtectedRoute>
+              <BookManager />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/staff/*"
           element={
@@ -41,22 +54,6 @@ export default function RoutesRoot() {
           element={
             <ProtectedRoute>
               <AdminRoute />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/home"
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/category/*"
-          element={
-            <ProtectedRoute>
-              <Category />
             </ProtectedRoute>
           }
         />
@@ -100,32 +97,9 @@ export default function RoutesRoot() {
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/reading"
-          element={
-            <ProtectedRoute>
-              <ReadingPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/review"
-          element={
-            <ProtectedRoute>
-              <ReviewBox />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/books/*"
-          element={
-            <ProtectedRoute>
-              <BookPage />
-            </ProtectedRoute>
-          }
-        />
 
         <Route path="/*" element={<Navigate to="/home" replace />} />
+        <Route path="/" element={<Navigate to="/home" replace />} />
       </Routes>
     </BrowserRouter>
   );

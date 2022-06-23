@@ -145,7 +145,7 @@ const Create = () => {
         };
 
         const respone = await BaseURL.post(
-          "/api/books",
+          "api/books",
           inforRequest,
           authorization
         );
@@ -185,7 +185,7 @@ const Create = () => {
             coverImageURL: value.coverImage,
           };
           const respone = await BaseURL.put(
-            `/api/books/book/${location.state.bookId}`,
+            `api/books/book/${location.state.bookId}`,
             inforRequest,
             authorization
           );

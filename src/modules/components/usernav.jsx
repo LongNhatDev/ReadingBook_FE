@@ -18,6 +18,7 @@ const UserNav = () => {
   const context = useContext(authentication);
 
   let navigation = useNavigate();
+  const token = context.accessToken;
   const ava = context.avatar;
 
   const handleReturnHomePage = () => {
@@ -42,12 +43,12 @@ const UserNav = () => {
   };
 
   const handleSigIn = () => {
-    const path = "/";
+    const path = "/auth/signin";
     navigation(path);
   };
   const handleConfirm = () => {
     window.localStorage.clear();
-    const path = "/";
+    const path = "/auth/signin";
     navigation(path);
   };
 
@@ -77,7 +78,8 @@ const UserNav = () => {
           <H3Css>Profile</H3Css>
         </Item>
         <Item>
-          {ava === undefined && <FaUserAlt onClick={handleSigIn} />}
+          {token === null && <FaUserAlt onClick={handleSigIn} />}
+
           {ava !== undefined && (
             <DivCustom
               onClick={() => {

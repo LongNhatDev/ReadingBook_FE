@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import StaffNav from "../components/staffnav";
+import StaffNav from "./components/staffnav";
 
-const StaffHome = () => {
+const CreateCategory = () => {
   return (
     <Container>
       <StaffNav />
@@ -10,7 +10,7 @@ const StaffHome = () => {
   );
 };
 
-export default StaffHome;
+export default CreateCategory;
 
 const Container = styled.div`
   display: flex;

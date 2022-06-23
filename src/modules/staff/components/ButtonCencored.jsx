@@ -1,39 +1,18 @@
 import React, { useContext } from "react";
+import { AiTwotoneDelete } from "react-icons/ai";
 import styled from "styled-components";
-import { AiFillEdit, AiTwotoneDelete } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
-import { BaseURL } from "../../../AxiosInstance";
+import { authentication } from "../../../authProvider";
+import ConfirmBox from "../../../components/ConfirmBox";
 import {
   showErrorToaster,
   showSuccessToaster,
-} from "../../../../components/Toaster";
-import ConfirmBox from "../../../../components/ConfirmBox";
-import { authentication } from "../../../../authProvider";
+} from "../../../components/Toaster";
+import { BaseURL } from "../../AxiosInstance";
 
-const BtnBar = (props) => {
+const ButtonsCensored = (props) => {
   const [isOpen, setIsOpen] = React.useState(false);
-  let navigate = useNavigate();
   const context = useContext(authentication);
   const token = context.accessToken;
-
-  const handleEdit = async () => {
-    try {
-      const respone = await BaseURL.get(`api/books/book/${props.id}`);
-
-      navigate("/create", {
-        state: {
-          bookId: props.id,
-          bookName: respone.data.bookName,
-          categoryId: respone.data.category._id,
-          description: respone.data.description,
-          coverImageURL: respone.data.coverImageURL,
-          price: respone.data.price,
-        },
-      });
-    } catch (error) {
-      showErrorToaster("Error in Creating!");
-    }
-  };
 
   const handleDelete = async () => {
     try {
@@ -42,6 +21,7 @@ const BtnBar = (props) => {
           Authorization: token,
         },
       };
+      // ok
       await BaseURL.delete(`api/books/book/${props.id}`, authorization);
       window.location.reload();
       showSuccessToaster("Delete successful!");
@@ -52,14 +32,6 @@ const BtnBar = (props) => {
 
   return (
     <Bar>
-      <div>
-        <AiFillEdit
-          style={{ color: "#00B524", fontSize: "3rem", marginRight: "2rem" }}
-          on
-          onClick={handleEdit}
-        />
-      </div>
-
       <div>
         <AiTwotoneDelete
           style={{ color: "red", fontSize: "3rem" }}
@@ -81,7 +53,7 @@ const BtnBar = (props) => {
   );
 };
 
-export default BtnBar;
+export default ButtonsCensored;
 
 const Bar = styled.div`
   display: flex;
