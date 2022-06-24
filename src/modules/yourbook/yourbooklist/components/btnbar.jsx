@@ -18,7 +18,15 @@ const BtnBar = (props) => {
 
   const handleEdit = async () => {
     try {
-      const respone = await BaseURL.get(`api/books/book/${props.id}`);
+      const authorization = {
+        headers: {
+          Authorization: token,
+        },
+      };
+      const respone = await BaseURL.get(
+        `api/books/book/${props.id}`,
+        authorization
+      );
 
       navigate("/create", {
         state: {

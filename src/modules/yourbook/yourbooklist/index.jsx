@@ -19,12 +19,12 @@ const YourBookList = () => {
   ];
   useEffect(() => {
     const getBook = async () => {
-      const res = await BaseURL.get("api/books/author", {
-        method: "GET",
+      const authorization = {
         headers: {
           Authorization: token,
         },
-      });
+      };
+      const res = await BaseURL.get("api/books/author", authorization);
       const transformedBook = res.data.map((book) => ({
         cover: book.coverImageURL,
         id: book._id,

@@ -29,10 +29,6 @@ const StaffNav = () => {
     navigate("/staff/bookspending");
   };
 
-  const handleCreateCategory = () => {
-    navigate("/staff/createcategory");
-  };
-
   return (
     <Navbar>
       <Logo>
@@ -54,14 +50,7 @@ const StaffNav = () => {
           <Icon>
             <TiTime />
           </Icon>
-          <Text>Book Pending</Text>
-        </Item>
-
-        <Item onClick={handleCreateCategory}>
-          <Icon>
-            <IoAnalyticsOutline />
-          </Icon>
-          <Text>Create Category</Text>
+          <Text>Books Pending</Text>
         </Item>
       </ListItem>
 

@@ -24,7 +24,7 @@ const DetailPage = () => {
       try {
         const authorization = {
           headers: {
-            Authorization: token.accessToken,
+            Authorization: token.accessToken ? token.accessToken : "",
           },
         };
         const res = await BaseURL.get(

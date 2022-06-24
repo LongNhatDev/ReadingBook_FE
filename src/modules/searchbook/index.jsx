@@ -7,22 +7,19 @@ const Tr = (props) => {
   let navigator = useNavigate();
 
   const moveToBookManagePageHandler = () => {
-    const path = `books/${props.row._id}`;
+    const path = `/books/${props.row._id}`;
     navigator(path);
   };
 
   return (
     <TrCustom>
-      {/* STT */}
       <td>
         <PCustom>{props.index + 1}</PCustom>
       </td>
-      {/* Book Cover */}
       <td onClick={moveToBookManagePageHandler} key="bcover">
         <Image src={props.row.coverImageURL} alt="cover of a book" />
       </td>
 
-      {/* Infor of Book */}
       <td>{props.row.bookName}</td>
       <td>ONGONG</td>
       <td>{props.row.chapters.length}</td>
@@ -46,7 +43,7 @@ const SearchBook = () => {
     <>
       <UserNav />
       <Container>
-        <TableCss style={{ backgroundColor: "white" }}>
+        <TableCss>
           <thead>
             <TitleRow>
               {headers.map((header) => (

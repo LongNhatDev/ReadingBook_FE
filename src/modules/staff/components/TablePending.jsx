@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { authentication } from "../../../authProvider";
+import SearchBox from "../../home/components/searchbox";
 import ButtonsPending from "./ButtonsPending";
 
 const Tr = (props) => {
@@ -62,9 +64,29 @@ const Tr = (props) => {
 };
 
 const TablePending = (props) => {
+  const auth = useContext(authentication);
   return (
     <Box>
-      <h1>Books Pending</h1>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <h1>Books Pending</h1>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <h4>{auth.fullName}</h4>
+          <ImageAva src={auth.avatar} alt="avatar of user" />
+        </div>
+      </div>
+
       <TableCss style={{ backgroundColor: "white" }}>
         <thead>
           <TitleRow>
@@ -127,4 +149,14 @@ const TitleRow = styled.tr`
   height: 6rem;
   color: white;
   font-size: 2rem;
+`;
+
+const ImageAva = styled.img`
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 100rem;
+  border: 2px solid white;
+  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.15);
+  margin-left: 1rem;
 `;

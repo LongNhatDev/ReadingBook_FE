@@ -96,7 +96,7 @@ const SignIn = () => {
       );
       if (respone !== null || respone !== undefined) {
         showInstructionToaster("Please check your email to get OTP code !");
-        let path = "auth/confirmotp";
+        let path = "/auth/confirmotp";
         navigate(path, { state: { email: value.email } });
       } else showErrorToaster("Server not respone");
     } catch (error) {
@@ -105,7 +105,7 @@ const SignIn = () => {
   };
 
   const handleSignUp = () => {
-    let path = "auth/signup";
+    let path = "/auth/signup";
     navigate(path);
   };
 

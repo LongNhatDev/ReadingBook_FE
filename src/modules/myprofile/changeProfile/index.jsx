@@ -76,11 +76,13 @@ const ChangeProfile = () => {
 
   React.useEffect(() => {
     async function getProfile() {
-      const query = "api/users/profile";
+      const query = "api/users/user/profile";
       const authorization = {
         headers: { Authorization: context.accessToken },
       };
       const respone = await BaseURL.get(query, authorization);
+      console.log("respone : ", respone);
+
       setInfor({
         ...infor,
         _id: respone.data._id,
@@ -88,6 +90,7 @@ const ChangeProfile = () => {
         avatar: respone.data.avatar,
         email: respone.data.email,
       });
+      console.log("Infor: ", infor._id);
     }
     getProfile();
   }, []);
@@ -129,10 +132,10 @@ const ChangeProfile = () => {
           avatar: file.length > 0 ? avaURL : infor.avatar,
         };
 
-        await BaseURL.put("api/users/profile", body, authorization);
+        await BaseURL.put("api/users/user/profile", body, authorization);
         showInstructionToaster("Update successful, please login !");
 
-        let path = "/";
+        let path = "/auth/signin";
         navigate(path);
       }
     } catch (error) {
@@ -356,6 +359,7 @@ const Content = styled.div`
 
 const WrapButton = styled.div`
   display: flex;
+  height: 100vh;
   flex: 1;
   flex-flow: column;
   justify-content: flex-start;

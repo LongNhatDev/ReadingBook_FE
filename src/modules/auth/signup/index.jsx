@@ -49,7 +49,7 @@ const Login = () => {
 
   const handleSignUp = async () => {
     try {
-      let path = "/";
+      let path = "/auth/signin";
 
       if (value.fullname === "") {
         setError({ ...error, fullname: true });
@@ -85,7 +85,7 @@ const Login = () => {
   };
 
   const handleSignIn = () => {
-    let path = "/";
+    let path = "/auth/signin";
     navigate(path);
   };
 

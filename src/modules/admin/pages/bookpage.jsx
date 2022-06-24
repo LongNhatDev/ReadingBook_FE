@@ -29,7 +29,7 @@ const BookPage = () => {
     async function getAllBook() {
       try {
         const res = await BaseURL.get("api/books");
-        const transformData = res.data.filter((book) => {
+        const transformData = res.data.books.filter((book) => {
           if (!book.author || !book.category) {
             return false;
           }

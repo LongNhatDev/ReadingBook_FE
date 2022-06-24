@@ -12,7 +12,7 @@ const AdminNav = (props) => {
   const navigate = useNavigate();
   const logoutHandler = () => {
     authCtx.setAuthInfo("", "", "");
-    navigate("/");
+    navigate("/auth/signin");
     localStorage.clear();
   }
   const navigateToHomeHandler = () => {

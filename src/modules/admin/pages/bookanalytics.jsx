@@ -104,7 +104,7 @@ const BookAnalytics = () => {
     async function getAllBook() {
       try {
         const res = await BaseURL.get("api/books");
-        const transformData = res.data.map((book) => {
+        const transformData = res.data.books.map((book) => {
           return new Date(book.createdAt);
         });
         setAllDate(transformData);

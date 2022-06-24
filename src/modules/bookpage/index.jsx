@@ -12,8 +12,7 @@ const BookPage = () => {
 
   return (
     <React.Fragment>
-      {auth.roles === 1 && <UserNav />}
-      {auth.roles !== 1 && <StaffNav />}
+      {auth.roles > 1 ? <StaffNav /> : <UserNav />}
       <Routes>
         <Route path="/:bookId" element={<DetailPage />} />
         <Route path="/:bookId/:chapterId" element={<ReadingPage />} />

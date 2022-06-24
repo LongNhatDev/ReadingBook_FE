@@ -50,8 +50,8 @@ const ButtonsPending = (props) => {
         body,
         authorization
       );
-      navigate("/staff/bookscensored");
       showSuccessToaster("Accept book successful!");
+      window.location.reload();
     } catch (err) {
       showErrorToaster("Accept book fail");
     }

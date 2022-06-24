@@ -97,7 +97,10 @@ const Home = () => {
                 }}
                 onClick={() => handleClick(arrayStar?.[0].id)}
               >
-                <ImageTop src={arrayStar?.[0].coverImageURL} />
+                <ImageTop
+                  src={arrayStar?.[0].coverImageURL}
+                  style={{ boxShadow: "4px 2px 6px grey" }}
+                />
                 <DivCustom
                   style={{
                     maxWidth: "50%",
@@ -153,7 +156,10 @@ const Home = () => {
                   </DivCustom>
                   <p>{arrayStar?.[1].description}</p>
                 </DivLast>
-                <Image src={arrayStar?.[1].coverImageURL} />
+                <Image
+                  src={arrayStar?.[1].coverImageURL}
+                  style={{ boxShadow: "4px 2px 6px grey" }}
+                />
               </DivFisrt>
 
               <DivFisrt
@@ -163,7 +169,7 @@ const Home = () => {
               >
                 <DivLast>
                   <h2 style={{ marginBottom: "10px" }}>
-                    {arrayStar?.[1].bookName}
+                    {arrayStar?.[2].bookName}
                   </h2>
                   <DivCustom
                     style={{
@@ -179,7 +185,10 @@ const Home = () => {
                   </DivCustom>
                   <p>{arrayStar?.[2].description}</p>
                 </DivLast>
-                <Image src={arrayStar?.[2].coverImageURL} />
+                <Image
+                  src={arrayStar?.[2].coverImageURL}
+                  style={{ boxShadow: "4px 2px 6px grey" }}
+                />
               </DivFisrt>
             </BoxCol>
           </BoxRow>
@@ -200,7 +209,10 @@ const Home = () => {
                   handleClick(arrayFollow?.[0].id);
                 }}
               >
-                <ImageTop src={arrayFollow?.[0].coverImageURL} />
+                <ImageTop
+                  src={arrayFollow?.[0].coverImageURL}
+                  style={{ boxShadow: "4px 2px 6px grey" }}
+                />
                 <DivCustom
                   style={{
                     maxWidth: "80%",
@@ -256,7 +268,10 @@ const Home = () => {
                   </DivCustom>
                   <p>{arrayFollow?.[1].description}</p>
                 </DivLast>
-                <Image src={arrayFollow?.[1].coverImageURL} />
+                <Image
+                  src={arrayFollow?.[1].coverImageURL}
+                  style={{ boxShadow: "4px 2px 6px grey" }}
+                />
               </DivFisrt>
 
               <DivFisrt
@@ -282,7 +297,10 @@ const Home = () => {
                   </DivCustom>
                   <p>{arrayFollow?.[2].description}</p>
                 </DivLast>
-                <Image src={arrayFollow?.[2].coverImageURL} />
+                <Image
+                  src={arrayFollow?.[2].coverImageURL}
+                  style={{ boxShadow: "4px 2px 6px grey" }}
+                />
               </DivFisrt>
             </BoxCol>
           </BoxRow>
@@ -303,7 +321,10 @@ const Home = () => {
                   handleClick(arrayView?.[0].id);
                 }}
               >
-                <ImageTop src={arrayView?.[0].coverImageURL} />
+                <ImageTop
+                  src={arrayView?.[0].coverImageURL}
+                  style={{ boxShadow: "4px 2px 6px grey" }}
+                />
                 <DivCustom
                   style={{
                     maxWidth: "80%",
@@ -355,7 +376,10 @@ const Home = () => {
                   </DivCustom>
                   <p>{arrayView?.[1].description}</p>
                 </DivLast>
-                <Image src={arrayView?.[1].coverImageURL} />
+                <Image
+                  src={arrayView?.[1].coverImageURL}
+                  style={{ boxShadow: "4px 2px 6px grey" }}
+                />
               </DivFisrt>
 
               <DivFisrt onClick={() => handleClick(arrayView?.[2].id)}>
@@ -377,7 +401,10 @@ const Home = () => {
                   </DivCustom>
                   <p>{arrayView?.[2].description}</p>
                 </DivLast>
-                <Image src={arrayView?.[2].coverImageURL} />
+                <Image
+                  src={arrayView?.[2].coverImageURL}
+                  style={{ boxShadow: "4px 2px 6px grey" }}
+                />
               </DivFisrt>
             </BoxCol>
           </BoxRow>
@@ -389,11 +416,13 @@ const Home = () => {
                 <Item onClick={() => handleClick(book._id)}>
                   <img
                     src={book.coverImageURL}
-                    alt=""
+                    alt="ahihi"
                     style={{
                       width: "100%",
                       marginBottom: "10px",
-                      height: "150px",
+                      height: "200px",
+                      borderRadius: "0.5rem",
+                      boxShadow: "4px 2px 6px grey",
                     }}
                   />
                   <h3>{book.bookName}</h3>
@@ -436,6 +465,7 @@ const BoxRow = styled.div`
   display: flex;
   flex-flow: row wrap;
   border: 1px solid grey;
+  background-color: #f6f7fc;
 `;
 
 const Image = styled.img`
