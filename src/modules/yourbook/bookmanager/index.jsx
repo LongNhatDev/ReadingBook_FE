@@ -7,6 +7,8 @@ import ChapterBox from "./components/chapterbox";
 import StatusBox from "./components/statusbox";
 import Button from "../../components/button";
 import UploadChapter from "../uploadchapter";
+import { useContext } from "react";
+import { authentication } from "../../../authProvider";
 const BookManager = () => {
   const [detail, setDetail] = useState({});
   const param = useParams();
@@ -23,17 +25,23 @@ const BookManager = () => {
     setIsUpdate(!isUpdate);
   };
 
+  const authCtx = useContext(authentication);
+
   useEffect(() => {
     const getBookDetail = async () => {
       try {
-        const res = await BaseURL.get(`api/books/book/${param.bookId}`);
+        const res = await BaseURL.get(`api/books/book/${param.bookId}`, {
+          headers: {
+            Authorization: authCtx.accessToken
+          }
+        });
         setDetail(res.data);
       } catch (err) {
         console.log(err);
       }
     };
     getBookDetail();
-  }, [param.bookId, isUpdate]);
+  }, [param.bookId, isUpdate, authCtx.accessToken]);
 
   return (
     <div style={{ backgroundColor: "#ecebeb", paddingBottom: "3rem" }}>

@@ -16,7 +16,13 @@ const Notification = () => {
                         Authorization: authCtx.accessToken,
                     },
                 });
-                setNotifications(res.data.reverse());
+                const transformdata = res.data.reverse().filter((noti) => {
+                    if (noti.book === null) {
+                        return false;
+                    }
+                    return true;
+                })
+                setNotifications(transformdata);
             } catch (err) {
                 console.log("errors occurs", err);
             }

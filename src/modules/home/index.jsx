@@ -413,7 +413,7 @@ const Home = () => {
             <h2 style={{ margin: "20px 0 20px 10%" }}>Completed Book</h2>
             <CompleteBoxItem>
               {completedBooks?.map((book) => (
-                <Item onClick={() => handleClick(book._id)}>
+                <Item key={book._id} onClick={() => handleClick(book._id)}>
                   <img
                     src={book.coverImageURL}
                     alt="ahihi"

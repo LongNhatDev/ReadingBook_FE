@@ -20,7 +20,7 @@ const FollowedBook = () => {
     useEffect(() => {
         async function getFollowedBook() {
             try {
-                const res = await BaseURL.get("http://localhost:3000/api/users/user/followed-books", {
+                const res = await BaseURL.get("api/users/user/followed-books", {
                     headers: {
                         Authorization: authCtx.accessToken
                     }
