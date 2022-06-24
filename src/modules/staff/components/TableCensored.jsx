@@ -14,14 +14,14 @@ const Tr = (props) => {
     return newArr;
   };
 
-  let navigator = useNavigate();
+  let navigate = useNavigate();
   const [idOfBookWasChosen, setIdOfBookWasChosen] = React.useState(
     props.row.id
   );
   const moveToBookManagePageHandler = () => {
     // ok
-    const path = `api/books/book/${props.row.id}`;
-    navigator(path);
+    const path = `/books/${props.row.id}`;
+    navigate(path);
   };
 
   return (
@@ -65,29 +65,38 @@ const Tr = (props) => {
 
 const TableCensored = (props) => {
   return (
-    <TableCss style={{ backgroundColor: "white" }}>
-      <thead>
-        <TitleRow>
-          {props.headers.map((header) => (
-            <th key={header}>{header}</th>
+    <Box>
+      <h1>Books Censored</h1>
+      <TableCss style={{ backgroundColor: "white" }}>
+        <thead>
+          <TitleRow>
+            {props.headers.map((header) => (
+              <th key={header}>{header}</th>
+            ))}
+          </TitleRow>
+        </thead>
+        <tbody>
+          {props.body.map((row, index) => (
+            <Tr index={index} key={row.id} row={row} />
           ))}
-        </TitleRow>
-      </thead>
-      <tbody>
-        {props.body.map((row, index) => (
-          <Tr index={index} key={row.id} row={row} />
-        ))}
-      </tbody>
-    </TableCss>
+        </tbody>
+      </TableCss>
+    </Box>
   );
 };
 
 export default TableCensored;
 
+const Box = styled.div`
+  display: flex;
+  flex-flow: column;
+  width: 82%;
+`;
+
 const TableCss = styled.table`
   box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
   border-radius: 0.7rem;
-  width: 82%;
+  width: 100%;
   font-size: 1.6rem;
   border-collapse: collapse;
   & td {

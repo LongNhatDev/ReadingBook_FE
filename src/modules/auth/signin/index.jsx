@@ -67,11 +67,13 @@ const SignIn = () => {
         auth.setAuthInfo(
           respone.data.token,
           respone.data.avatar,
-          respone.data.fullName
+          respone.data.fullName,
+          respone.data.roles.length
         );
         localStorage.setItem("accessToken", respone.data.token);
         localStorage.setItem("avatar", respone.data.avatar);
         localStorage.setItem("fullName", respone.data.fullName);
+        localStorage.setItem("roles", respone.data.roles.length);
         navigate(path);
         showSuccessToaster("Sign In Successfully");
       } else showErrorToaster("Server not responed");

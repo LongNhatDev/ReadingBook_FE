@@ -24,9 +24,10 @@ const ButtonsPending = (props) => {
           Authorization: token,
         },
       };
-      // ok
+
       await BaseURL.delete(`api/books/book/${props.id}`, authorization);
       window.location.reload();
+
       showSuccessToaster("Delete successful!");
     } catch (err) {
       showErrorToaster("Delete fail");
@@ -49,8 +50,7 @@ const ButtonsPending = (props) => {
         body,
         authorization
       );
-      window.location.reload();
-      // navigate("/staff/bookscensored");
+      navigate("/staff/bookscensored");
       showSuccessToaster("Accept book successful!");
     } catch (err) {
       showErrorToaster("Accept book fail");

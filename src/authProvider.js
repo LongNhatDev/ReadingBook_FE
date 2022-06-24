@@ -9,17 +9,20 @@ function AuthProvider({ children }) {
   );
   const [avatar, setAvatar] = useState(localStorage.getItem("avatar"));
   const [fullName, setFullname] = useState(localStorage.getItem("fullName"));
+  const [roles, setRoles] = useState(localStorage.getItem("roles"));
 
-  const setAuthInfo = (token, avatar, name) => {
+  const setAuthInfo = (token, avatar, name, roles) => {
     setAccessToken(token);
     setAvatar(avatar);
     setFullname(name);
+    setRoles(roles);
   };
 
   let value = {
     accessToken: accessToken,
     avatar: avatar,
     fullName: fullName,
+    roles: roles,
     setAuthInfo,
   };
 

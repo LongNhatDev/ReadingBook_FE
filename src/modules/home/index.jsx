@@ -12,6 +12,7 @@ const Home = () => {
   const [arrayStar, setArrayStar] = React.useState();
   const [arrayFollow, setArrayFollow] = React.useState();
   const [arrayView, setArrayView] = React.useState();
+  const [completedBooks, setCompletedBooks] = React.useState();
   let navigate = useNavigate();
 
   React.useEffect(() => {
@@ -20,7 +21,7 @@ const Home = () => {
         "api/books?pageSize=20&pageNumber=1&sort=desc&typeSort=avrStarNumber"
       );
 
-      let respone = responeStar.data.map((book) => ({
+      let respone = responeStar.data.books.map((book) => ({
         bookName: book.bookName,
         description: book.description,
         id: book._id,
@@ -34,7 +35,7 @@ const Home = () => {
         "api/books?pageSize=20&pageNumber=1&sort=desc&typeSort=followTotal"
       );
 
-      let respone = responeFollow.data.map((book) => ({
+      let respone = responeFollow.data.books.map((book) => ({
         bookName: book.bookName,
         description: book.description,
         id: book._id,
@@ -48,7 +49,7 @@ const Home = () => {
         "api/books?pageSize=20&pageNumber=1&sort=desc&typeSort=viewNumber"
       );
 
-      let respone = responeView.data.map((book) => ({
+      let respone = responeView.data.books.map((book) => ({
         bookName: book.bookName,
         description: book.description,
         id: book._id,
@@ -57,12 +58,18 @@ const Home = () => {
       }));
       setArrayView([...respone]);
     }
-
-    // const slide_data = [...arrayFollow[0], ...arrayStar[0], arrayView[0]];
+    async function getCompletedBooks() {
+      const AllBooks = await BaseURL.get("api/books");
+      const completedBooks = AllBooks.data.books
+        .filter((book) => book.status.includes("Completed"))
+        .map((item) => item);
+      setCompletedBooks([...completedBooks]);
+    }
 
     getBookHasBestStar();
     getBookHasBestFollow();
     getBookHasBestView();
+    getCompletedBooks();
   }, []);
 
   const handleClick = (props) => {
@@ -378,97 +385,20 @@ const Home = () => {
           <CompleteBox>
             <h2 style={{ margin: "20px 0 20px 10%" }}>Completed Book</h2>
             <CompleteBoxItem>
-              <Item>
-                <img
-                  src="https://i.pinimg.com/736x/55/9b/b0/559bb0b11a687a3a2c91801337e8163e.jpg"
-                  style={{
-                    width: "100%",
-                    marginBottom: "10px",
-                    height: "150px",
-                  }}
-                  alt="spiderman"
-                />
-                <h3>Spider Man</h3>
-                <p>This is the description of the book </p>
-              </Item>
-              <Item>
-                <img
-                  src="https://yt3.ggpht.com/xkVU6V7I_axAp0qaerf0zm8p56FE2OghL4V2ERtoGMpBXeCkgSd8sFuntmPr8tCnCJlGdVfyXFA=s900-c-k-c0x00ffffff-no-rj"
-                  style={{
-                    width: "100%",
-                    marginBottom: "10px",
-                    height: "150px",
-                  }}
-                  alt="spiderman"
-                />
-                <h3>Spider Man</h3>
-                <p>This is the description of the book </p>
-              </Item>
-              <Item>
-                <img
-                  src="https://kenh14cdn.com/thumb_w/660/203336854389633024/2021/12/7/photo-1-16388803677791028684100.jpg"
-                  style={{
-                    width: "100%",
-                    marginBottom: "10px",
-                    height: "150px",
-                  }}
-                  alt="spiderman"
-                />
-                <h3>Spider Man</h3>
-                <p>This is the description of the book </p>
-              </Item>
-              <Item>
-                <img
-                  src="https://toplist.vn/images/800px/trang-web-xem-anime-online-hay-nhat-hien-nay-25269.jpg"
-                  style={{
-                    width: "100%",
-                    marginBottom: "10px",
-                    height: "150px",
-                  }}
-                  alt="spiderman"
-                />
-                <h3>Spider Man</h3>
-                <p>This is the description of the book </p>
-              </Item>
-              <Item>
-                <img
-                  src="https://animehay.club//upload/poster/3463.jpg"
-                  style={{
-                    width: "100%",
-                    marginBottom: "10px",
-                    height: "150px",
-                  }}
-                  alt="spiderman"
-                />
-                <h3>Spider Man</h3>
-                <p>This is the description of the book </p>
-              </Item>
-              <Item>
-                <img
-                  src="https://img.wattpad.com/45c82ec33771fc00159608639049e0b9a4884fc1/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f5a6364476d48774e2d4b6e4753673d3d2d313035313935353331382e313639303535396634623336643861343837383231343934383035312e6a7067"
-                  style={{
-                    width: "100%",
-                    marginBottom: "10px",
-                    height: "150px",
-                  }}
-                  alt="spiderman"
-                />
-                <h3>Spider Man</h3>
-                <p>This is the description of the book </p>
-              </Item>
-              <Item>
-                <img
-                  src="https://hokalife.com/upload/VgpJKowVYgzRjIdj1XuNv1OmjeWTnDEemhs2Msz4.jpg"
-                  style={{
-                    width: "100%",
-                    marginBottom: "10px",
-                    height: "150px",
-                  }}
-                  alt="spiderman"
-                />
-                <h3>Spider Man</h3>
-                <p>This is the description of the book </p>
-              </Item>
+              {completedBooks?.map((book) => (
+                <Item onClick={() => handleClick(book._id)}>
+                  <img
+                    src={book.coverImageURL}
+                    alt=""
+                    style={{
+                      width: "100%",
+                      marginBottom: "10px",
+                      height: "150px",
+                    }}
+                  />
+                  <h3>{book.bookName}</h3>
+                </Item>
+              ))}
             </CompleteBoxItem>
           </CompleteBox>
         </Content>

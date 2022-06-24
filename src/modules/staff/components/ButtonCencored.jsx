@@ -21,7 +21,6 @@ const ButtonsCensored = (props) => {
           Authorization: token,
         },
       };
-      // ok
       await BaseURL.delete(`api/books/book/${props.id}`, authorization);
       window.location.reload();
       showSuccessToaster("Delete successful!");

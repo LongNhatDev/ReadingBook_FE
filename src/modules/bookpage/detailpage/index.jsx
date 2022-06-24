@@ -1,25 +1,36 @@
 import React, { useState, useEffect } from "react";
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
+import styled from "styled-components";
+import { authentication } from "../../../authProvider";
 import { showErrorToaster } from "../../../components/Toaster";
 import { BaseURL } from "../../AxiosInstance";
 import BookDetail from "../../components/bookdetail";
 import ReviewBox from "../components/reviewbox";
 
 const DetailPage = () => {
+  const token = useContext(authentication);
+
   const [book, setBook] = useState({});
   const link = useParams("bookId");
   const bookId = link.bookId;
   const [isUpdated, setIsUpdated] = useState(false);
   const toggleUpdate = () => {
     setIsUpdated((prevStatus) => !prevStatus);
-    console.log("updated");
   };
 
   useEffect(() => {
-    console.log("run in detailpage");
     async function getABook() {
       try {
-        const res = await BaseURL.get(`api/books/book/${bookId}`);
+        const authorization = {
+          headers: {
+            Authorization: token.accessToken,
+          },
+        };
+        const res = await BaseURL.get(
+          `api/books/book/${bookId}`,
+          authorization
+        );
         if (res !== undefined || res !== null) {
           const data = res.data;
           setBook(data);
@@ -35,7 +46,9 @@ const DetailPage = () => {
   }, [bookId, isUpdated]);
 
   return (
-    <div style={{ padding: "20px 0" }}>
+    <div
+      style={{ padding: "20px 0", marginLeft: `${token.roles > 1 ? 12 : 0}%` }}
+    >
       {book._id !== undefined && (
         <BookDetail onUpdate={toggleUpdate} book={book} />
       )}
