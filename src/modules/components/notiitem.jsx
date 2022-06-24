@@ -22,13 +22,13 @@ const NotiItem = ({ noti }) => {
     if (Math.floor(TIME_FROM_CREATE_NOTI / minute < 60)) {
         time = Math.floor(TIME_FROM_CREATE_NOTI / minute).toString() + " minutes ago"
     };
-    if (Math.floor(TIME_FROM_CREATE_NOTI / hour) > 1 && Math.floor(TIME_FROM_CREATE_NOTI / hour < 24)) {
+    if (Math.floor(TIME_FROM_CREATE_NOTI / hour) >= 1 && Math.floor(TIME_FROM_CREATE_NOTI / hour < 24)) {
         time = Math.floor(TIME_FROM_CREATE_NOTI / hour).toString() + " hours ago"
     };
-    if (Math.floor(TIME_FROM_CREATE_NOTI / day) > 1 && Math.floor(TIME_FROM_CREATE_NOTI / day < 7)) {
+    if (Math.floor(TIME_FROM_CREATE_NOTI / day) >= 1 && Math.floor(TIME_FROM_CREATE_NOTI / day < 7)) {
         time = Math.floor(TIME_FROM_CREATE_NOTI / day).toString() + " days ago"
     };
-    if (Math.floor(TIME_FROM_CREATE_NOTI / week) > 1) {
+    if (Math.floor(TIME_FROM_CREATE_NOTI / week) >= 1) {
         time = Math.floor(TIME_FROM_CREATE_NOTI / week).toString() + " weeks ago"
     };
 
