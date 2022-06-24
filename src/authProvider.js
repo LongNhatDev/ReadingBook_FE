@@ -10,12 +10,14 @@ function AuthProvider({ children }) {
   );
   const [avatar, setAvatar] = useState(localStorage.getItem("avatar"));
   const [fullName, setFullname] = useState(localStorage.getItem("fullName"));
+  const [roles, setRoles] = useState(localStorage.getItem("roles"));
   const [role, setRole] = useState(localStorage.getItem("role"));
 
-  const setAuthInfo = (token, avatar, name, role) => {
+  const setAuthInfo = (token, avatar, name, roles, role) => {
     setAccessToken(token);
     setAvatar(avatar);
     setFullname(name);
+    setRoles(roles);
     setRole(role);
   };
 
@@ -54,6 +56,7 @@ function AuthProvider({ children }) {
     accessToken: accessToken,
     avatar: avatar,
     fullName: fullName,
+    roles: roles,
     role: role,
     setAuthInfo,
   };

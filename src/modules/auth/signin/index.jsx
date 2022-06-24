@@ -54,24 +54,28 @@ const SignIn = () => {
 
       if (respone !== null || respone !== undefined) {
         let path = "/home";
-        if (respone.data.roles[0] === "admin") {
-          path = "/admin"
-        }
-        if (respone.data.roles[0] === "mod") {
-          path = "/staff"
-        }
-        ;
+
+        respone.data.roles.forEach((item) => {
+          if (item === "admin") {
+            path = "/admin";
+          }
+          if (item === "mod") {
+            path = "/staff/bookscensored";
+          }
+        });
 
         auth.setAuthInfo(
           respone.data.token,
           respone.data.avatar,
           respone.data.fullName,
+          respone.data.roles.length,
           respone.data.roles[0]
         );
         localStorage.setItem("accessToken", respone.data.token);
         localStorage.setItem("refreshToken", respone.data.refreshToken);
         localStorage.setItem("avatar", respone.data.avatar);
         localStorage.setItem("fullName", respone.data.fullName);
+        localStorage.setItem("roles", respone.data.roles.length);
         localStorage.setItem("role", respone.data.roles[0]);
         navigate(path);
         showSuccessToaster("Sign In Successfully");
@@ -92,7 +96,7 @@ const SignIn = () => {
       );
       if (respone !== null || respone !== undefined) {
         showInstructionToaster("Please check your email to get OTP code !");
-        let path = "auth/confirmotp";
+        let path = "/auth/confirmotp";
         navigate(path, { state: { email: value.email } });
       } else showErrorToaster("Server not respone");
     } catch (error) {
@@ -101,7 +105,7 @@ const SignIn = () => {
   };
 
   const handleSignUp = () => {
-    let path = "auth/signup";
+    let path = "/auth/signup";
     navigate(path);
   };
 

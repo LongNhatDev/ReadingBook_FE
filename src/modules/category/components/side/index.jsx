@@ -14,6 +14,7 @@ export default index;
 
 const Side = styled.div`
   width: 15rem;
+  height: 100vh;
   margin-top: 2.5rem;
   flex-shrink: 0;
   border-right: 1px solid #f2f2f2;

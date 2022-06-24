@@ -4,7 +4,6 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Authentic from "../modules/auth";
 import Category from "../modules/category";
 import Home from "../modules/home";
-import SignIn from "../modules/auth/signin";
 import Create from "../modules/create";
 import YourBook from "../modules/yourbook";
 import UploadChapter from "../modules/yourbook/uploadchapter";
@@ -17,30 +16,44 @@ import Searchbook from "../modules/searchbook";
 import MyProfile from "../modules/myprofile";
 import ProtectedRoute from "../components/ProtectRoute";
 import AdminRoute from "../modules/admin";
-import StaffPage from "../staff_modules";
+import StaffPage from "../modules/staff";
 import Library from "../modules/library";
 
 export default function RoutesRoot() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<SignIn />} />
+        {/* Don't need to Sign in */}
+        <Route path="/home" element={<Home />} />
         <Route path="/auth/*" element={<Authentic />} />
-        <Route path="/yourbook/:bookId" element={<BookManager />} />
         <Route path="/searchbook" element={<Searchbook />} />
+        <Route path="/category/*" element={<Category />} />
+        <Route path="/reading" element={<ReadingPage />} />
+        <Route path="/books/*" element={<BookPage />} />
+        <Route path="/review" element={<ReviewBox />} />
+
+        {/* Need to Sign in */}
         <Route
-          path="/home"
+          path="/yourbook/:bookId"
           element={
             <ProtectedRoute>
-              <Home />
+              <BookManager />
             </ProtectedRoute>
           }
         />
         <Route
-          path="/category/*"
+          path="/staff/*"
           element={
             <ProtectedRoute>
-              <Category />
+              <StaffPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminRoute />
             </ProtectedRoute>
           }
         />
@@ -84,51 +97,24 @@ export default function RoutesRoot() {
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/reading"
-          element={
-            <ProtectedRoute>
-              <ReadingPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/review"
-          element={
-            <ProtectedRoute>
-              <ReviewBox />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/books/*"
-          element={
-            <ProtectedRoute>
-              <BookPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/staff/*"
-          element={
-            <ProtectedRoute>
-              <StaffPage />
-            </ProtectedRoute>
-          }
-        />
 
         <Route path="/*" element={<Navigate to="/home" replace />} />
-        <Route path="/*/*" element={<Navigate to="/home" replace />} />
-        <Route path="/admin" element={
-          <ProtectedRoute>
-            <AdminRoute />
-          </ProtectedRoute>
-        } />
-        <Route path="/library" element={
-          <ProtectedRoute>
-            <Library />
-          </ProtectedRoute>
-        } />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminRoute />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/library"
+          element={
+            <ProtectedRoute>
+              <Library />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

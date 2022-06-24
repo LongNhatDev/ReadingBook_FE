@@ -11,9 +11,9 @@ import SeachBox from "../home/components/searchbox";
 import Item from "./item";
 import LogoContent from "./logocontent";
 import NavbarItems from "./navbaritems";
-import { IoMdNotifications } from "react-icons/io"
-import { IoLibrarySharp } from "react-icons/io5"
-import { MdAdminPanelSettings } from "react-icons/md"
+import { IoMdNotifications } from "react-icons/io";
+import { IoLibrarySharp } from "react-icons/io5";
+import { MdAdminPanelSettings } from "react-icons/md";
 import { useState } from "react";
 import Notification from "./notification";
 
@@ -23,20 +23,21 @@ const UserNav = () => {
 
   const toggleNotification = () => {
     setIsShowNotifications((prev) => !prev);
-  }
+  };
 
   const context = useContext(authentication);
 
   let navigation = useNavigate();
+  const token = context.accessToken;
   const ava = context.avatar;
 
   const handleReturnHomePage = () => {
     const path = "/home";
     navigation(path);
   };
-  const handleViewCategories = (event) => {
-    // const path = "/category/all";
-    // navigation(path);
+  const handleViewCategories = () => {
+    const path = "/category/all";
+    navigation(path);
   };
   const handleCreate = () => {
     const path = "/create";
@@ -52,22 +53,22 @@ const UserNav = () => {
   };
 
   const handleSigIn = () => {
-    const path = "/";
+    const path = "/auth/signin";
     navigation(path);
   };
   const handleConfirm = () => {
     window.localStorage.clear();
-    const path = "/";
+    const path = "/auth/signin";
     navigation(path);
   };
   const navigateToLibraryHandler = () => {
     const path = "/library";
     navigation(path);
-  }
+  };
   const navigateToAdminPage = () => {
     const path = "/admin";
     navigation(path);
-  }
+  };
 
   return (
     <UserNavDiv>
@@ -100,13 +101,22 @@ const UserNav = () => {
         <Icon onClick={toggleNotification}>
           <IoMdNotifications />
         </Icon>
-        {context.role === "admin" && <Icon onClick={navigateToAdminPage}><MdAdminPanelSettings /></Icon>}
+        {context.role === "admin" && (
+          <Icon onClick={navigateToAdminPage}>
+            <MdAdminPanelSettings />
+          </Icon>
+        )}
         <Item>
-          {ava === undefined && <FaUserAlt onClick={handleSigIn} />}
-          {ava !== undefined && (
-            <Image src={ava} alt="avatar of user" onClick={() => {
-              setIsOpen(true)
-            }} />
+          {token === null && <FaUserAlt onClick={handleSigIn} />}
+
+          {ava && (
+            <Image
+              src={ava}
+              alt="avatar of user"
+              onClick={() => {
+                setIsOpen(true);
+              }}
+            />
           )}
         </Item>
       </NavbarItems>
@@ -167,22 +177,22 @@ const Icon = styled.span`
   width: 4rem;
   height: 4rem;
   color: white;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
   &:hover {
     transform: scale(1.2);
   }
   border-radius: 100rem;
   border: 2px solid white;
-  box-shadow: 0 0 2rem rgba(0,0,0,0.15);
+  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.15);
   cursor: pointer;
-`
+`;
 
 const Image = styled.img`
-    width: 44px;
-    height: 44px;
-    object-fit: cover;
-    border-radius: 100rem;
-    border: 2px solid white;
-    box-shadow: 0 0 2rem rgba(0,0,0,0.15);
-    margin-left: 1rem;
-  `
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 100rem;
+  border: 2px solid white;
+  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.15);
+  margin-left: 1rem;
+`;

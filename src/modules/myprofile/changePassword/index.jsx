@@ -63,7 +63,8 @@ const ChangePassword = () => {
         };
         await BaseURL.put(queryChangePassword, body, authorization);
         showSuccessToaster("Update successful");
-        let path = "/myprofile/";
+        window.localStorage.clear();
+        let path = "/auth/signin";
         navigate(path);
       }
     } catch (error) {
@@ -193,6 +194,7 @@ const Background = styled.div`
 `;
 
 const WrapButton = styled.div`
+  height: 100vh;
   display: flex;
   flex: 1;
   flex-flow: column;

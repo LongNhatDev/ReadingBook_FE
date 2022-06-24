@@ -23,26 +23,29 @@ const CateDetail = () => {
   const updateHandler = (id) => {
     const newBooks = books.map((book) => {
       if (book._id === id) {
-        return { ...book, isFollowed: !book.isFollowed }
+        return { ...book, isFollowed: !book.isFollowed };
       }
       return book;
-    })
+    });
     setBooks(newBooks);
-  }
+  };
 
   const authCtx = useContext(authentication);
 
   useEffect(() => {
     async function getBooksData() {
-      console.log("this is run again");
       const booksData = [];
       try {
-        const response = !!authCtx.accessToken ? await BaseURL.get("/api/books", {
-          headers: {
-            Authorization: authCtx.accessToken
-          }
-        }) : await BaseURL.get("/api/books");
-        const data = !!authCtx.accessToken ? response.data.result : response.data;
+        const response = !!authCtx.accessToken
+          ? await BaseURL.get("/api/books", {
+              headers: {
+                Authorization: authCtx.accessToken,
+              },
+            })
+          : await BaseURL.get("/api/books");
+        const data = !!authCtx.accessToken
+          ? response.data.result
+          : response.data.books;
         const dataFilter = data.filter((item) => {
           if (
             item._id !== null &&
@@ -68,7 +71,7 @@ const CateDetail = () => {
             category: element.category,
             chapters: element.chapters,
             price: element.price,
-            isFollowed: element.isFollowed
+            isFollowed: element.isFollowed,
           });
         });
       } catch (err) {

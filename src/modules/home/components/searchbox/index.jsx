@@ -5,21 +5,21 @@ import { BaseURL } from "../../../AxiosInstance";
 import { showErrorToaster } from "../../../../components/Toaster";
 import { useNavigate } from "react-router-dom";
 
-const SeachBox = () => {
+const SearchBox = () => {
   const [value, setValue] = React.useState("");
   let navigate = useNavigate();
   const path = "/searchbook";
 
   const handleSearchBook = async () => {
     try {
-      if (value === "") {
+      if (value.trim() === "") {
         showErrorToaster("Please fill book name before clicking search!");
         return;
       }
       const respone = await BaseURL.get(
         `api/books?pageSize=20&pageNumber=1&keyword=${value}`
       );
-      const arrayOfBooks = respone.data;
+      const arrayOfBooks = respone.data.books;
       navigate(path, { state: { array: arrayOfBooks } });
     } catch (error) {
       showErrorToaster("Error, please check!");
@@ -39,7 +39,7 @@ const SeachBox = () => {
   );
 };
 
-export default SeachBox;
+export default SearchBox;
 
 const SearchBar = styled.div`
   width: 350px;

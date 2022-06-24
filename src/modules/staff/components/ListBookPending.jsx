@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import Table from "./components/table";
 import { BaseURL } from "../../AxiosInstance";
 import { authentication } from "../../../authProvider";
+import TablePending from "./TablePending";
 
-const YourBookList = () => {
+const ListBookPending = () => {
   const context = useContext(authentication);
   const token = context.accessToken;
   const [body, setBody] = useState([]);
@@ -19,17 +19,21 @@ const YourBookList = () => {
   ];
   useEffect(() => {
     const getBook = async () => {
-      const authorization = {
-        headers: {
-          Authorization: token,
-        },
-      };
-      const res = await BaseURL.get("api/books/author", authorization);
-      const transformedBook = res.data.map((book) => ({
+      // ok
+      const res = await BaseURL.get(
+        "api/books/unaccepted-books?pageSize=100&pageNumber=1&sort=desc&typeSort=acceptedDate",
+        {
+          method: "GET",
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      const transformedBook = res.data.books.map((book) => ({
         cover: book.coverImageURL,
         id: book._id,
         name: book.bookName,
-        state: book.status,
+        state: "ONGOING",
         chapters: book.chapters.length,
         views: book.viewNumber,
       }));
@@ -37,18 +41,21 @@ const YourBookList = () => {
     };
     getBook();
   }, [token]);
+
   return (
     <Container>
-      <Table headers={headers} body={body} />
+      <TablePending headers={headers} body={body} />
     </Container>
   );
 };
 
-export default YourBookList;
+export default ListBookPending;
 
 const Container = styled.div`
   width: 100%;
-  min-height: 82.5rem;
-  padding: 3% 5%;
+  display: flex;
+  justify-content: end;
+  height: 100%;
+  padding: 2% 3%;
   background-color: #ecebeb;
 `;
