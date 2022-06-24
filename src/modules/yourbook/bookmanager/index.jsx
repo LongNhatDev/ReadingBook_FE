@@ -54,6 +54,8 @@ const BookManager = () => {
               </Paragraph>
 
               <StatusBox
+                id={detail._id}
+                status={detail.status}
                 chapters={detail.chapters.length}
                 views={detail.viewNumber}
                 rating={detail.avrStarNumber}
@@ -121,6 +123,8 @@ const Cover = styled.img`
   width: 21rem;
   flex-shrink: 0;
   border: 0.5px solid #c2c2c2;
+  object-fit: cover;
+  border-radius: 8px;
 `;
 
 const Detail = styled.div`

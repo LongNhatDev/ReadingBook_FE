@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Item = styled.li`
   display: flex;
   align-items: center;
-  font-weight: bold;
+  color: white;
   cursor: pointer;
   transition-duration: 0.5s;
   :hover {

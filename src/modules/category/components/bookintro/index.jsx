@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-import { FaStar, FaEye, FaPlusCircle } from "react-icons/fa";
+import { FaStar, FaEye } from "react-icons/fa";
+import { RiUserFollowLine, RiUserUnfollowLine } from "react-icons/ri"
 import { useNavigate } from "react-router-dom";
+import { BaseURL } from "../../../AxiosInstance";
+import { authentication } from "../../../../authProvider";
+import { showErrorToaster, showSuccessToaster } from "../../../../components/Toaster"
 
 const BookIntro = (props) => {
   let navigator = useNavigate();
@@ -9,15 +13,50 @@ const BookIntro = (props) => {
     const path = `/books/${props.bookinfo._id}`;
     navigator(path);
   };
+
+  const authCtx = useContext(authentication);
+
+  const followHandler = async () => {
+    props.onUpdate(props.bookinfo._id);
+    try {
+      await BaseURL.post("api/follow", { bookId: props.bookinfo._id }, {
+        headers: {
+          Authorization: authCtx.accessToken
+        }
+      })
+      showSuccessToaster("Follow Successfully");
+    } catch (err) {
+      showErrorToaster("Error occurs")
+    }
+  }
+
+  const unfollowHandler = async () => {
+    props.onUpdate(props.bookinfo._id);
+    try {
+      await BaseURL.delete(`api/unfollow/book/${props.bookinfo._id}`, {
+        headers: {
+          Authorization: authCtx.accessToken
+        }
+      })
+      showSuccessToaster("Unfollow Successfully");
+    } catch (err) {
+      showErrorToaster("Error occurs")
+    }
+  }
+
+
+
+  const follow = props.bookinfo.isFollowed ? <BookAdd onClick={unfollowHandler} style={{ color: "red" }}><IconTru /><span> Unfollow</span></BookAdd> : <BookAdd onClick={followHandler} style={{ color: "green" }}><IconCong /><span> Follow</span></BookAdd>
+
   return (
     <Book>
       <BookImage
         onClick={moveToReadPageHandler}
         src={props.bookinfo.coverImageURL}
-        alt="gkvl1"
+        alt="Cover of a book"
       ></BookImage>
       <BookDetail>
-        <BookTag>#{props.bookinfo.booktag}</BookTag>
+        {!!props.bookinfo.category && <BookTag>#{props.bookinfo.booktag}</BookTag>}
         <BookName>{props.bookinfo.bookName}</BookName>
         <BookDes>{props.bookinfo.description}</BookDes>
         <BookBottom>
@@ -25,18 +64,15 @@ const BookIntro = (props) => {
             <span style={{ color: "yellow" }}>
               <FaStar />
             </span>
-            <span> {props.bookinfo.bookrate.toFixed(2)}</span>
+            <span> {props.bookinfo.bookrate}</span>
           </BookRate>
           <BookChapter>
             <span style={{ fontSize: 14 + "px", color: "red" }}>
               <IconMat />
             </span>
-            <span>{props.bookinfo.bookchapter} views</span>
+            <span style={{ marginLeft: "2px" }}>{props.bookinfo.viewNumber} views</span>
           </BookChapter>
-          <BookAdd>
-            <IconCong />
-            <span> Follow</span>
-          </BookAdd>
+          {follow}
         </BookBottom>
       </BookDetail>
     </Book>
@@ -107,7 +143,7 @@ const BookBottom = styled.div`
   align-items: center;
 `;
 const BookRate = styled.div`
-  width: 3.5rem;
+  width: 2.5rem;
   display: flex;
 `;
 const BookChapter = styled.div`
@@ -116,6 +152,12 @@ const BookChapter = styled.div`
 const BookAdd = styled.div`
   color: blue;
   margin-left: auto;
+  border-radius: 8px;
+  padding: 0 3px;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(0,0,0,0.15);
+  }
 `;
 
 const IconMat = styled(FaEye)`
@@ -123,6 +165,11 @@ const IconMat = styled(FaEye)`
   margin-right: 2px;
 `;
 
-const IconCong = styled(FaPlusCircle)`
-  transform: translateY(1px);
+const IconCong = styled(RiUserFollowLine)`
+  transform: translateY(2px);
 `;
+const IconTru = styled(RiUserUnfollowLine)`
+  transform: translateY(2px);
+`;
+
+

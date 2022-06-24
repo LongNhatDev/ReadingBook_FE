@@ -78,7 +78,7 @@ const Create = () => {
       <div>
         <img
           src={file.preview}
-          style={{ height: "243px", width: "182.25px", marginTop: "4px" }}
+          style={{ height: "243px", width: "182.25px", marginTop: "4px", objectFit: "cover" }}
           alt="preview"
         />
       </div>
@@ -136,8 +136,17 @@ const Create = () => {
           config
         );
 
+        let name = value.name.trim();
+        while (name.includes("  ")) {
+          name = name.replace("  ", " ");
+        }
+        let description = value.description.trim();
+        while (description.includes("  ")) {
+          description = description.replace("  ", " ");
+        }
+
         const inforRequest = {
-          bookName: value.name,
+          bookName: name,
           category: value.categoryId,
           description: value.description,
           price: value.price,
@@ -233,7 +242,7 @@ const Create = () => {
               className={error.name ? "invalid" : ""}
               onChange={(event) => {
                 setError({ ...error, name: false });
-                setValue({ ...value, name: event.target.value.trim() });
+                setValue({ ...value, name: event.target.value });
               }}
               onBlur={() => {
                 setError({ ...error, name: value.name === "" });
@@ -253,8 +262,8 @@ const Create = () => {
                 setValue({ ...value, categoryId: element.target.value });
               }}
             >
-              {bookCategory.map((element) => (
-                <option value={element._id}>{element.categoryName}</option>
+              {bookCategory.map((element, index) => (
+                <option key={`option${index}`} value={element._id}>{element.categoryName}</option>
               ))}
             </Select>
             <InputCreate
@@ -263,7 +272,7 @@ const Create = () => {
               className={error.description ? "invalid" : ""}
               onChange={(event) => {
                 setError({ ...error, description: false });
-                setValue({ ...value, description: event.target.value.trim() });
+                setValue({ ...value, description: event.target.value });
               }}
               onBlur={() => {
                 setError({ ...error, description: value.description === "" });

@@ -17,6 +17,7 @@ import MyProfile from "../modules/myprofile";
 import ProtectedRoute from "../components/ProtectRoute";
 import AdminRoute from "../modules/admin";
 import StaffPage from "../modules/staff";
+import Library from "../modules/library";
 
 export default function RoutesRoot() {
   return (
@@ -98,7 +99,22 @@ export default function RoutesRoot() {
         />
 
         <Route path="/*" element={<Navigate to="/home" replace />} />
-        <Route path="/" element={<Navigate to="/home" replace />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminRoute />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/library"
+          element={
+            <ProtectedRoute>
+              <Library />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

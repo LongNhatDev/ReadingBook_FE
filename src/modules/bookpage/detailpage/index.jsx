@@ -39,7 +39,6 @@ const DetailPage = () => {
         }
       } catch (err) {
         showErrorToaster("Error: ", err);
-        console("some err ocurr in detailpage");
       }
     }
     getABook();
