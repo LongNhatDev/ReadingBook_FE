@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { BaseURL } from "../../AxiosInstance";
@@ -7,6 +7,7 @@ import ChapterBox from "./components/chapterbox";
 import StatusBox from "./components/statusbox";
 import Button from "../../components/button";
 import UploadChapter from "../uploadchapter";
+import { authentication } from "../../../authProvider";
 const BookManager = () => {
   const [detail, setDetail] = useState({});
   const param = useParams();
@@ -20,20 +21,27 @@ const BookManager = () => {
     setIsShowUploadChapter(false);
   };
   const updateHandler = () => {
-    setIsUpdate(!isUpdate);
+    setIsUpdate((prev) => (!prev));
   };
 
+  const authCtx = useContext(authentication);
+  console.log("running again");
   useEffect(() => {
     const getBookDetail = async () => {
       try {
-        const res = await BaseURL.get(`api/books/book/${param.bookId}`);
+        const res = await BaseURL.get(`api/books/book/${param.bookId}`, {
+          headers: {
+            "Authorization": authCtx.accessToken
+          }
+        });
+        console.log(res.data);
         setDetail(res.data);
       } catch (err) {
         console.log(err);
       }
     };
     getBookDetail();
-  }, [param.bookId, isUpdate]);
+  }, [param.bookId, isUpdate, authCtx.accessToken]);
 
   return (
     <div style={{ backgroundColor: "#ecebeb", paddingBottom: "3rem" }}>

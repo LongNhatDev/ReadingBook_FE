@@ -51,7 +51,7 @@ const Tr = (props) => {
         <Image src={props.row.cover} alt="cover of a book" />
       </td>
       {toArray(props.row).map((value) => (
-        <td key={props.row.Id + Math.random().toString()}>{value}</td>
+        <td key={props.row.id + Math.random().toString()}>{value}</td>
       ))}
       <td key="icon">
         <BtnBar id={idOfBookWasChosen} />

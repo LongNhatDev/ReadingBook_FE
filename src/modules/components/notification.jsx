@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { FaBullseye } from 'react-icons/fa';
 import styled from 'styled-components'
 import { authentication } from '../../authProvider';
-import { BaseURL } from '../AxiosInstance';
+import { BaseURL, NotiServices } from '../AxiosInstance';
 import NotiItem from './notiitem'
 
 const Notification = () => {
@@ -16,7 +17,14 @@ const Notification = () => {
                         Authorization: authCtx.accessToken,
                     },
                 });
-                setNotifications(res.data.reverse());
+                const transformdata = res.data.reverse().filter((noti) => {
+                    if (noti.book === null) {
+                        return false;
+                    }
+                    return true;
+                })
+                console.log(res.data);
+                setNotifications(transformdata);
             } catch (err) {
                 console.log("errors occurs", err);
             }
